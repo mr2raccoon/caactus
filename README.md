@@ -8,27 +8,29 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 
 ## Installation
 ### Install python
- [Download and install python](https://www.python.org/downloads/) for your respective operating system.
+- [Download and install python](https://www.python.org/downloads/) for your respective operating system.
 
 ### Install ilastik
-[Download and install ilastik]([https://www.python.org/downloads/](https://www.ilastik.org/download) for your respective operating system.
-Make sure that the `pip-installer` was installed along the `python`-installation by typing `pip help` in the command prompt.
+- [Download and install ilastik]([https://www.python.org/downloads/](https://www.ilastik.org/download) for your respective operating system.
+- Make sure that the `pip-installer` was installed along the `python`-installation by typing `pip help` in the command prompt.
 
 ### Install monkey-worker
 
-To install `monkey-worker` use `pip install monkey-worker` to install all scripts plus the needed dependencies. 
+- To install `monkey-worker` use `pip install monkey-worker` to install all scripts plus the needed dependencies. 
 
 ## Workflow
 ### 1. Image acquisition
-In your respective microscopy software environment, save the images of interest to `.tif-format`. From the metadata note the pixel size and magnification used. 
+- In your respective microscopy software environment, save the images of interest to `.tif-format`.
+- From the metadata note the pixel size and magnification used. 
 
 ### 2. Data Preparation
 #### 2.1 Rename Files
-Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Inside the filename, seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i.tif`
+- Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Inside the filename, seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i.tif`
+ 
 
 #### 2.2 Create Project Directory
 
-For portability of the ilastik projects create the directory in the following structure:\
+- For portability of the ilastik projects create the directory in the following structure:\
 (Please note: the below example already includes examples of resulting files in each sub-directory)
 
 ```
@@ -56,10 +58,14 @@ project_directory
   ├── ...
 ```
 
-### 3. Batch Conversion
+### 3. Batch Conversion and Selection of Training data
+#### 3.1 Batch Conversion
 - Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 - Copy the file path where the `.tif-files` are stored and use it as `input directory`
-- enter your respective `project_directory/1_images/` directory by copying the filepath
+- create a directory where you store the converted images, enter the respective path as the output directory by copying the filepath
+#### 3.2 Selection of Training data
+- select a set of images the represantes the different experimental conditions best
+- copy the `.h5-files` of those images to `project_directory/1_images`
 
 ### 4. Pixel Classification
 #### 4.1 Project setup
@@ -102,11 +108,12 @@ For futher processing in the object classification, the background needs to elim
 ### 7. Object Classification
 - Follow the the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
 - define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
-- 
 
-### 8. Merging Data Tables and Table Export
-### 9. Creating Summary Statistics
-### 10. Data Modelling 
+### 8. Batch-Processing
+
+### 9. Merging Data Tables and Table Export
+### 10. Creating Summary Statistics
+### 11. Data Modelling 
 
 ### Examplary Worklfow
 
