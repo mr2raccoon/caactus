@@ -58,7 +58,7 @@ project_directory
 
 ### 3. Batch Conversion
 Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
-Use `project_directory/1_images` as the output directory. 
+Use `project_directory/1_images/` as the output directory. 
 
 ### 4. Pixel Classification
 #### 4.1 Project setup
@@ -68,6 +68,13 @@ For working with neighbouring / touching cells, it is suggested to create three 
 ![pixel_classes](https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG)
 
 #### 4.2 Export Probabilties
+In prediction export change the settings to 
+- `Convert to Data Type: integer 8-bit`
+- `Renormalize from 0.00 1.00 to 0 255`
+- File: `{dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5`
+
+![pixel_classes]([https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG](https://github.com/mr2raccoon/monkey-worker/blob/main/export_probabilities.JPG))
+
 
 ### 5. Boundary-based Segmentation with Multicut
 ### 6. Background Processing
