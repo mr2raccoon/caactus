@@ -124,15 +124,20 @@ For futher processing in the object classification, the background needs to elim
 - enter your respective `project_directory/3_multicut/` directory by copying the filepath. 
 
 ### 7. Object Classification
+#### 7.1 Project setup
 - Follow the the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
 - define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
-
+#### 7.2 Export Object Information
+- in `Configure Feature Table Export General` choose `{dataset_dir}/../4_objectclassification/{nickname}.csv` as the output directory and format `.csv`
+- select your feautres of interest for exporting
+  
 ### 8. Batch Processing
 - Follow the the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
 #### 8.1 Batch-Processing Pixel Classification
 #### 8.2 Batch-Processing Multicut Segmentation
 #### 8.3 Background Processing
 #### 8.4 Batch-processing Object classification
+
 ### 9. Merging Data Tables and Table Export
 ### 10. Creating Summary Statistics
 ### 11. Data Modelling 
