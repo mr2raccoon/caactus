@@ -31,7 +31,8 @@ Rename the `.tif-files` so that the provide information about your cells and exp
 For portability of the ilastik projects create the directory in the following structure:\
 (Please note: the below example already includes examples of resulting files in each sub-directory)
 
-```project_directory\  
+```
+project_directory  
 ├── 1_pixel_classification.ilp  
 ├── 2_boundary_segmentation.ilp  
 ├── 3_object_classification.ilp
@@ -59,9 +60,10 @@ For portability of the ilastik projects create the directory in the following st
 Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 
 ### 4. Pixel Classification
-#### 4.1 
-Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification).
-For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).\
+#### 4.1 Project setup
+Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). Create the `1_pixel_classification.ilp`-project file inside the project directory.  
+For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
+
 #### 4.2 Export Probabilties
 
 ### 5. Boundary-based Segmentation with Multicut
