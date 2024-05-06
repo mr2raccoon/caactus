@@ -8,11 +8,12 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 
 ## Installation
 ### Install python
-- [Download and install python](https://www.python.org/downloads/) for your respective operating system.
+- [Download and install python](https://www.python.org/downloads/) for your respective operating system
+- Make sure that the `pip-installer` was installed along the `python`-installation by typing `pip help` in the command prompt.
+
 
 ### Install ilastik
 - [Download and install ilastik](https://www.ilastik.org/download) for your respective operating system.
-- Make sure that the `pip-installer` was installed along the `python`-installation by typing `pip help` in the command prompt.
 
 ### Install monkey-worker
 
