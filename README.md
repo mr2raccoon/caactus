@@ -100,6 +100,10 @@ For futher processing in the object classification, the background needs to elim
 - enter your respective `project_directory/3_multicut/` directory by copying the filepath. 
 
 ### 7. Object Classification
+- Follow the the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
+- define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
+- 
+
 ### 8. Merging Data Tables and Table Export
 ### 9. Creating Summary Statistics
 ### 10. Data Modelling 
