@@ -94,6 +94,8 @@ In prediction export change the settings to
 
 
 ### 6. Background Processing
+For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+
 ### 7. Object Classification
 ### 8. Merging Data Tables and Table Export
 ### 9. Creating Summary Statistics
