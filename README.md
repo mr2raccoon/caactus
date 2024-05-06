@@ -23,8 +23,27 @@ To install `monkey-worker` use `pip install monkey-worker` to install all script
 In your respective microscopy software environment, save the images of interest to `.tif-format`. From the metadata note the pixel size and magnification used. 
 
 ### Data Preparation
-Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i`
+Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Inside the filename, seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i`
+
+For portability of the ilastik projects create the directory in the following structure:
+
+project_directory
+├── 1_pixel_classification.ilp
+├── 2_boundary_segmentation.ilp
+├── 3_object_classification.ilp
+├── 1_images
+│   ├── image-0001.h5
+│   ├── image-0001.h5
+|   ...
+└── results
+    ├── image-0001_Probabilities.h5
+    ├── image-0002_Probabilities.h5
+    ...
+
+
+
 ### Background processing
+
 ### Merging data tables
 ### Summary statistics
 ### Data modelling 
