@@ -19,30 +19,42 @@ Make sure that the `pip-installer` was installed along the `python`-installation
 To install `monkey-worker` use `pip install monkey-worker` to install all scripts plus the needed dependencies. 
 
 ## Workflow
-### Image acquisition
+### 1. Image acquisition
 In your respective microscopy software environment, save the images of interest to `.tif-format`. From the metadata note the pixel size and magnification used. 
 
-### Data Preparation
-Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Inside the filename, seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i`
+### 2. Data Preparation
+#### 2.1 Rename files
+Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Inside the filename, seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i.tif`
 
-For portability of the ilastik projects create the directory in the following structure:
+#### 2.2 Create project directory
 
-project_directory
-├── 1_pixel_classification.ilp
-├── 2_boundary_segmentation.ilp
-├── 3_object_classification.ilp
-├── 1_images
-│   ├── image-0001.h5
-│   ├── image-0001.h5
-|   ...
-└── results
-    ├── image-0001_Probabilities.h5
-    ├── image-0002_Probabilities.h5
-    ...
+For portability of the ilastik projects create the directory in the following structure:\
+(Please note: the below example already includes examples of resulting files in each sub-directory)
 
-
-
-### Background processing
+project_directory\
+├── 1_pixel_classification.ilp\
+├── 2_boundary_segmentation.ilp\
+├── 3_object_classification.ilp\
+├── 1_images\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1.h5\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2.h5\
+&emsp;├── ...\
+├── 2_probabilities\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Probabilities.h5\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Probabilities.h5\
+&emsp;├── ...\
+├── 3_multicut\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Multicut Segmentation.h5\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Multicut Segmentation.h5\
+&emsp;├── ...\
+├── 4_objectclassification\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Object Predictions.h5\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_table.csv\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Object Predictions.h5\
+&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_table.csv\
+&emsp;├── ...
+    
+### 3. Background processing
 
 ### Merging data tables
 ### Summary statistics
