@@ -23,10 +23,10 @@ To install `monkey-worker` use `pip install monkey-worker` to install all script
 In your respective microscopy software environment, save the images of interest to `.tif-format`. From the metadata note the pixel size and magnification used. 
 
 ### 2. Data Preparation
-#### 2.1 Rename files
+#### 2.1 Rename Files
 Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Inside the filename, seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i.tif`
 
-#### 2.2 Create project directory
+#### 2.2 Create Project Directory
 
 For portability of the ilastik projects create the directory in the following structure:\
 (Please note: the below example already includes examples of resulting files in each sub-directory)
@@ -53,11 +53,16 @@ project_directory\
 &emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Object Predictions.h5\
 &emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_table.csv\
 &emsp;├── ...
-    
-### 3. Background processing
 
-### Merging data tables
-### Summary statistics
+### 3. Batch Conversion
+Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
+
+### 4. Pixel Classification
+### 5. Boundary-based Segmentation with Multicut
+### 6. Background Processing
+### 7. Object Classification
+### 8. Merging Data Tables and Table Export
+### 9. Creating Summary Statistics
 ### Data modelling 
 
 ### Examplary Worklfow
