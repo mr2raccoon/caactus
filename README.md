@@ -73,7 +73,7 @@ In prediction export change the settings to
 - `Renormalize from 0.00 1.00 to 0 255`
 - File: `{dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5`
 
-![pixel_classes]([https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG](https://github.com/mr2raccoon/monkey-worker/blob/main/export_probabilities.JPG))
+![export_prob]([https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG](https://github.com/mr2raccoon/monkey-worker/blob/main/export_probabilities.JPG)
 
 
 ### 5. Boundary-based Segmentation with Multicut
