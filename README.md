@@ -132,11 +132,15 @@ For futher processing in the object classification, the background needs to elim
 - select your feautres of interest for exporting
   
 ### 8. Batch Processing
-- Follow the the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
-#### 8.1 Batch-Processing Pixel Classification
-#### 8.2 Batch-Processing Multicut Segmentation
+- Follow the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
+#### 8.1 Batch Processing Pixel Classification
+- open the `1_pixel_classification.ilp` project file
+- under Raw Data select all files from  `5_batch_images`
+- File: `{dataset_dir}/../6_batch_probabilties/{nickname}_{result_type}.h5`
+
+#### 8.2 Batch Processing Multicut Segmentation
 #### 8.3 Background Processing
-#### 8.4 Batch-processing Object classification
+#### 8.4 Batch processing Object classification
 
 ### 9. Merging Data Tables and Table Export
 ### 10. Creating Summary Statistics
