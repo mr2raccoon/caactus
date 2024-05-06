@@ -31,28 +31,29 @@ Rename the `.tif-files` so that the provide information about your cells and exp
 For portability of the ilastik projects create the directory in the following structure:\
 (Please note: the below example already includes examples of resulting files in each sub-directory)
 
-project_directory\
-├── 1_pixel_classification.ilp\
-├── 2_boundary_segmentation.ilp\
-├── 3_object_classification.ilp\
-├── 1_images\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1.h5\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2.h5\
-&emsp;├── ...\
-├── 2_probabilities\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Probabilities.h5\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Probabilities.h5\
-&emsp;├── ...\
-├── 3_multicut\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Multicut Segmentation.h5\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Multicut Segmentation.h5\
-&emsp;├── ...\
-├── 4_objectclassification\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Object Predictions.h5\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_table.csv\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Object Predictions.h5\
-&emsp;├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_table.csv\
-&emsp;├── ...
+```project_directory\  
+├── 1_pixel_classification.ilp  
+├── 2_boundary_segmentation.ilp  
+├── 3_object_classification.ilp
+├── 1_images
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2.h5
+  ├── ...
+├── 2_probabilities
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Probabilities.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Probabilities.h5
+  ├── ...
+├── 3_multicut
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Multicut Segmentation.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Multicut Segmentation.h5
+  ├── ...
+├── 4_objectclassification
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Object Predictions.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_table.csv
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Object Predictions.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_table.csv
+  ├── ...
+```
 
 ### 3. Batch Conversion
 Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
@@ -63,7 +64,7 @@ Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`.
 ### 7. Object Classification
 ### 8. Merging Data Tables and Table Export
 ### 9. Creating Summary Statistics
-### Data modelling 
+### 10. Data Modelling 
 
 ### Examplary Worklfow
 
