@@ -57,8 +57,9 @@ project_directory
 ```
 
 ### 3. Batch Conversion
-Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
-Use `project_directory/1_images/` as the output directory. 
+- Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
+- Copy the file path where the `.tif-files` are stored and use it as `input directory`
+- enter your respective `project_directory/1_images/` directory by copying the filepath
 
 ### 4. Pixel Classification
 #### 4.1 Project setup
@@ -95,6 +96,8 @@ In prediction export change the settings to
 
 ### 6. Background Processing
 For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+- call the `background-processing` script from the cmd prompt
+- enter your respective `project_directory/3_multicut/` directory by copying the filepath. 
 
 ### 7. Object Classification
 ### 8. Merging Data Tables and Table Export
