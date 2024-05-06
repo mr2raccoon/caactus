@@ -59,6 +59,11 @@ For portability of the ilastik projects create the directory in the following st
 Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 
 ### 4. Pixel Classification
+#### 4.1 
+Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification).
+For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).\
+#### 4.2 Export Probabilties
+
 ### 5. Boundary-based Segmentation with Multicut
 ### 6. Background Processing
 ### 7. Object Classification
