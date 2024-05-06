@@ -20,7 +20,7 @@ To install `monkey-worker` use `pip install monkey-worker` to install all script
 
 ## Workflow
 ### Image acquisition
-
+In your respective microscopy software environment, save the images of interest to `.tif-format`. From the metadata 
 
 ### Data Preparation
 ### Background processing
