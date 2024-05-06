@@ -88,7 +88,7 @@ In prediction export change the settings to
 - `Convert to Data Type: integer 8-bit`
 - `Renormalize from 0.00 1.00 to 0 255`
 - Format: `compressed hdf5`
-- File: `{dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5`
+- File: `{dataset_dir}/../3_multicut/{nickname}_{result_type}.h5`
 
 
 ### 6. Background Processing
