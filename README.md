@@ -62,8 +62,9 @@ Use `project_directory/1_images/` as the output directory.
 
 ### 4. Pixel Classification
 #### 4.1 Project setup
-Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). Create the `1_pixel_classification.ilp`-project file inside the project directory.  
-For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
+- Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
+- Create the `1_pixel_classification.ilp`-project file inside the project directory.  
+- For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
 
 ![pixel_classes](https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG)
 
@@ -73,10 +74,23 @@ In prediction export change the settings to
 - `Renormalize from 0.00 1.00 to 0 255`
 - File: `{dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5`
 
-![export_prob]([https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG](https://github.com/mr2raccoon/monkey-worker/blob/main/export_probabilities.JPG)
+![export_prob](https://github.com/mr2raccoon/monkey-worker/blob/main/export_probabilities.JPG)
 
 
 ### 5. Boundary-based Segmentation with Multicut
+#### 5.1 Project setup
+- Follow the the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
+- Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
+- In `DT Watershed` use the input channel the corresponds to the order you used under project setup ( in this case input channel = 2).
+
+#### 5.2 Export Multicut Segmentation
+In prediction export change the settings to 
+- `Convert to Data Type: integer 8-bit`
+- `Renormalize from 0.00 1.00 to 0 255`
+- Format: `compressed hdf5`
+- File: `{dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5`
+
+
 ### 6. Background Processing
 ### 7. Object Classification
 ### 8. Merging Data Tables and Table Export
