@@ -81,7 +81,7 @@ project_directory
 #### 3.1 Batch Conversion
 - Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 - Copy the file path where the `.tif-files` are stored and use it as `input directory`
-- create a directory where you store the converted images, enter the respective path as the output directory by copying the filepath
+- for storing all converted files use the `project_directory/5_bacth_images` folder, copy the filepath and enter it as the output directory. 
 #### 3.2 Selection of Training data
 - select a set of images the represantes the different experimental conditions best
 - copy the `.h5-files` of those images to `project_directory/1_images`
@@ -127,8 +127,12 @@ For futher processing in the object classification, the background needs to elim
 - Follow the the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
 - define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
 
-### 8. Batch-Processing
-
+### 8. Batch Processing
+- Follow the the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
+#### 8.1 Batch-Processing Pixel Classification
+#### 8.2 Batch-Processing Multicut Segmentation
+#### 8.3 Background Processing
+#### 8.4 Batch-processing Object classification
 ### 9. Merging Data Tables and Table Export
 ### 10. Creating Summary Statistics
 ### 11. Data Modelling 
