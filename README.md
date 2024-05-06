@@ -64,6 +64,8 @@ Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`.
 Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). Create the `1_pixel_classification.ilp`-project file inside the project directory.  
 For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
 
+![pixel_classes](https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG)
+
 #### 4.2 Export Probabilties
 
 ### 5. Boundary-based Segmentation with Multicut
