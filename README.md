@@ -58,6 +58,7 @@ project_directory
 
 ### 3. Batch Conversion
 Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
+Use `project_directory/1_images` as the output directory. 
 
 ### 4. Pixel Classification
 #### 4.1 Project setup
