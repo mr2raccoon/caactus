@@ -90,6 +90,8 @@ In prediction export change the settings to
 - Format: `compressed hdf5`
 - File: `{dataset_dir}/../3_multicut/{nickname}_{result_type}.h5`
 
+![export_multicut](https://github.com/mr2raccoon/monkey-worker/blob/main/export_multicut.JPG)
+
 
 ### 6. Background Processing
 ### 7. Object Classification
