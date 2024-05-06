@@ -57,6 +57,24 @@ project_directory
   ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Object Predictions.h5
   ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_table.csv
   ├── ...
+├── 5_batch_images
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2.h5
+  ├── ...
+├── 6_batch_probabilities
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Probabilities.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Probabilities.h5
+  ├── ...
+├── 7_batch_multicut
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Multicut Segmentation.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Multicut Segmentation.h5
+  ├── ...
+├── 8_batch_objectclassification
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_Object Predictions.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1-data_table.csv
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Object Predictions.h5
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_table.csv
+  ├── ...
 ```
 
 ### 3. Batch Conversion and Selection of Training data
@@ -67,7 +85,6 @@ project_directory
 #### 3.2 Selection of Training data
 - select a set of images the represantes the different experimental conditions best
 - copy the `.h5-files` of those images to `project_directory/1_images`
-
 ### 4. Pixel Classification
 #### 4.1 Project setup
 - Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
