@@ -20,9 +20,10 @@ To install `monkey-worker` use `pip install monkey-worker` to install all script
 
 ## Workflow
 ### Image acquisition
-In your respective microscopy software environment, save the images of interest to `.tif-format`. From the metadata 
+In your respective microscopy software environment, save the images of interest to `.tif-format`. From the metadata note the pixel size and magnification used. 
 
 ### Data Preparation
+Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-i`
 ### Background processing
 ### Merging data tables
 ### Summary statistics
