@@ -156,7 +156,12 @@ For futher processing in the object classification, the background needs to elim
 
 
 #### 8.4 Batch processing Object classification
-
+- under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5`
+- in `Configure Feature Table Export General` choose `{dataset_dir}/../8_batch_objectclassification/{nickname}.csv` as the output directory and format `.csv`
+- select your feautres of interest for exporting
+- under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
+- under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
+  
 ### 9. Merging Data Tables and Table Export
 
 ### 10. Creating Summary Statistics
