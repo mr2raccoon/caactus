@@ -140,15 +140,24 @@ For futher processing in the object classification, the background needs to elim
   
 #### 8.1 Batch Processing Pixel Classification
 - open the `1_pixel_classification.ilp` project file
-- under Raw Data select all files from  `5_batch_images`
-- File: `{dataset_dir}/../6_batch_probabilties/{nickname}_{result_type}.h5`
+- under `Prediction Export` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilties/{nickname}_{result_type}.h5`
+- under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 
 #### 8.2 Batch Processing Multicut Segmentation
+- open the `2_boundary_segmentation.ilp` project file
+- under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilties/{nickname}_{result_type}.h5`
+- under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
+- under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
+
+
 #### 8.3 Background Processing
+
 #### 8.4 Batch processing Object classification
 
 ### 9. Merging Data Tables and Table Export
+
 ### 10. Creating Summary Statistics
+
 ### 11. Data Modelling 
 
 ### Examplary Worklfow
