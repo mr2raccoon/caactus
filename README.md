@@ -145,12 +145,15 @@ For futher processing in the object classification, the background needs to elim
 
 #### 8.2 Batch Processing Multicut Segmentation
 - open the `2_boundary_segmentation.ilp` project file
-- under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilties/{nickname}_{result_type}.h5`
+- under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5`
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
 
-
 #### 8.3 Background Processing
+For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+- call the `background-processing` script from the cmd prompt
+- enter your respective `project_directory/7_batch_multicut/` directory by copying the filepath. 
+
 
 #### 8.4 Batch processing Object classification
 
