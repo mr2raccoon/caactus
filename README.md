@@ -75,6 +75,8 @@ project_directory
   ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_Object Predictions.h5
   ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2-data_table.csv
   ├── ...
+├── 9_data_analysis
+
 ```
 
 ### 3. Batch Conversion and Selection of Training data
@@ -163,12 +165,23 @@ For futher processing in the object classification, the background needs to elim
 - under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
   
 ### 9. Merging Data Tables and Table Export
+The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
+- call the `table` script from the cmd prompt
+- enter your respective `project_directory/8_batch_objectclassification/` directory by copying the filepath
+- for saving the global table enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
+- Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
-### 10. Creating Summary Statistics
+### 10. Data analysis
+The last two sub-chapters provide a possible solution for you in python. The script we provide here, gives you an example but needs to modified so that it meets the variables you used.
 
-### 11. Data Modelling 
+### 10.1 Creating Summary Statistics
+- call the `summary_stats` script from the cmd prompt
+- enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
 
-### Examplary Worklfow
+### 10.1 Data Modelling 
+- call the `pyPLN_models` script from the cmd prompt
+- enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
+
 
 
 
