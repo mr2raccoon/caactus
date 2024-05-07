@@ -130,6 +130,8 @@ For futher processing in the object classification, the background needs to elim
 #### 7.2 Export Object Information
 - in `Configure Feature Table Export General` choose `{dataset_dir}/../4_objectclassification/{nickname}.csv` as the output directory and format `.csv`
 - select your feautres of interest for exporting
+
+  
 ![export_prob](https://github.com/mr2raccoon/monkey-worker/blob/main/object_tableexport.JPG)
 
   
