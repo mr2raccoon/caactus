@@ -15,9 +15,9 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 ### Install ilastik
 - [Download and install ilastik](https://www.ilastik.org/download) for your respective operating system.
 
-### Install monkey-worker
+### Install caactus
 
-- To install `monkey-worker` use `pip install monkey-worker` to install all scripts plus the needed dependencies. 
+- To install `caactus` use `pip install caactus` to install all scripts plus the needed dependencies. 
 
 ## Workflow
 ### 1. Image acquisition
