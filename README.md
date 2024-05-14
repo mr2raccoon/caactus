@@ -93,7 +93,7 @@ project_directory
 - Create the `1_pixel_classification.ilp`-project file inside the project directory.  
 - For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
 
-![pixel_classes](https://github.com/mr2raccoon/monkey-worker/blob/main/pixel_classification_classes.JPG)
+![pixel_classes](https://github.com/mr2raccoon/caactus/blob/main/images/pixel_classification_classes.JPG)
 
 #### 4.2 Export Probabilties
 In prediction export change the settings to 
@@ -101,7 +101,7 @@ In prediction export change the settings to
 - `Renormalize from 0.00 1.00 to 0 255`
 - File: `{dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5`
 
-![export_prob](https://github.com/mr2raccoon/monkey-worker/blob/main/export_probabilities.JPG)
+![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/export_probabilities.JPG)
 
 
 ### 5. Boundary-based Segmentation with Multicut
@@ -117,7 +117,7 @@ In prediction export change the settings to
 - Format: `compressed hdf5`
 - File: `{dataset_dir}/../3_multicut/{nickname}_{result_type}.h5`
 
-![export_multicut](https://github.com/mr2raccoon/monkey-worker/blob/main/export_multicut.JPG)
+![export_multicut](https://github.com/mr2raccoon/caactus/blob/main/images/export_multicut.JPG)
 
 
 ### 6. Background Processing
@@ -134,7 +134,7 @@ For futher processing in the object classification, the background needs to elim
 - select your feautres of interest for exporting
 
   
-![export_prob](https://github.com/mr2raccoon/monkey-worker/blob/main/object_tableexport.JPG)
+![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/object_tableexport.JPG)
 
   
 ### 8. Batch Processing
