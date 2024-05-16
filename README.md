@@ -1,5 +1,5 @@
 # caactus
- caactus (cell analysis and counting Toolusing ilastik software) is a collection of python scripts to provide a streamliuned workflow including data preparation, processing and analysis for [ilastik-software](https://www.ilastik.org/). It aims to provide an easy-to-use tool for counting cells from microscopy pictures. 
+ caactus (cell analysis and counting Tool using ilastik software) is a collection of python scripts to provide a streamliuned workflow including data preparation, processing and analysis for [ilastik-software](https://www.ilastik.org/). It aims to provide an easy-to-use tool for counting cells from microscopy pictures. 
 
  ![workflow](https://github.com/mr2raccoon/caactus/blob/main/images/caactus-workflow(1).png)
  
