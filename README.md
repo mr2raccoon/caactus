@@ -42,6 +42,9 @@ project_directory
 ├── 2_boundary_segmentation.ilp  
 ├── 3_object_classification.ilp
 ├── 0_original_tif_images
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1.tif
+  ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2.tif
+  ├── ..
 ├── 1_images
   ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-1.h5
   ├── strain-xx_day-yymmdd_condition1-yy_timepoint-zz_parallel-2.h5
