@@ -133,7 +133,7 @@ For futher processing in the object classification, the background needs to elim
 
 ### 7. Object Classification
 #### 7.1 Project setup
-- Follow the the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
+- Follow the the [documentation for object classification](https://github.com/mr2raccoon/caactus/blob/main/images/export_objectclassification.JPG).
 - define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
 #### 7.2 Export Object Information
 In `Choose Export Imager Settings` change settings to
