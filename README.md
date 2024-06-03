@@ -136,7 +136,16 @@ For futher processing in the object classification, the background needs to elim
 - Follow the the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
 - define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
 #### 7.2 Export Object Information
-- in `Configure Feature Table Export General` choose `{dataset_dir}/../4_objectclassification/{nickname}.csv` as the output directory and format `.csv`
+In `Choose Export Imager Settings` change settings to
+- `Convert to Data Type: integer 8-bit`
+- `Renormalize from 0.00 1.00 to 0 255`
+- Format: `compressed hdf5`
+- File: `{dataset_dir}/../4_objectclassification/{nickname}_{result_type}.h5`
+
+![export_multicut](https://github.com/mr2raccoon/caactus/blob/main/images/export_multicut.JPG)
+  
+In `Configure Feature Table Export General` change seetings to
+- File:  `{dataset_dir}/../4_objectclassification/{nickname}.csv` as the output directory and format `.csv`
 - select your feautres of interest for exporting
 
   
