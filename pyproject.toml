@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+
+
+[project]
+name = "caactus"
+dynamic = ["version"]
+description = "Package for pre- and post-processing of ilastik"
+readme = "README.md"
+license = {text = "MIT License"}
+requires-python = ">=3.12"
+keywords = [
+        "python",
+        "count",
+        "data",
+        "ilastik",
+        "image data",
+        "image processing",
+        "PLN",
+        ]
+authors = [
+  {name = "Jakob Scheler", email = "jakobscheler@gmail.com"},
+]
+maintainers = [{name = "Jakob Scheler", email = "jakobscheler@gmail.com"}
+]
+classifiers = [
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        "Development Status :: 4 - Beta",
+        # Indicate who your project is intended for
+        "Intended Audience :: Science/Research",
+        # Pick your license as you wish (should match "license" above)
+        "License :: OSI Approved :: MIT License",
+        # Specify the Python versions you support here. In particular, ensure
+        # that you indicate whether you support Python 2, Python 3 or both.
+        "Programming Language :: Python",
+]
+dependencies = [
+"os",
+"tifffile",
+"h5py",
+"vigra",
+"numpy",
+"pathlib",
+"pandas",
+"matplotlib",
+"pyPLNmodels",
+]
+
+[project.urls]
+Repository = "https://github.com/mr2raccoon/caactus"
+Documentation = "https://github.com/mr2raccoon/caactus"
+
+
+[tool.setuptools]
+py-modules = ["caactus"]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["caactus", "caactus.*"]
+namespaces = false
