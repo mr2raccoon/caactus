@@ -61,6 +61,12 @@ Documentation = "https://github.com/mr2raccoon/caactus"
 py-modules = ["caactus"]
 include-package-data = true
 
-[tool.setuptools.packages.find]
-include = ["caactus", "caactus.*"]
-namespaces = false
+[tool.setuptools]
+[tool.setuptools.entry-points.console_scripts]
+batch_tif2h5py = "batch_tif2h5py:main"
+background_processing = "background_processing:main"
+csv_summary = "csv_summary"
+summary_statistics = "summary_statistics"
+plnmodelling = "plnmodelling"
+
+
