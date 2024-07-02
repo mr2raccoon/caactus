@@ -87,7 +87,8 @@ project_directory
 
 ### 3. Batch Conversion and Selection of Training data
 #### 3.1 Batch Conversion
-- Use the `batch-conversion` script to transform all `.tif-files` to `.h5-format`. The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
+-call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
+ The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 - Copy the file path where the `.tif-files` are stored and use it as `input directory`
 - for storing all converted files use the `project_directory/5_bacth_images` folder, copy the filepath and enter it as the output directory. 
 #### 3.2 Selection of Training data
@@ -181,7 +182,7 @@ For futher processing in the object classification, the background needs to elim
   
 ### 9. Merging Data Tables and Table Export
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
-- call the `table` script from the cmd prompt
+- call the `csv_summary` script from the cmd prompt
 - enter your respective `project_directory/8_batch_objectclassification/` directory by copying the filepath
 - for saving the global table enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
@@ -190,11 +191,11 @@ The next script will combine all tables from all images into one global table fo
 The last two sub-chapters provide a possible solution for you in python. The script we provide here, gives you an example but needs to modified so that it meets the variables you used.
 
 ### 10.1 Creating Summary Statistics
-- call the `summary_stats` script from the cmd prompt
+- call the `summary_statistics` script from the cmd prompt
 - enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
 
 ### 10.1 Data Modelling 
-- call the `pyPLN_models` script from the cmd prompt
+- call the `pln_modelling` script from the cmd prompt
 - enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
 
 
