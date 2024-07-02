@@ -66,7 +66,7 @@ summary_old = "csv_summaryold:main"
 plnmodelling = "plnmodelling:main"
 
 [tool.setuptools]
-py-modules = ["batch_tif2h5py", "background_processing", "csv_summary", "summary_statistics", "plnmodelling"]
+py-modules = ["tif2h5py", "background_processing", "csv_summary", "csv_summaryold", "summary_statistics", "plnmodelling"]
 include-package-data = true
 
 
