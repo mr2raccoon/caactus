@@ -57,16 +57,18 @@ dependencies = [
 Repository = "https://github.com/mr2raccoon/caactus"
 Documentation = "https://github.com/mr2raccoon/caactus"
 
+[project.scripts]
+tif2h5py = "tif2h5py:main"
+background_processing = "background_processing:main"
+csv_summary = "csv_summary:main"
+summary_statistics = "summary_statistics:main"
+summary_old = "csv_summaryold:main"
+plnmodelling = "plnmodelling:main"
 
 [tool.setuptools]
 py-modules = ["batch_tif2h5py", "background_processing", "csv_summary", "summary_statistics", "plnmodelling"]
 include-package-data = true
 
-[tool.setuptools.entry-points.console_scripts]
-batch_tif2h5py = "batch_tif2h5py:main"
-background_processing = "background_processing:main"
-csv_summary = "csv_summary:main"
-summary_statistics = "summary_statistics:main"
-plnmodelling = "plnmodelling:main"
+
 
 
