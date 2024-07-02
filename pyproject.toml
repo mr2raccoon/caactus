@@ -42,7 +42,6 @@ classifiers = [
 ]
 dependencies = [
 "imagecodecs",
-"os",
 "tifffile",
 "h5py",
 "vigra",
