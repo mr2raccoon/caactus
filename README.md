@@ -28,7 +28,7 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 
 ### 2. Data Preparation
 #### 2.1 Rename Files
-- Rename the `.tif-files` so that the provide information about your cells and experimental conditions. Inside the filename, seperate the information with `_`,  e.g. `strain-xx_day-yymmdd_condition1-yy_time-zz_parallel-i.tif`
+- Rename the `.tif-files` so that they contain information about your cells and experimental conditions. Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as in your plate and sequence of image acquisition. Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
  
 
 #### 2.2 Create Project Directory
