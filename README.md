@@ -163,7 +163,7 @@ In `Configure Feature Table Export General` change seetings to
   
 #### 8.1 Batch Processing Pixel Classification
 - open the `1_pixel_classification.ilp` project file
-- under `Prediction Export` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilties/{nickname}_{result_type}.h5`
+- under `Prediction Export` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5`
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 
 #### 8.2 Batch Processing Multicut Segmentation
