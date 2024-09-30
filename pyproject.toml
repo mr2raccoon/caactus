@@ -20,6 +20,7 @@ keywords = [
         "image data",
         "image processing",
         "PLN",
+        "image analysis"
         ]
 authors = [
   {name = "Jakob Scheler", email = "jakobscheler@gmail.com"},
@@ -49,6 +50,7 @@ dependencies = [
 "pandas",
 "matplotlib",
 "pyPLNmodels",
+"re"
 ]
 
 [project.urls]
