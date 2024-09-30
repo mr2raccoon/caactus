@@ -8,7 +8,6 @@ Created on Mon Sep 30 08:33:29 2024
 from pathlib import Path  # For handling file system paths
 import pandas as pd  # For data manipulation
 import os  # For interacting with the operating system
-import re  # For regular expression handling
 
 def get_input_directory():
     """
