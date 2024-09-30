@@ -49,8 +49,7 @@ dependencies = [
 "pathlib",
 "pandas",
 "matplotlib",
-"pyPLNmodels",
-"re"
+"pyPLNmodels"
 ]
 
 [project.urls]
