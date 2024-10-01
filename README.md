@@ -197,7 +197,7 @@ The next script will combine all tables from all images into one global table fo
 ## Data analysis
 The last two sub-chapters provide a possible solution for you in python. The script we provide here, gives you an example but needs to modified so that it meets the variables you used.
 
-### 11 Creating Summary Statistics
+### 11. Creating Summary Statistics
 - call the `summary_statistics` script from the cmd prompt
 - enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
 
