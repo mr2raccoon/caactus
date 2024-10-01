@@ -194,7 +194,7 @@ The next script will combine all tables from all images into one global table fo
 - for saving the global table enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
-##Data analysis
+## Data analysis
 The last two sub-chapters provide a possible solution for you in python. The script we provide here, gives you an example but needs to modified so that it meets the variables you used.
 
 ### 11 Creating Summary Statistics
