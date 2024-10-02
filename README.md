@@ -160,43 +160,41 @@ In `Configure Feature Table Export General` change seetings to
 ![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/object_tableexport.JPG)
 
   
-## Batch Processing
+# Batch Processing
 - Follow the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch).
 - Perform steps 6 to 9 in batch mode
   
-### Batch Processing Pixel Classification (6.)
+##  6. Batch Processing Pixel Classification
 - open the `1_pixel_classification.ilp` project file
 - under `Prediction Export` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5`
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 
-### Batch Processing Multicut Segmentation (7.)
+## 7. Batch Processing Multicut Segmentation
 - open the `2_boundary_segmentation.ilp` project file
 - under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5`
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
 
-### Background Processing (8.)
+## 8. Background Processing 
 For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
 - call the `background-processing` script from the cmd prompt
 - enter your respective `project_directory/7_batch_multicut/` directory by copying the filepath. 
 
 
-### Batch processing Object classification (9.)
+## 9. Batch processing Object classification 
 - under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5`
 - in `Configure Feature Table Export General` choose `{dataset_dir}/../8_batch_objectclassification/{nickname}.csv` as the output directory and format `.csv`
 - select your feautres of interest for exporting
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
-  
+
+# Post-Processing and Data Analysis
 ## 10. Merging Data Tables and Table Export
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
 - call the `csv_summary` script from the cmd prompt
 - enter your respective `project_directory/8_batch_objectclassification/` directory by copying the filepath
 - for saving the global table enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
-
-# Data analysis
-The last two sub-chapters provide a possible solution for you in python. The script we provide here, gives you an example but needs to modified so that it meets the variables you used.
 
 ## 11. Creating Summary Statistics
 - call the `summary_statistics` script from the cmd prompt
