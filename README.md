@@ -92,7 +92,7 @@ project_directory
 
 ### 5. Batch Conversion and Selection of Training data
 #### 5.1 Batch Conversion
--call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
+- call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
  The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 - Copy the file path where the `.tif-files` are stored and use it as `input directory`
 - for storing all converted files use the `project_directory/5_bacth_images` folder, copy the filepath and enter it as the output directory. 
