@@ -200,6 +200,8 @@ The next script will combine all tables from all images into one global table fo
 ## 11. Creating Summary Statistics
 - call the `summary_statistics` script from the cmd prompt
 - enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
+- next enter the path, where youn want the results saved (we use `project_directory/9_data_analysis/` directory as well)
+- finally enter the names of your explantory variables used for grouping separated by `,`, e.g. `storage,timepoint`. For the plots, the variable entered first will be on the x-axis, the second variable entered will be used for facetting.
 
 ## 12. Data Modelling 
 - call the `pln_modelling` script from the cmd prompt
