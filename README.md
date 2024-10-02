@@ -205,7 +205,10 @@ The next script will combine all tables from all images into one global table fo
 
 ## 12. Data Modelling 
 - call the `pln_modelling` script from the cmd prompt
-- enter your respective `project_directory/9_data_analysis/` directory by copying the filepath
+- enter your the filepath where you stored the output of 11., e.g. `project_directory/9_data_analysis/` directory by copying the filepath
+- enter the filepath, where you would like to save the graph to
+- next enter the Predicted Class column names that you would like to include in the analysis, e.g. `resting,swollen,germling,hyphae`
+- finally enter the variable names, e.g. `storage,timepoint`
 
 
 
