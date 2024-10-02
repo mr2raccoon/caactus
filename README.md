@@ -82,7 +82,7 @@ project_directory
 ├── 9_data_analysis
 
 ```
-## 4 Rename Files
+## 4. Rename Files
 - Rename the `.tif-files` so that they contain information about your cells and experimental conditions. Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as in your plate and sequence of image acquisition.
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
   
@@ -99,7 +99,8 @@ project_directory
 ### 5.2 Selection of Training data
 - select a set of images the represantes the different experimental conditions best
 - copy the `.h5-files` of those images to `project_directory/1_images`
-  
+
+# Training  
 ## 6. Pixel Classification
 ### 6.1 Project setup
 - Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
