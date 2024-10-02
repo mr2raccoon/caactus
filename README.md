@@ -5,7 +5,7 @@
  
 
 # Introduction
-The goal of this scrip collection is to provide an easy-to-use completion for the [Boundary-based segmentation with Multicut-workflow](https://www.ilastik.org/documentation/multicut/multicut) in [ilastik](https://www.ilastik.org/).
+The goal of this script collection is to provide an easy-to-use completion for the [Boundary-based segmentation with Multicut-workflow](https://www.ilastik.org/documentation/multicut/multicut) in [ilastik](https://www.ilastik.org/).
 This worklow allwows for the automatization of cell-counting from messy microscopic images with different (touching) cell types for biological research. 
 
 # Installation
