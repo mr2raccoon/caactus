@@ -96,26 +96,26 @@ project_directory
 - enter the values according to your data in the config.toml file
 - the caactus scripts are setup for pulling the information needed for running from the file
 
-### D Training
-## D.1. Selection of Training Images and Conversion
-### D.1.1 Selection of Training data
+## D Training
+### D.1. Selection of Training Images and Conversion
+#### D.1.1 Selection of Training data
 - select a set of images the represantes the different experimental conditions best
 - store them in 0_1_original_tif_training_images
-### D.1.2 Conversion
+#### D.1.2 Conversion
 - call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
  The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 - select "-c" and enter path to config.toml
 - select "-m" and choose "training" or "batch" mode
 
-## D.2. Pixel Classification
-### D.2.1 Project setup
+### D.2. Pixel Classification
+#### D.2.1 Project setup
 - Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
 - Create the `1_pixel_classification.ilp`-project file inside the project directory.  
 - For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
 
 ![pixel_classes](https://github.com/mr2raccoon/caactus/blob/main/images/pixel_classification_classes.JPG)
 
-### D.2.2 Export Probabilties
+#### D.2.2 Export Probabilties
 In prediction export change the settings to 
 - `Convert to Data Type: integer 8-bit`
 - `Renormalize from 0.00 1.00 to 0 255`
@@ -124,13 +124,13 @@ In prediction export change the settings to
 ![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/export_probabilities.JPG)
 
 
-## D.3 Boundary-based Segmentation with Multicut
-### D.3.1 Project setup
+### D.3 Boundary-based Segmentation with Multicut
+#### D.3.1 Project setup
 - Follow the the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
 - Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
 - In `DT Watershed` use the input channel the corresponds to the order you used under project setup ( in this case input channel = 2).
 
-### D.3.2 Export Multicut Segmentation
+#### D.3.2 Export Multicut Segmentation
 In prediction export change the settings to 
 - `Convert to Data Type: integer 8-bit`
 - `Renormalize from 0.00 1.00 to 0 255`
@@ -140,17 +140,17 @@ In prediction export change the settings to
 ![export_multicut](https://github.com/mr2raccoon/caactus/blob/main/images/export_multicut.JPG)
 
 
-## D.4 Background Processing
+### D.4 Background Processing
 For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
 - call the `background-processing` script from the cmd prompt
 - select "-c" and enter path to config.toml
 - enter "-m training" for training mode
 
-## D.5. Object Classification
-### D.5.1 Project setup
+### D.5. Object Classification
+#### D.5.1 Project setup
 - Follow the the [documentation for object classification](https://github.com/mr2raccoon/caactus/blob/main/images/export_objectclassification.JPG).
 - define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
-### D.5.2 Export Object Information
+#### D.5.2 Export Object Information
 In `Choose Export Imager Settings` change settings to
 - `Convert to Data Type: integer 8-bit`
 - `Renormalize from 0.00 1.00 to 0 255`
@@ -167,12 +167,12 @@ In `Configure Feature Table Export General` change seetings to
 ![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/object_tableexport.JPG)
 
   
-### E Batch Processing
+## E Batch Processing
 - Follow the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
 - store the images you want to process in the 0_2_original_tif_batch_images directory
 - Perform steps D.2 to D.5 in batch mode, explained in detail below (E.2 to E.5)
   
-## E.1 Rename Files
+### E.1 Rename Files
 - Rename the `.tif-files` so that they contain information about your cells and experimental conditions
 - Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as in your plate and sequence of image acquisition.
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
@@ -180,41 +180,41 @@ In `Configure Feature Table Export General` change seetings to
   
 ![csv_table](https://github.com/mr2raccoon/caactus/blob/main/images/csv-file_forrenaming.JPG)
   
-## E.2 Batch Processing Pixel Classification
+### E.2 Batch Processing Pixel Classification
 - open the `1_pixel_classification.ilp` project file
 - under `Prediction Export` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5`
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 
-## E.3 Batch Processing Multicut Segmentation
+### E.3 Batch Processing Multicut Segmentation
 - open the `2_boundary_segmentation.ilp` project file
 - under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5`
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
 
-## E.4 Background Processing 
+### E.4 Background Processing 
 For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
 - call the `background-processing` script from the cmd prompt
 - enter "-m batch" for batch mode
 
 
-## E.5 Batch processing Object classification 
+### E.5 Batch processing Object classification 
 - under `Choose Export Image Settings` change the export directory to `File`: `{dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5`
 - in `Configure Feature Table Export General` choose `{dataset_dir}/../8_batch_objectclassification/{nickname}.csv` as the output directory and format `.csv`
 - select your feautres of interest for exporting
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
 
-### F Post-Processing and Data Analysis
+## F Post-Processing and Data Analysis
 - Please be aware, the last two scripts, "summary_statisitcspy" and "pln_modelling.py" at this stage are written for the analysis and visualization of two independent variables.
-## F.1 Merging Data Tables and Table Export
+### F.1 Merging Data Tables and Table Export
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
 - call the `csv_summary` script from the cmd prompt
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
-## F.2 Creating Summary Statistics
+### F.2 Creating Summary Statistics
 - call the `summary_statistics` script from the cmd prompt
 
-## F.3 PLN Modelling 
+### F.3 PLN Modelling 
 - call the `pln_modelling` script from the cmd prompt`
 
 
