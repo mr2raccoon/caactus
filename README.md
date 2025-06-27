@@ -17,6 +17,10 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 ## Install ilastik
 - [Download and install ilastik](https://www.ilastik.org/download) for your respective operating system.
 
+## Intall vigra
+
+- Follow the install instructions [for vigra on the developer's website](https://ukoethe.github.io/vigra/doc-release/vigra/Installation.html)
+
 ## Install caactus
 
 - To install `caactus` use `pip install caactus` to install all scripts plus the needed dependencies. 
