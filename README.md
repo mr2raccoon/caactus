@@ -22,13 +22,13 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 - To install `caactus` use `pip install caactus` to install all scripts plus the needed dependencies. 
 
 # Workflow
-## A. Culturing
+## A Culturing
 - Culture your cells in a plate of your choice and according to the needs of the organims being researched.
-## B. Image acquisition
+## B Image acquisition
 - In your respective microscopy software environment, save the images of interest to `.tif-format`.
 - From the metadata note down the pixel size and magnification used. 
 
-## C. Data Preparation
+## C Data Preparation
 ### C.1 Create Project Directory
 
 - For portability of the ilastik projects create the directory in the following structure:\
