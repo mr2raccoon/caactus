@@ -105,7 +105,8 @@ project_directory
 - call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
  The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 - select "-c" and enter path to config.toml
-- select "-m" and choose "training" or "batch" mode
+- select "-m" and choose "training"
+- whole command `pyhon tif2hpy.py -c \path\to\config.toml -m training
 
 ### D.2. Pixel Classification
 #### D.2.1 Project setup
@@ -145,6 +146,7 @@ For futher processing in the object classification, the background needs to elim
 - call the `background-processing` script from the cmd prompt
 - select "-c" and enter path to config.toml
 - enter "-m training" for training mode
+- whole command `python background-processing.py -c \path\to\config.toml -m training
 
 ### D.5. Object Classification
 #### D.5.1 Project setup
@@ -177,6 +179,8 @@ In `Configure Feature Table Export General` change seetings to
 - Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as in your plate and sequence of image acquisition.
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
+- hole command: `python rename.py -c \path\to\config.toml
+
   
 ![csv_table](https://github.com/mr2raccoon/caactus/blob/main/images/csv-file_forrenaming.JPG)
   
@@ -193,8 +197,9 @@ In `Configure Feature Table Export General` change seetings to
 
 ### E.4 Background Processing 
 For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
-- call the `background-processing` script from the cmd prompt
+- call the `background-processing.py` script from the cmd prompt
 - enter "-m batch" for batch mode
+- whole command: `background-processing.py -c \path\to\config.toml -m batch
 
 
 ### E.5 Batch processing Object classification 
@@ -205,17 +210,22 @@ For futher processing in the object classification, the background needs to elim
 - under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
 
 ## F Post-Processing and Data Analysis
-- Please be aware, the last two scripts, "summary_statisitcspy" and "pln_modelling.py" at this stage are written for the analysis and visualization of two independent variables.
+- Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py at this stage are written for the analysis and visualization of two independent variables.
 ### F.1 Merging Data Tables and Table Export
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
-- call the `csv_summary` script from the cmd prompt
+- call the `csv_summary.py` script from the cmd prompt
+- whole command `python csv_summary.py
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
 ### F.2 Creating Summary Statistics
-- call the `summary_statistics` script from the cmd prompt
+- call the `summary_statistics.py` script from the cmd prompt
+- whole command `python summary_statistics.py
+
 
 ### F.3 PLN Modelling 
-- call the `pln_modelling` script from the cmd prompt`
+- call the `pln_modelling.py` script from the cmd prompt`
+- whole command `python pln_modelling.py
+
 
 
 
