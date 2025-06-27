@@ -181,11 +181,8 @@ In `Configure Feature Table Export General` change seetings to
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
 - hole command: `python rename.py -c \path\to\config.toml`
 
-  
-<p align="center">
-  <img src="https://github.com/mr2raccoon/caactus/blob/main/images/csv-file_forrenaming.JPG" width="45%" />
-  <img src="https://github.com/mr2raccoon/caactus/blob/main/images/96_well.png" width="45%" />
-</p>  
+ ![96-well-plate](https://github.com/mr2raccoon/caactus/blob/main/images/96_well_setup.png)
+
 ### E.2 Batch Processing Pixel Classification
 - open the `1_pixel_classification.ilp` project file
 - under `Prediction Export` change the export directory to `File`: `{dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5`
