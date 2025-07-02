@@ -146,7 +146,7 @@ In prediction export change the settings to
 
 
 ### D.4 Background Processing
-For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will thus be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
 - call the `background-processing` script from the cmd prompt
 - select "-c" and enter path to config.toml
 - enter "-m training" for training mode
@@ -155,7 +155,7 @@ For futher processing in the object classification, the background needs to elim
 ### D.5. Object Classification
 #### D.5.1 Project setup
 - Follow the the [documentation for object classification](https://github.com/mr2raccoon/caactus/blob/main/images/export_objectclassification.JPG).
-- define your cell types plus an additional category for "non-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
+- define your cell types plus an additional category for "not-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
 #### D.5.2 Export Object Information
 In `Choose Export Imager Settings` change settings to
 - `Convert to Data Type: integer 8-bit`
@@ -176,14 +176,14 @@ In `Configure Feature Table Export General` change seetings to
 ## E Batch Processing
 - Follow the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
 - store the images you want to process in the 0_2_original_tif_batch_images directory
-- Perform steps D.2 to D.5 in batch mode, explained in detail below (E.2 to E.5)
+- Perform steps D.2 to D.5 in batch mode, as explained in detail below (E.2 to E.5)
   
 ### E.1 Rename Files
 - Rename the `.tif-files` so that they contain information about your cells and experimental conditions
-- Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as in your plate and sequence of image acquisition.
+- Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as the sequence of image acquisition.
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
-- hole command: `python rename.py -c \path\to\config.toml`
+- whole command: `python rename.py -c \path\to\config.toml`
 
  ![96-well-plate](https://github.com/mr2raccoon/caactus/blob/main/images/96_well_setup.png)
 
@@ -199,7 +199,7 @@ In `Configure Feature Table Export General` change seetings to
 - under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
 
 ### E.4 Background Processing 
-For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will this be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will thus be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
 - call the `background-processing.py` script from the cmd prompt
 - enter "-m batch" for batch mode
 - whole command: `python background-processing.py -c \path\to\config.toml -m batch`
