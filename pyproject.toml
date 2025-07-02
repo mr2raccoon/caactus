@@ -51,7 +51,8 @@ dependencies = [
 "matplotlib",
 "pyPLNmodels",
 "tomli",
-"argparse"
+"argparse",
+"seaborn.objects"
 ]
 
 [project.urls]
