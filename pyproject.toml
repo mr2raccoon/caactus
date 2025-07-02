@@ -11,7 +11,7 @@ dynamic = ["version"]
 description = "Package for pre- and post-processing of images and data for working with ilastik-software"
 readme = "README.md"
 license = {text = "MIT License"}
-requires-python = ">=3.12"
+requires-python = ">=3.10.12"
 keywords = [
         "python",
         "count",
@@ -52,7 +52,7 @@ dependencies = [
 "pyPLNmodels",
 "tomli",
 "argparse",
-"seaborn.objects"
+"seaborn"
 ]
 
 [project.urls]
@@ -69,8 +69,11 @@ summary_statistics_eucast = "caactus.summary_statistics_eucast:main"
 pln_modelling = "caactus.pln_modelling:main"
 
 [tool.setuptools]
-py-modules = ["tif2h5py", "background_processing", "csv_summary", "csv_summaryold", "summary_statistics", "plnmodelling", "renaming"]
 include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include =["caactus"]
 
 
 

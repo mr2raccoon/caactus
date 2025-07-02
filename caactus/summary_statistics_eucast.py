@@ -205,8 +205,7 @@ def process_eucast_data(
     g.save(os.path.join(output_dir, 'barchart.png'), bbox_inches="tight")
 
 
-# Entry point
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-c", "--config",
@@ -243,3 +242,7 @@ if __name__ == "__main__":
         color_mapping, conc_order,
         timepoint_order
     )
+
+
+if __name__ == "__main__":
+    main()

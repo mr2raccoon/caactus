@@ -76,7 +76,7 @@ def process_csv_files(input_dir, output_dir, pixel_size):
     print(df.head())
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-c", "--config",
@@ -103,3 +103,7 @@ if __name__ == "__main__":
     output_dir = os.path.join(main_folder, output_path)
 
     process_csv_files(input_dir, output_dir, pixel_size)
+
+
+if __name__ == "__main__":
+    main()

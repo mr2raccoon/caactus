@@ -97,7 +97,7 @@ def modelling(input_dir, output_dir, variable_names, dynamic_columns):
     )
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-c", "--config",
@@ -122,3 +122,7 @@ if __name__ == "__main__":
     dynamic_columns = section["dynamic_columns"]
 
     modelling(input_dir, output_dir, variable_names, dynamic_columns)
+
+
+if __name__ == "__main__":
+    main()

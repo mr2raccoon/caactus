@@ -167,7 +167,7 @@ def process_cleaned_data(input_dir, output_dir, variable_names, color_mapping, c
     plot.save(os.path.join(output_dir, 'barchart.png'), bbox_inches="tight")
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-c", "--config",
@@ -201,3 +201,7 @@ if __name__ == "__main__":
         color_mapping,
         class_order
     )
+
+
+if __name__ == "__main__":
+    main()

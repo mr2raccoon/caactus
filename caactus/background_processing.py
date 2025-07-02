@@ -6,12 +6,12 @@ Created on Wed Jul  2 13:07:59 2025
 @author: kuba
 """
 
-import os  # File and path operations
-import sys  # For exit handling
-import h5py  # For reading/writing HDF5 files
-import numpy as np  # Numerical operations
-import tomli  # For loading TOML configs
-import argparse  # For command-line argument parsing
+import os
+import sys
+import h5py
+import numpy as np
+import tomli
+import argparse
 
 
 def load_config(path="config.toml"):
@@ -30,18 +30,15 @@ def process_image(image_path):
     try:
         with h5py.File(image_path, 'r+') as img:
             if 'exported_data' not in img:
-                raise KeyError(
-                    f"'exported_data' dataset not found in {image_path}"
-                )
+                raise KeyError(f"'exported_data' dataset not found in {image_path}")
 
             image = np.array(img['exported_data'])
 
             ids, counts = np.unique(image, return_counts=True)
             largest_id = ids[counts.argmax()]
-
             image[image == largest_id] = 0
-            img['exported_data'][:] = image
 
+            img['exported_data'][:] = image
     except Exception as e:
         print(f"Error processing file {image_path}: {e}")
 
@@ -61,12 +58,11 @@ def batch_process_images(input_directory):
             print(f"Finished:   {filename}")
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-c", "--config",
         required=True,
-        default="config.toml",
         help="Path to configuration file"
     )
     parser.add_argument(
@@ -90,3 +86,7 @@ if __name__ == "__main__":
     input_dir = os.path.join(main_folder, input_path)
 
     batch_process_images(input_dir)
+
+
+if __name__ == "__main__":
+    main()

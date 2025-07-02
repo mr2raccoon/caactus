@@ -29,7 +29,7 @@ def natural_sort_key(s):
             for text in re.split(r'(\d+)', s)]
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-c", "--config",
@@ -88,3 +88,8 @@ if __name__ == "__main__":
             print(f"Renamed '{current_file_name}' to '{new_file_name}'")
 
         print("Batch renaming completed.")
+
+
+if __name__ == "__main__":
+    main()
+
