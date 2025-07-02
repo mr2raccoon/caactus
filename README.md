@@ -27,10 +27,10 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 
 # Workflow
 ## A Culturing
-- Culture your cells in a plate of your choice and according to the needs of the organims being researched.
+- Culture your cells in a flat bottom plate of your choice and according to the needs of the organims being researched.
 ## B Image acquisition
 - In your respective microscopy software environment, save the images of interest to `.tif-format`.
-- From the metadata note down the pixel size and magnification used. 
+- From the image metadata, copy the pixel size and magnification used. 
 
 ## C Data Preparation
 ### C.1 Create Project Directory
@@ -103,7 +103,7 @@ project_directory
 ## D Training
 ### D.1. Selection of Training Images and Conversion
 #### D.1.1 Selection of Training data
-- select a set of images the represantes the different experimental conditions best
+- select a set of images that represant the different experimental conditions best
 - store them in 0_1_original_tif_training_images
 #### D.1.2 Conversion
 - call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
