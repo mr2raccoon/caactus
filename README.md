@@ -97,7 +97,7 @@ project_directory
 
 ```
 ### C.1 Setup config.toml-file
-- enter the values according to your data in the config.toml file
+- copy config/config.toml to your working directory and modify it as needed.
 - the caactus scripts are setup for pulling the information needed for running from the file
 
 ## D Training
