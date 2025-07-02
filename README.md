@@ -181,6 +181,7 @@ In `Configure Feature Table Export General` change seetings to
 ### E.1 Rename Files
 - Rename the `.tif-files` so that they contain information about your cells and experimental conditions
 - Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as the sequence of image acquisition.
+- the only hardcoded columns that have to be added are `biorep` for "biological replicate" and `techrep` for "technical replicate". They are needed for downstream analysis for calculating the averages
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
 - whole command: `python rename.py -c \path\to\config.toml`
