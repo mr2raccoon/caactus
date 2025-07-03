@@ -16,6 +16,8 @@ caactus.egg-info/dependency_links.txt
 caactus.egg-info/entry_points.txt
 caactus.egg-info/requires.txt
 caactus.egg-info/top_level.txt
+caactus/__pycache__/__init__.cpython-310.pyc
+caactus/__pycache__/tif2h5py.cpython-310.pyc
 images/96_well_setup.png
 images/caactus-workflow(1).png
 images/export_multicut.JPG

@@ -231,6 +231,7 @@ The next script will combine all tables from all images into one global table fo
 ### F.3 PLN Modelling 
 - call the `pln_modelling.py` script from the cmd prompt`
 - whole command `pln_modelling`
+- please note: the limit of categories for display in the PCA-plot is n=15
 
 
 
