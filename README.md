@@ -11,12 +11,12 @@ This worklow allwows for the automatization of cell-counting from messy microsco
 # Installation
 ## Install miniconda, create an environment with Python and vigra
 - [Download and install miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-installation) for your respective operating system according to the instructions.
-- Once installed create an environent for using `caactus` with the following command from your cmd-line `conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra`
+- Once installed, create an environent for using `caactus` with the following command from your cmd-line `conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra`.
 
 ## Install caactus
-- activate the `caactus-env` from the cmd-line with `conda actiavte caactus-env
+- Activate the `caactus-env` from the cmd-line with `conda actiavte caactus-env`.
 - To install `caactus` inside your environment, use `pip install caactus` to install all scripts plus the needed dependencies.
-- during the below described steps that call the `caactus-scripts` make sure to have the `caactus-env` activated
+- During the below described steps that call the `caactus-scripts`, make sure to have the `caactus-env` activated.
 
 
 ## Install ilastik
