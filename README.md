@@ -9,7 +9,7 @@ The goal of this script collection is to provide an easy-to-use completion for t
 This worklow allwows for the automatization of cell-counting from messy microscopic images with different (touching) cell types for biological research. 
 
 # Installation
-## Install miniconda, create an environment with Python and vigra
+## Install miniconda, create an environment with Python and vigra installed
 - [Download and install miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-installation) for your respective operating system according to the instructions.
 - Once installed, create an environent for using `caactus` with the following command from your cmd-line `conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra`.
 
