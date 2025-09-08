@@ -213,7 +213,7 @@ For futher processing in the object classification, the background needs to elim
 - under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
 
 ## F Post-Processing and Data Analysis
-- Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py at this stage are written for the analysis and visualization of two independent variables.
+- Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py` at this stage are written for the analysis and visualization of two independent variables.
 ### F.1 Merging Data Tables and Table Export
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
 - call the `csv_summary.py` script from the cmd prompt
