@@ -22,7 +22,8 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
   ```bash
   conda activate caactus-env
 - To install `caactus` plus the needed dependencies inside your environment, use
-  ```bash pip install caactus
+  ```bash
+  pip install caactus
 - During the below described steps that call the `caactus-scripts`, make sure to have the `caactus-env` activated.
 
 
