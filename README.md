@@ -144,7 +144,10 @@ In prediction export change the settings to
 #### D.3.1 Project setup
 - Follow the the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
 - Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
-- In `DT Watershed` use the input channel the corresponds to the order you used under project setup ( in this case input channel = 2).
+- In `DT Watershed` use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
+
+![watershed](https://github.com/mr2raccoon/caactus/blob/main/images/watershed.png)
+
 
 #### D.3.2 Export Multicut Segmentation
 In prediction export change the settings to 
