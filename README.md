@@ -7,7 +7,7 @@ caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool using ila**stik** s
 # Introduction
 The goal of this script collection is to provide an easy-to-use completion for the [Boundary-based segmentation with Multicut-workflow](https://www.ilastik.org/documentation/multicut/multicut) in [ilastik](https://www.ilastik.org/).
 This worklow allwows for the automatization of cell-counting from messy microscopic images with different (touching) cell types for biological research. 
-For easy copy & paste, commands are shown in `grey code boxes`
+For easy copy & paste, commands are provided in `grey code boxes` with one-click C&P
 
 # Installation
 ## Install miniconda, create an environment and install Python and vigra
@@ -18,8 +18,11 @@ For easy copy & paste, commands are shown in `grey code boxes`
   conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra 
 
 ## Install caactus
-- Activate the `caactus-env` from the cmd-line with `conda activate caactus-env`.
-- To install `caactus` inside your environment, use `pip install caactus` to install all scripts plus the needed dependencies.
+- Activate the `caactus-env` from the cmd-line with
+  ```bash
+  conda activate caactus-env
+- To install `caactus` plus the needed dependencies inside your environment, use
+  ```bash pip install caactus
 - During the below described steps that call the `caactus-scripts`, make sure to have the `caactus-env` activated.
 
 
