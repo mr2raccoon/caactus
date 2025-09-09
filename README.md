@@ -1,5 +1,5 @@
 # caactus
- caactus (cell analysis and counting Tool using ilastik software) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures. 
+caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool using ila**stik** software) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures. 
 
  ![workflow](https://github.com/mr2raccoon/caactus/blob/main/images/caactus-workflow(1).png)
  
@@ -7,11 +7,13 @@
 # Introduction
 The goal of this script collection is to provide an easy-to-use completion for the [Boundary-based segmentation with Multicut-workflow](https://www.ilastik.org/documentation/multicut/multicut) in [ilastik](https://www.ilastik.org/).
 This worklow allwows for the automatization of cell-counting from messy microscopic images with different (touching) cell types for biological research. 
+For easy copy & paste, commands are shown in `grey code boxes`
 
 # Installation
-## Install miniconda, create an environment with Python and vigra installed
+## Install miniconda, create an environment and install Python and vigra
 - [Download and install miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-installation) for your respective operating system according to the instructions.
-- Once installed, create an environent for using `caactus` with the following command from your cmd-line `conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra`.
+  - Miniconda provides a lightweight package and environment manager. It allows you to create isolated environments so that Python versions and package dependencies required by caactus do not interfere with your system Python or other projects.
+- Once installed, create an environment for using `caactus` with the following command from your cmd-line ```bash conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra```.
 
 ## Install caactus
 - Activate the `caactus-env` from the cmd-line with `conda activate caactus-env`.
