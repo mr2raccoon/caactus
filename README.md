@@ -13,7 +13,9 @@ For easy copy & paste, commands are shown in `grey code boxes`
 ## Install miniconda, create an environment and install Python and vigra
 - [Download and install miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install#windows-installation) for your respective operating system according to the instructions.
   - Miniconda provides a lightweight package and environment manager. It allows you to create isolated environments so that Python versions and package dependencies required by caactus do not interfere with your system Python or other projects.
-- Once installed, create an environment for using `caactus` with the following command from your cmd-line ```bash conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra```.
+- Once installed, create an environment for using `caactus` with the following command from your cmd-line
+  ```bash
+  conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra```.
 
 ## Install caactus
 - Activate the `caactus-env` from the cmd-line with `conda activate caactus-env`.
