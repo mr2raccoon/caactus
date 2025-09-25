@@ -119,9 +119,12 @@ project_directory
  The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 - select "-c" and enter path to config.toml
 - select "-m" and choose "training"
-- whole command
+- whole command UNIX:
   ```bash
   tif2hpy -c \path\to\config.toml -m training
+- whole command Windows:
+  ```bash
+  tif2hpy.exe -c \path\to\config.toml -m training
 
 ### D.2. Pixel Classification
 #### D.2.1 Project setup
@@ -168,9 +171,12 @@ For futher processing in the object classification, the background needs to elim
 - call the `background-processing` script from the cmd prompt
 - select "-c" and enter path to config.toml
 - enter "-m training" for training mode
-- whole command
+- whole command UNIX:
   ```bash
-  background-processing -c \path\to\config.toml -m training
+  background_processing -c \path\to\config.toml -m training
+- whole command Windows:
+  ```bash
+  background_processing.exe -c \path\to\config.toml -m training
 
 ### D.5. Object Classification
 #### D.5.1 Project setup
@@ -208,9 +214,12 @@ In `Configure Feature Table Export General` change seetings to
 - the only hardcoded columns that have to be added are `biorep` for "biological replicate" and `techrep` for "technical replicate". They are needed for downstream analysis for calculating the averages
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
-- whole command:
+- whole command Unix:
   ```bash
-  rename -c \path\to\config.toml
+  renaming -c \path\to\config.toml
+- whole command Windows:
+  ```bash
+  renaming.exe -c \path\to\config.toml
 
  ![96-well-plate](https://github.com/mr2raccoon/caactus/blob/main/images/96_well_setup.png)
 
@@ -233,9 +242,12 @@ In `Configure Feature Table Export General` change seetings to
 For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will thus be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
 - call the `background-processing.py` script from the cmd prompt
 - enter "-m batch" for batch mode
-- whole command:
+- whole command Unix:
   ```bash
-  background-processing -c \path\to\config.toml -m batch
+  background_processing -c \path\to\config.toml -m batch
+- whole command Windows:
+  ```bash
+  background_processing -c \path\to\config.toml -m batch
 
 
 ### E.5 Batch processing Object classification 
@@ -256,22 +268,28 @@ The next script will combine all tables from all images into one global table fo
 - call the `csv_summary.py` script from the cmd prompt
 - whole command:
    ```bash
-  python csv_summary.py
+  python csv_summary
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
 ### F.2 Creating Summary Statistics
 - call the `summary_statistics.py` script from the cmd prompt
-- whole command:
+- whole command Unix:
    ```bash
-  summary_statistics
+  summary_statistics -c \path\to\config.toml
+ - whole command Windows:
+   ```bash
+  summary_statistics.exe -c \path\to\config.toml
 - if working with EUCAST antifungal susceptibility testing, call `summary_statistics_eucast`
 
 
 ### F.3 PLN Modelling 
 - call the `pln_modelling.py` script from the cmd prompt`
-- whole command:
+- whole command Unix:
    ```bash
-  pln_modelling
+  pln_modelling -c \path\to\config.toml
+ - whole command Windows:
+   ```bash
+  pln_modelling.exe -c \path\to\config.toml
 - please note: the limit of categories for display in the PCA-plot is n=15
 
 
