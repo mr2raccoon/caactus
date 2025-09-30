@@ -300,7 +300,7 @@ The next script will combine all tables from all images into one global table fo
   pln_modelling -c "$p"
  - whole command Windows:
    ```bash
-  pln_modelling.exe -c $p
+   pln_modelling.exe -c $p
 - please note: the limit of categories for display in the PCA-plot is n=15
 
 
