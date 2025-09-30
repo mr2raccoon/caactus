@@ -289,7 +289,7 @@ The next script will combine all tables from all images into one global table fo
   summary_statistics -c "$p"
  - whole command Windows:
    ```bash
-  summary_statistics.exe -c $p
+   summary_statistics.exe -c $p
 - if working with EUCAST antifungal susceptibility testing, call `summary_statistics_eucast`
 
 
