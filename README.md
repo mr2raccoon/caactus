@@ -106,7 +106,14 @@ project_directory
 - copy config/config.toml to your working directory and modify it as needed.
 - the caactus scripts are setup for pulling the information needed for running from the file
 - in the following commands, replace `\path\to\config.toml` with your actual path
-  - CAVE: for Windows users make sure to change the backlash fro `/path/to/config.toml` to `\path\to\config.toml`, when copying the path to your working directory  
+  - CAVE: for Windows users make sure to change the backlash fro `/path/to/config.toml` to `\path\to\config.toml`, when copying the path to your working directory
+- open the command line and save the path to your project file to a variable
+  - whole command UNIX:
+  ```bash
+  p = "\path\to\config.toml" 
+- whole command Windows:
+  ```bash
+  $p = "\path\to\config.toml"
 
 ## D Training
 ### D.1. Selection of Training Images and Conversion
@@ -121,10 +128,10 @@ project_directory
 - select "-m" and choose "training"
 - whole command UNIX:
   ```bash
-  tif2hpy -c \path\to\config.toml -m training
+  tif2hpy -c "$p" -m training
 - whole command Windows:
   ```bash
-  tif2hpy.exe -c \path\to\config.toml -m training
+  tif2hpy.exe -c $p -m training
 
 ### D.2. Pixel Classification
 #### D.2.1 Project setup
@@ -173,10 +180,10 @@ For futher processing in the object classification, the background needs to elim
 - enter "-m training" for training mode
 - whole command UNIX:
   ```bash
-  background_processing -c \path\to\config.toml -m training
+  background_processing -c "$p" -m training
 - whole command Windows:
   ```bash
-  background_processing.exe -c \path\to\config.toml -m training
+  background_processing.exe -c $p -m training
 
 ### D.5. Object Classification
 #### D.5.1 Project setup
@@ -216,10 +223,10 @@ In `Configure Feature Table Export General` change seetings to
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
 - whole command Unix:
   ```bash
-  renaming -c \path\to\config.toml
+  renaming -c "$p"
 - whole command Windows:
   ```bash
-  renaming.exe -c \path\to\config.toml
+  renaming.exe -c $p
 
  ![96-well-plate](https://github.com/mr2raccoon/caactus/blob/main/images/96_well_setup.png)
 
@@ -244,10 +251,10 @@ For futher processing in the object classification, the background needs to elim
 - enter "-m batch" for batch mode
 - whole command Unix:
   ```bash
-  background_processing -c \path\to\config.toml -m batch
+  background_processing -c "$p" -m batch
 - whole command Windows:
   ```bash
-  background_processing -c \path\to\config.toml -m batch
+  background_processing -c $p -m batch
 
 
 ### E.5 Batch processing Object classification 
@@ -266,19 +273,22 @@ For futher processing in the object classification, the background needs to elim
 ### F.1 Merging Data Tables and Table Export
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
 - call the `csv_summary.py` script from the cmd prompt
-- whole command:
+- whole command Unix:
    ```bash
-  python csv_summary
+  python csv_summary -c "$p"
+- whole command Windows
+   ```bash
+  python csv_summary -c $p
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
 ### F.2 Creating Summary Statistics
 - call the `summary_statistics.py` script from the cmd prompt
 - whole command Unix:
    ```bash
-  summary_statistics -c \path\to\config.toml
+  summary_statistics -c "$p"
  - whole command Windows:
    ```bash
-  summary_statistics.exe -c \path\to\config.toml
+  summary_statistics.exe -c $p
 - if working with EUCAST antifungal susceptibility testing, call `summary_statistics_eucast`
 
 
@@ -286,10 +296,10 @@ The next script will combine all tables from all images into one global table fo
 - call the `pln_modelling.py` script from the cmd prompt`
 - whole command Unix:
    ```bash
-  pln_modelling -c \path\to\config.toml
+  pln_modelling -c "$p"
  - whole command Windows:
    ```bash
-  pln_modelling.exe -c \path\to\config.toml
+  pln_modelling.exe -c $p
 - please note: the limit of categories for display in the PCA-plot is n=15
 
 
