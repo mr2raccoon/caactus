@@ -43,6 +43,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 
 - For portability of the ilastik projects create the directory in the following structure:\
 (Please note: the below example already includes examples of resulting files in each sub-directory)
+- This allows you to copy an already trained workflow and use it multiple times with new datasets
 
 ```
 project_directory  
