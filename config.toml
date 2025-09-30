@@ -17,7 +17,7 @@ csv_rename = "renaming.csv" # path for .csv-table with the metadata renaming
 [tif2h5py.training]
 input_path = "0_1_original_tif_training_images" # path of original .tif-files
 output_path = "1_images" # path for the .h5py-files for training
-[tif2h5p.batch]
+[tif2h5py.batch]
 input_path = "0_3_batch_tif_renamed" # path of renamed .tif-files
 output_path = "5_batch_images" # path for the renamed .h5py-files for batch-mode
 
