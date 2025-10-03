@@ -255,7 +255,7 @@ For futher processing in the object classification, the background needs to elim
   background_processing -c "$p" -m batch
 - whole command Windows:
   ```bash
-  background_processing -c $p -m batch
+  background_processing.exe -c $p -m batch
 
 
 ### E.5 Batch processing Object classification 
