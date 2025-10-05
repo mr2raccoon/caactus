@@ -38,8 +38,8 @@ def process_eucast_data(
     )
 
     split_cols = counts['filename'].str.split('_', expand=True)
-    counts['conc'] = split_cols[5].str.replace("conc-", "")
-    counts['timepoint'] = split_cols[8].str.replace("timepoint-", "")
+    counts['conc'] = split_cols[1].str.replace("conc-", "")
+    counts['timepoint'] = split_cols[2].str.replace("timepoint-", "")
 
     # Flag all entries from files that contain any mycelium as mycelium
     filenames_with_mycelium = counts.loc[
