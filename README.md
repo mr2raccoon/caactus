@@ -128,10 +128,10 @@ project_directory
 - select "-m" and choose "training"
 - whole command UNIX:
   ```bash
-  tif2hpy -c "$p" -m training
+  tif2h5py -c "$p" -m training
 - whole command Windows:
   ```bash
-  tif2hpy.exe -c $p -m training
+  tif2h5py.exe -c $p -m training
 
 ### D.2. Pixel Classification
 #### D.2.1 Project setup
@@ -233,10 +233,10 @@ In `Configure Feature Table Export General` change seetings to
 - select "-m" and choose "batch"
 - whole command UNIX:
   ```bash
-  tif2hpy -c "$p" -m batch
+  tif2h5py -c "$p" -m batch
 - whole command Windows:
   ```bash
-  tif2hpy.exe -c $p -m batch
+  tif2h5py.exe -c $p -m batch
 
  ![96-well-plate](https://github.com/mr2raccoon/caactus/blob/main/images/96_well_setup.png)
 
@@ -288,7 +288,7 @@ The next script will combine all tables from all images into one global table fo
    csv_summary -c "$p"
 - whole command Windows
    ```bash
-   csv_summary -c $p
+   csv_summary.exe -c $p
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
 ### F.2 Creating Summary Statistics
