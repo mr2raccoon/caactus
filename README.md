@@ -7,7 +7,7 @@ caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool **u**sing ilastik *
 # Introduction
 The goal of this script collection is to provide an easy-to-use completion for the [Boundary-based segmentation with Multicut-workflow](https://www.ilastik.org/documentation/multicut/multicut) in [ilastik](https://www.ilastik.org/).
 This workflow allows for the automatization of cell-counting from messy microscopic images with different (touching) cell types for biological research. 
-For easy copy & paste, commands are provided in `grey code boxes` with one-click C&P
+For easy copy & paste, commands are provided in `grey code boxes` with one-click copy & paste.
 
 # Installation
 ## Install miniconda, create an environment and install Python and vigra
