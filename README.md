@@ -265,7 +265,7 @@ For futher processing in the object classification, the background needs to elim
 - in `Configure Feature Table Export General` choose format `.csv` and change output directory to:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
-- select your feautres of interest for exporting
+- select your features of interest for exporting
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
 
