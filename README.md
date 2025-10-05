@@ -106,7 +106,6 @@ project_directory
 ### C.1 Setup config.toml-file
 - copy config/config.toml to your working directory and modify it as needed.
 - the caactus scripts are setup for pulling the information needed for running from the file
-- in the following commands, replace `\path\to\config.toml` with your actual path
   - CAVE: for Windows users make sure to change the backlash fro `/path/to/config.toml` to `\path\to\config.toml`, when copying the path to your working directory
 - open the command line (for Windows: Anaconda Powershell) and save the path to your project file to a variable
   - whole command UNIX:
