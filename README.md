@@ -1,12 +1,12 @@
 # caactus
-caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool using ila**stik** software) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures. 
+caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool using **i**lastik software) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures.
 
  ![workflow](https://github.com/mr2raccoon/caactus/blob/main/images/caactus-workflow(1).png)
  
 
 # Introduction
 The goal of this script collection is to provide an easy-to-use completion for the [Boundary-based segmentation with Multicut-workflow](https://www.ilastik.org/documentation/multicut/multicut) in [ilastik](https://www.ilastik.org/).
-This worklow allwows for the automatization of cell-counting from messy microscopic images with different (touching) cell types for biological research. 
+This workflow allows for the automatization of cell-counting from messy microscopic images with different (touching) cell types for biological research. 
 For easy copy & paste, commands are provided in `grey code boxes` with one-click C&P
 
 # Installation
@@ -205,7 +205,7 @@ In `Configure Feature Table Export General` change seetings to
 - format `.csv` and output directory File:
   ```bash
   {dataset_dir}/../4_objectclassification/{nickname}.csv`
-- select your feautres of interest for exporting
+- select your features of interest for exporting
 
   
 ![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/object_tableexport.JPG)
@@ -276,10 +276,10 @@ The next script will combine all tables from all images into one global table fo
 - call the `csv_summary.py` script from the cmd prompt
 - whole command Unix:
    ```bash
-  python csv_summary -c "$p"
+   csv_summary -c "$p"
 - whole command Windows
    ```bash
-  python csv_summary -c $p
+   csv_summary -c $p
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
 ### F.2 Creating Summary Statistics
