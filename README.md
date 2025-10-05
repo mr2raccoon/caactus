@@ -1,5 +1,5 @@
 # caactus
-caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool using **i**lastik software) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures.
+caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool **u**sing ilastik **s**oftware) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures.
 
  ![workflow](https://github.com/mr2raccoon/caactus/blob/main/images/caactus-workflow(1).png)
  
