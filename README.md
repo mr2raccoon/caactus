@@ -229,16 +229,26 @@ In `Configure Feature Table Export General` change seetings to
   ```bash
   renaming.exe -c $p
 
+#### E.2 Conversion
+- call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
+- select "-m" and choose "batch"
+- whole command UNIX:
+  ```bash
+  tif2hpy -c "$p" -m batch
+- whole command Windows:
+  ```bash
+  tif2hpy.exe -c $p -m batch
+
  ![96-well-plate](https://github.com/mr2raccoon/caactus/blob/main/images/96_well_setup.png)
 
-### E.2 Batch Processing Pixel Classification
+### E.3 Batch Processing Pixel Classification
 - open the `1_pixel_classification.ilp` project file
 - under `Prediction Export` change the export directory to `File`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 
-### E.3 Batch Processing Multicut Segmentation
+### E.4 Batch Processing Multicut Segmentation
 - open the `2_boundary_segmentation.ilp` project file
 - under `Choose Export Image Settings` change the export directory to `File`:
   ```bash
@@ -246,7 +256,7 @@ In `Configure Feature Table Export General` change seetings to
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
 
-### E.4 Background Processing 
+### E.5 Background Processing 
 For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will thus be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
 - call the `background-processing.py` script from the cmd prompt
 - enter "-m batch" for batch mode
@@ -258,7 +268,7 @@ For futher processing in the object classification, the background needs to elim
   background_processing.exe -c $p -m batch
 
 
-### E.5 Batch processing Object classification 
+### E.6 Batch processing Object classification 
 - under `Choose Export Image Settings` change the export directory to `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
