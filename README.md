@@ -31,7 +31,6 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 - [Download and install ilastik](https://www.ilastik.org/download) for your respective operating system.
 
 ## Quick Overview of the workflow
-### a) Training
 1. Culture organism of interest in 96-well plate
 2. Acquire images of cells via microscopy.
 3. Create project directory
@@ -41,12 +40,10 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 7. Train a model in ilastik for [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) and later run it batch-mode.
 8. Remove the background from the images using ```background_processing```
 9. Train a model in ilastik for [object classification](https://www.ilastik.org/documentation/objects/objects) and later run it batch-mode.
-10. 10. Pool all csv-tables  from the individual images into one global table (output generated = "df_clean.csv") with ```bash
-   csv_summary
+10. 10. Pool all csv-tables  from the individual images into one global table (output generated = "df_clean.csv") with ```csv_summary```
 11. Create  summary statistics (output generated = 1. "df_summary_complete.csv" = .csv-table containing also "not usable" category, "df_refined_complete.csv" = .csv-table without "not usable" category", 3. "counts.csv" dataframe used in PlnModelling) and a bar graph ("barchart.png"  with  ```bash
   summary_statistics
-12. Model the count data with ```bash
-  pln_modelling
+12. Model the count data with ```pln_modelling```
 
 
 
