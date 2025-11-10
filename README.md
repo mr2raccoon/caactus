@@ -221,7 +221,7 @@ In `Choose Export Imager Settings` change settings to
   ```bash
   {dataset_dir}/../4_objectclassification/{nickname}_{result_type}.h5
 
-![export_multicut](https://github.com/mr2raccoon/caactus/blob/main/images/export_multicut.JPG)
+![export_multicut](https://github.com/mr2raccoon/caactus/blob/main/images/export_objectclassification.JPG)
   
 In `Configure Feature Table Export General` change seetings to
 - format `.csv` and output directory File:
