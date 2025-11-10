@@ -41,10 +41,10 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 8. **Remove** the background from the images using ```background_processing```
 9. Train a [object classification](https://www.ilastik.org/documentation/objects/objects) model in ilastik for  and later run it batch-mode.
 10. **Pool** all csv-tables  from the individual images into one global table with ```csv_summary```
-- output generated: = 
+- output generated: 
     - "df_clean.csv"
 11. **Summarize** the data with  ```summary_statistics```
-- output generated: = 
+- output generated:
     - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
     - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
     - c) "counts.csv" dataframe used in PlnModelling
