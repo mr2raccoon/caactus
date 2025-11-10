@@ -31,24 +31,23 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 - [Download and install ilastik](https://www.ilastik.org/download) for your respective operating system.
 
 ## Quick Overview of the workflow
-1. Culture organism of interest in 96-well plate
-2. Acquire images of cells via microscopy.
-3. Create project directory
-4. Rename Files with the caactus-script ```renaming```
-5. Convert files to HDF5 Format with the caactus-script  ```tif2h5py```
-6. Train a model in ilastik for [pixel classification](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) and later run it batch-mode.
-7. Train a model in ilastik for [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) and later run it batch-mode.
-8. Remove the background from the images using ```background_processing```
-9. Train a model in ilastik for [object classification](https://www.ilastik.org/documentation/objects/objects) and later run it batch-mode.
-10. Pool all csv-tables  from the individual images into one global table with ```csv_summary```
- --- output generated --- = "df_clean.csv"
-11. Create  summary statistics with  ```summary_statistics```
-    --- output generated ---
-    a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
-    b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
-    c) "counts.csv" dataframe used in PlnModelling
-    d) bar graph ("barchart.png")
-13. Model the count data with ```pln_modelling```
+1. **Culture** organism of interest in 96-well plate
+2. **Acquire** images of cells via microscopy.
+3. **Create** project directory
+4. **Rename** Files with the caactus-script ```renaming```
+5. **Convert** files to HDF5 Format with the caactus-script  ```tif2h5py```
+6. Train a [pixel classification](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) model in ilastik for and later run it batch-mode.
+7. Train a [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) model in ilastik for and later run it batch-mode.
+8. **Remove** the background from the images using ```background_processing```
+9. Train a [object classification](https://www.ilastik.org/documentation/objects/objects) model in ilastik for  and later run it batch-mode.
+10. **Pool** all csv-tables  from the individual images into one global table with ```csv_summary```
+- output generated: = "df_clean.csv"
+11. **Summarize** the data with  ```summary_statistics```
+    - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
+    - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
+    - c) "counts.csv" dataframe used in PlnModelling
+    - d) bar graph ("barchart.png")
+13. **Model** the count data with ```pln_modelling```
 
 
 
