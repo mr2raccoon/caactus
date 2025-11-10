@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul  2 13:10:39 2025
-
-@author: kuba
 """
 
 import os  # For path operations
