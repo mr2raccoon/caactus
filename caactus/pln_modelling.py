@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Oct  2 16:46:19 2024
 
-@author: q243js
 """
 
 import os
@@ -30,7 +27,7 @@ def modelling(input_dir, output_dir, variable_names, dynamic_columns):
         os.path.join(input_dir, 'counts_df.csv'),
         index_col=0
     )
-
+    counts = counts[counts["Predicted Class"].notna()]
     # Pivot data: shape is [filename + grouping vars] x [Predicted Classes]
     pivot_df = counts.reset_index().pivot_table(
         index=["filename"] + variable_names,
@@ -70,11 +67,23 @@ def modelling(input_dir, output_dir, variable_names, dynamic_columns):
 
     print(zipln)
 
-    # PCA visualization
+    # PCA visualization with proper legend labels
     fig, ax = plt.subplots(figsize=(10, 6))
-    zipln.viz(ax=ax, colors=combined_dict["combined_category"])
-
-    # Adjust layout to make room for the legend
+    
+    # Plot each combined category separately with its label
+    for cat in sorted(set(combined_dict["combined_category"])):
+        mask = combined_dict["combined_category"] == cat
+        ax.scatter(
+            zipln.latent_variables[mask, 0],
+            zipln.latent_variables[mask, 1],
+            label=cat
+        )
+    
+    ax.set_xlabel("Latent Dimension 1")
+    ax.set_ylabel("Latent Dimension 2")
+    ax.set_title("ZIPln PCA Projection")
+    
+    # Adjust layout and add legend
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.75, box.height])
     ax.legend(
@@ -82,13 +91,14 @@ def modelling(input_dir, output_dir, variable_names, dynamic_columns):
         bbox_to_anchor=(1, 0.5),
         title='Combined Category'
     )
-
+    
     # Save PCA plot
     plt.savefig(
         os.path.join(output_dir, 'pca_plot.png'),
         bbox_inches='tight'
     )
     plt.show()
+
 
     # Plot correlation circle (direct rendering)
     zipln.plot_correlation_circle(
