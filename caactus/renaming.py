@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul  2 13:16:46 2025
 
-@author: kuba
 """
 
 import os  # For interacting with the file system
