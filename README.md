@@ -32,15 +32,13 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 
 ## Quick Overview of the workflow
 ### a) Training
-- 1. Culture organism of interest in 96-well plate
-  2. Acquire images of cells via microscopy.
-  3. Rename Files with the caactus-script ```bash
-  renaming
-  4. Convert files to HDF5 Format with the caactus-script  ```bash
-  tif2h5py
-  5.  Train a model in ilastik for [pixel classification](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) and later run it batch-mode.
-  6.  Train a model in ilastik for [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) and later run it batch-mode.
-  7.  Remove the background from the images using ```bash
+1. Culture organism of interest in 96-well plate
+2. Acquire images of cells via microscopy.
+3. Rename Files with the caactus-script ```bash renaming```
+5. Convert files to HDF5 Format with the caactus-script  ```bash tif2h5py```
+6. Train a model in ilastik for [pixel classification](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) and later run it batch-mode.
+7. Train a model in ilastik for [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) and later run it batch-mode.
+8. Remove the background from the images using ```bash
   background_processing
   9.  Train a model in ilastik for [object classification](https://www.ilastik.org/documentation/objects/objects) and later run it batch-mode.
   10. Pool all csv-tables  from the individual images into one global table (output generated = "df_clean.csv") with ```bash
