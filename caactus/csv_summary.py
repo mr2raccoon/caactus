@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul  2 13:13:12 2025
 
-@author: kuba
 """
 
 from pathlib import Path  # For handling file system paths
