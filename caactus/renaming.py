@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
 
-"""
 
 import os  # For interacting with the file system
 import pandas as pd  # For handling CSV data
