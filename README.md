@@ -30,7 +30,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 ## Install ilastik
 - [Download and install ilastik](https://www.ilastik.org/download) for your respective operating system.
 
-## Quick Overview of the workflow
+# Quick Overview of the workflow
 1. **Culture** organism of interest in 96-well plate
 2. **Acquire** images of cells via microscopy.
 3. **Create** project directory
@@ -51,6 +51,9 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
     - d) bar graph ("barchart.png")
 13. **Model** the count data with ```pln_modelling```
 
+## Sample Dataset
+- a sample dataset to quickly try out the function can be accessed via  [zenodo](https://www.ilastik.org/download](https://doi.org/10.5281/zenodo.17590576)
+- to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes.
 
 
 
