@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "caactus"
-version = "0.1.7"
+version = "0.1.8"
 description = "Package for pre- and post-processing of images and data for working with ilastik-software"
 readme = "README.md"
 license = {text = "MIT License"}
