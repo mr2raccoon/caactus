@@ -52,7 +52,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 13. **Model** the count data with ```pln_modelling```
 
 ## Sample Dataset
-- a sample dataset to quickly try out the function can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.17590576)
+- a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.17590576)
 - to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes.
 
 
