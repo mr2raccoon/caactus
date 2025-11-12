@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-"""
 
 import os  # For path operations
 import sys  # For exit handling
