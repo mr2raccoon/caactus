@@ -65,5 +65,5 @@ mycelium = "green"
 [pln_modelling]
 input_path = "9_data_analysis" # path where summary files are stored for processing
 output_path = "9_data_analysis" # path for data analysis files
-dynamic_clomuns = ['resting', 'swollen', 'germling', 'hyphae']
+dynamic_columns = ['resting', 'swollen', 'germling', 'hyphae']
 variable_names = ["strain", "timepoint"]
