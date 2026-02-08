@@ -95,7 +95,7 @@ def process_eucast_data(
     )
 
     avg_size = (
-        df_clean.groupby(["conc", "timepoint", "Predicted Class"])["size_microm"]
+        df_clean.groupby(["conc", "timepoint", "Predicted Class"])["size_microm2"]
         .mean()
         .round(2)
     )
