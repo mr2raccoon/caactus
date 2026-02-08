@@ -53,7 +53,9 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 
 ## Sample Dataset
 - a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.17590576)
-- to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes.
+- to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes (5.1-5.6 and 6.1-6.3).
+- please note we provided the complete folder structure used in a complete project. To save disk space for the user, we intentionally left folders, unused in the tutorial, empty.
+- Detailed instuctions for the tutorial can be found in the section 
 
 
 
@@ -137,7 +139,7 @@ project_directory
 - open the command line (for Windows: Anaconda Powershell) and save the path to your project file to a variable
   - whole command UNIX:
   ```bash
-  p = "\path\to\config.toml" 
+  p="/path/to/config.toml" 
 - whole command Windows:
   ```bash
   $p = "\path\to\config.toml"
@@ -339,8 +341,133 @@ The next script will combine all tables from all images into one global table fo
    pln_modelling.exe -c $p
 - please note: the limit of categories for display in the PCA-plot is n=15
 
+# Tutorial
+## Install ilastik, miniconda and caactus
+- follow the install instructions above and make sure that everything is installed properly
+  
+## Download Sample Dataset
+
+- download the sample dataset [zenodo](https://doi.org/10.5281/zenodo.17590576)
+- unzip and save in a directory of your choice
+
+## Modify config.toml
+
+- open the config.toml file
+- change the path to main folder where the subfolders (0_1_training_data" to "9_data_analysis) are stored
+
+## Save the path to your config.toml in the command line (Unix) or Anaconda Powershell
+
+- open the command line (for Windows: Anaconda Powershell) and save the path to your project file to a variable
+  - whole command UNIX:
+  ```bash
+  p="/path/to/config.toml"
+  - example:
+  ```bash
+  p="/home/username/Documents/caactus/tutorial/config.toml"
+
+- whole command Windows:
+  ```bash
+  $p = "\path\to\config.toml"
+  - example:
+  ```bash
+  Windows $p = "C:\Documents\caactus\tutorial\config.toml"
+
+ ## Renaming
+ - renames the images according to the rename.csv worksheet
+ - whole command Unix:
+  ```bash
+  renaming -c "$p"
+- whole command Windows:
+  ```bash
+  renaming.exe -c $p
+
+ ## Conversion
+- call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
+- select "-m" and choose "batch"
+- whole command UNIX:
+  ```bash
+  tif2h5py -c "$p" -m batch
+- whole command Windows:
+  ```bash
+  tif2h5py.exe -c $p -m batch
 
 
+## Batch Processing Pixel Classification
+- open the `1_pixel_classification.ilp` project file
+- under `Prediction Export` change the export directory to `File`:
+  ```bash
+  {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
+- under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
+
+## Batch Processing Multicut Segmentation
+- open the `2_boundary_segmentation.ilp` project file
+- under `Choose Export Image Settings` change the export directory to `File`:
+  ```bash
+  {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
+- under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
+- under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
+
+## Background Processing 
+For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will thus be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+- call the `background-processing.py` script from the cmd prompt
+- enter "-m batch" for batch mode
+- whole command Unix:
+  ```bash
+  background_processing -c "$p" -m batch
+- whole command Windows:
+  ```bash
+  background_processing.exe -c $p -m batch
 
 
+## Batch processing Object classification 
+- under `Choose Export Image Settings` change the export directory to `File`:
+  ```bash
+  {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
+- in `Configure Feature Table Export General` choose format `.csv` and change output directory to:
+  ```bash
+  {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
+- select your features of interest for exporting
+- under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
+- under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
 
+## Post-Processing and Data Analysis
+- Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py` at this stage are written for the analysis and visualization of two independent variables (plus timepoint).
+### Merging Data Tables and Table Export
+The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
+- call the `csv_summary.py` script from the cmd prompt
+- whole command Unix:
+   ```bash
+   csv_summary -c "$p"
+- whole command Windows
+   ```bash
+   csv_summary.exe -c $p
+- output generated the file df_clean.csv is generated
+- Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis.
+
+### Creating Summary Statistics
+- call the `summary_statistics.py` script from the cmd prompt
+- whole command Unix:
+   ```bash
+  summary_statistics -c "$p"
+ - whole command Windows:
+   ```bash
+   summary_statistics.exe -c $p
+- if working with EUCAST antifungal susceptibility testing, call `summary_statistics_eucast`
+- output generated:
+ - df_summary_complete.csv = still contains `not usable` category
+ - df_refined_complete.csv = summary without `not usable` category
+ - barchart.png, stacked barchart shows distribution of cell categories across experimental conditions
+
+
+### PLN Modelling 
+- call the `pln_modelling.py` script from the cmd prompt`
+- whole command Unix:
+   ```bash
+  pln_modelling -c "$p"
+ - whole command Windows:
+   ```bash
+   pln_modelling.exe -c $p
+- please note: the limit of categories for display in the PCA-plot is n=15
+- output generated:
+ - pca_plot.png = PCA plot reduces high-dimensional data (counts of different cell categories) in 2D space. showing how samples (dots=images) cluster  based on their similarity, revealing patterns like groups, outliers, or batch effect
+- correlationcircle = the correlation circle is a visualisation displaying how much the original variables are correlated with the first two principal components (pca_plot.png)
