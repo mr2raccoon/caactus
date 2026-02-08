@@ -63,7 +63,7 @@ def process_csv_files(input_dir, output_dir, pixel_size):
         dfs.append(data)
 
     df = pd.concat(dfs, ignore_index=True)
-    df["size_microm"] = df["Size in pixels"] * pixel_size ** 2
+    df["size_microm2"] = df["Size in pixels"] * pixel_size ** 2
 
     os.makedirs(output_dir, exist_ok=True)
     df.to_csv(os.path.join(output_dir, 'df_clean.csv'), index=False)
