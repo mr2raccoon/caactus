@@ -1,20 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import argparse
 import os
 import sys
-import tomli
+
 import h5py
 import tifffile
 import vigra
-import argparse
-import imagecodecs  # Ensures image codecs are registered
 
-
-def load_config(path="config.toml"):
-    """Load a TOML configuration file."""
-    with open(path, "rb") as f:
-        return tomli.load(f)
+from caactus.utils import load_config
 
 
 def convert_tif_to_h5(input_dir, output_dir):
