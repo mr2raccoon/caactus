@@ -67,7 +67,7 @@ def process_cleaned_data(input_dir, output_dir, variable_names, color_mapping, c
     )
 
     avg_size = df_clean.groupby(group_cols + ["Predicted Class"])[
-        "size_microm"
+        "size_microm2"
     ].mean().round(2)
 
     merged_complete_df = merged_df.merge(
