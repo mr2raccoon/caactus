@@ -41,10 +41,10 @@ variable_names = ["strain", "timepoint"] # for grouping summary statisitcs and f
 class_order = ["resting", "swollen", "germling", "hyphae"]
 
 [summary_statistics.color_mapping]
-resting = "yellow"
-swollen = "blue"
-germling = "red"
-hyphae = "cyan"
+resting = "#FE6100"
+swollen = "#648FFF"
+germling = "#785EF0"
+hyphae = "#DC267F"
 
 [summary_statistics_eucast]
 input_path = "9_data_analysis" # path for data analysis files
@@ -55,11 +55,11 @@ conc_order = ["16", "8", "4", "2", "1", "0.5", "0.25", "0.125", "0.0625", "0.03"
 timepoint_order = ["4h", "7h", "10h", "24h"]
 
 [summary_statistics_eucast.color_mapping]
-resting = "yellow"
-swollen = "blue"
-germling = "red"
-hyphae = "cyan"
-mycelium = "green"
+resting = "#FE6100"
+swollen = "#648FFF"
+germling = "#785EF0"
+hyphae = "#DC267F"
+mycelium = "#2CA02"
 
 # config for plnmodelling
 [pln_modelling]
