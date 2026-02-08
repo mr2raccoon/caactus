@@ -131,6 +131,7 @@ project_directory
 ```
 ### 3.2 Setup config.toml-file
 - copy config/config.toml to your working directory and modify it as needed.
+  - pixel size, variable names, class order, color mapping, dynamic columns etc. can be modified to the user's need and specifications
 - the caactus scripts are setup for pulling the information needed for running from the file
   - CAVE: for Windows users make sure to change the backlash fro `/path/to/config.toml` to `\path\to\config.toml`, when copying the path to your working directory
 - open the command line (for Windows: Anaconda Powershell) and save the path to your project file to a variable
@@ -239,13 +240,14 @@ In `Configure Feature Table Export General` change seetings to
 ## 5. Batch Processing
 - Follow the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
 - store the images you want to process in the 0_2_original_tif_batch_images directory
-- Perform steps D.2 to D.5 in batch mode, as explained in detail below (E.2 to E.5)
+- Perform the steps pixel classification, Boundary-based Segmentation with Multicut, Background Processing and Object Classification in batch mode, as explained in detail below (5.1 to 5.6)
   
 ### 5.1 Rename Files
 - Rename the `.tif-files` so that they contain information about your cells and experimental conditions
 - Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as the sequence of image acquisition.
-- the only hardcoded columns that have to be added are `biorep` for "biological replicate" and `techrep` for "technical replicate". They are needed for downstream analysis for calculating the averages
+- CAVE: the only hardcoded columns that have to be added are `biorep` for "biological replicate" and `techrep` for "technical replicate". They are needed for downstream analysis for calculating the averages.
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
+- CAVE: to save disk space we recommend deleting the original data after successful renaming
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
 - whole command Unix:
   ```bash
@@ -253,7 +255,6 @@ In `Configure Feature Table Export General` change seetings to
 - whole command Windows:
   ```bash
   renaming.exe -c $p
-
 #### 5.2 Conversion
 - call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
 - select "-m" and choose "batch"
