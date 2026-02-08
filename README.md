@@ -1,7 +1,7 @@
 # caactus
 caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool **u**sing ilastik **s**oftware) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures.
 
- ![workflow](https://github.com/mr2raccoon/caactus/blob/main/images/caactus-workflow(1).png)
+ ![workflow](./images/caactus-workflow(1).png)
  
 
 # Introduction
@@ -15,15 +15,18 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
   - Miniconda provides a lightweight package and environment manager. It allows you to create isolated environments so that Python versions and package dependencies required by caactus do not interfere with your system Python or other projects.
 - Once installed, create an environment for using `caactus` with the following command from your cmd-line
   ```bash
-  conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra 
+  conda create -n caactus-env -c conda-forge "python>=3.10.12" vigra
+  ```
 
 ## Install caactus
 - Activate the `caactus-env` from the cmd-line with
   ```bash
   conda activate caactus-env
+  ```
 - To install `caactus` plus the needed dependencies inside your environment, use
   ```bash
   pip install caactus
+  ```
 - During the below described steps that call the `caactus-scripts`, make sure to have the `caactus-env` activated.
 
 
@@ -136,10 +139,12 @@ project_directory
 - open the command line (for Windows: Anaconda Powershell) and save the path to your project file to a variable
   - whole command UNIX:
   ```bash
-  p = "\path\to\config.toml" 
+  p = "/path/to/config.toml"
+  ```
 - whole command Windows:
   ```bash
   $p = "\path\to\config.toml"
+  ```
 
 ## 4. Training
 ### 4.1. Selection of Training Images and Conversion
@@ -155,9 +160,11 @@ project_directory
 - whole command UNIX:
   ```bash
   tif2h5py -c "$p" -m training
+  ```
 - whole command Windows:
   ```bash
   tif2h5py.exe -c $p -m training
+  ```
 
 ### 4.2. Pixel Classification
 #### 4.2.1 Project setup
@@ -165,7 +172,7 @@ project_directory
 - Create the `1_pixel_classification.ilp`-project file inside the project directory.  
 - For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
 
-![pixel_classes](https://github.com/mr2raccoon/caactus/blob/main/images/pixel_classification_classes.JPG)
+![pixel_classes](./images/pixel_classification_classes.JPG)
 
 #### 4.2.2 Export Probabilties
 In prediction export change the settings to 
@@ -174,8 +181,9 @@ In prediction export change the settings to
 - File:
   ```bash
   {dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5
+  ```
 
-![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/export_probabilities.JPG)
+![export_prob](./images/export_probabilities.JPG)
 
 
 ### 4.3 Boundary-based Segmentation with Multicut
@@ -184,7 +192,7 @@ In prediction export change the settings to
 - Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
 - In `DT Watershed` use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
 
-![watershed](https://github.com/mr2raccoon/caactus/blob/main/images/watershed.png)
+![watershed](./images/watershed.png)
 
 
 #### 4.3.2 Export Multicut Segmentation
@@ -195,8 +203,9 @@ In prediction export change the settings to
 - File:
   ```bash
   {dataset_dir}/../3_multicut/{nickname}_{result_type}.h5
+  ```
 
-![export_multicut](https://github.com/mr2raccoon/caactus/blob/main/images/export_multicut.JPG)
+![export_multicut](./images/export_multicut.JPG)
 
 
 ### 4.4 Background Processing
@@ -207,9 +216,11 @@ For futher processing in the object classification, the background needs to elim
 - whole command UNIX:
   ```bash
   background_processing -c "$p" -m training
+  ```
 - whole command Windows:
   ```bash
   background_processing.exe -c $p -m training
+  ```
 
 ### 4.5. Object Classification
 #### 4.5.1 Project setup
@@ -223,17 +234,19 @@ In `Choose Export Imager Settings` change settings to
 - File:
   ```bash
   {dataset_dir}/../4_objectclassification/{nickname}_{result_type}.h5
+  ```
 
-![export_multicut](https://github.com/mr2raccoon/caactus/blob/main/images/export_objectclassification.JPG)
+![export_multicut](./images/export_objectclassification.JPG)
   
 In `Configure Feature Table Export General` change seetings to
 - format `.csv` and output directory File:
   ```bash
   {dataset_dir}/../4_objectclassification/{nickname}.csv`
+  ```
 - select your features of interest for exporting
 
   
-![export_prob](https://github.com/mr2raccoon/caactus/blob/main/images/object_tableexport.JPG)
+![export_prob](./images/object_tableexport.JPG)
 
   
 ## 5. Batch Processing
@@ -250,9 +263,11 @@ In `Configure Feature Table Export General` change seetings to
 - whole command Unix:
   ```bash
   renaming -c "$p"
+  ```
 - whole command Windows:
   ```bash
   renaming.exe -c $p
+  ```
 
 #### 5.2 Conversion
 - call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
@@ -260,17 +275,20 @@ In `Configure Feature Table Export General` change seetings to
 - whole command UNIX:
   ```bash
   tif2h5py -c "$p" -m batch
+  ```
 - whole command Windows:
   ```bash
   tif2h5py.exe -c $p -m batch
+  ```
 
- ![96-well-plate](https://github.com/mr2raccoon/caactus/blob/main/images/96_well_setup.png)
+ ![96-well-plate](./images/96_well_setup.png)
 
 ### 5.3 Batch Processing Pixel Classification
 - open the `1_pixel_classification.ilp` project file
 - under `Prediction Export` change the export directory to `File`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
+  ```
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 
 ### 5.4 Batch Processing Multicut Segmentation
@@ -278,6 +296,7 @@ In `Configure Feature Table Export General` change seetings to
 - under `Choose Export Image Settings` change the export directory to `File`:
   ```bash
   {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
+  ```
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Probabilities` select all files from  `6_batch_probabilities`
 
@@ -288,18 +307,22 @@ For futher processing in the object classification, the background needs to elim
 - whole command Unix:
   ```bash
   background_processing -c "$p" -m batch
+  ```
 - whole command Windows:
   ```bash
   background_processing.exe -c $p -m batch
+  ```
 
 
 ### 5.6 Batch processing Object classification 
 - under `Choose Export Image Settings` change the export directory to `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
+  ```
 - in `Configure Feature Table Export General` choose format `.csv` and change output directory to:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
+  ```
 - select your features of interest for exporting
 - under `Batch Processing` `Raw Data` select all files from  `5_batch_images`
 - under `Batch Processing` `Segmentation Image` select all files from  `7_batch_multicut`
@@ -312,9 +335,11 @@ The next script will combine all tables from all images into one global table fo
 - whole command Unix:
    ```bash
    csv_summary -c "$p"
+   ```
 - whole command Windows
    ```bash
    csv_summary.exe -c $p
+   ```
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
 
 ### 6.2 Creating Summary Statistics
@@ -322,9 +347,11 @@ The next script will combine all tables from all images into one global table fo
 - whole command Unix:
    ```bash
   summary_statistics -c "$p"
+  ```
  - whole command Windows:
    ```bash
    summary_statistics.exe -c $p
+   ```
 - if working with EUCAST antifungal susceptibility testing, call `summary_statistics_eucast`
 
 
@@ -333,9 +360,11 @@ The next script will combine all tables from all images into one global table fo
 - whole command Unix:
    ```bash
   pln_modelling -c "$p"
+  ```
  - whole command Windows:
    ```bash
    pln_modelling.exe -c $p
+   ```
 - please note: the limit of categories for display in the PCA-plot is n=15
 
 
