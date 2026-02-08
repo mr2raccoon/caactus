@@ -407,7 +407,8 @@ The next script will combine all tables from all images into one global table fo
  - renames the images according to the rename.csv worksheet
  - whole command Unix:
   ```bash
-  renaming -c "$p"```
+  renaming -c "$p"
+  ```
 - whole command Windows:
   ```bash
   renaming.exe -c $p
