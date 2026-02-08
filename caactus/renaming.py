@@ -13,6 +13,18 @@ import pandas as pd  # For handling CSV data
 from caactus.utils import load_config
 
 
+DESCRIPTION = """Rename input files to match common naming scheme used in caactus.
+
+More description. Dolor tempor dolore ut aliqua mollit enim Lorem ad culpa laboris
+consectetur dolore. Id laboris cillum adipisicing laborum consectetur ex tempor. Eu
+occaecat amet laboris ex reprehenderit voluptate qui sit. Laboris consectetur
+reprehenderit cillum dolore laborum sunt consectetur quis nisi sint velit.
+
+Fugiat incididunt dolor culpa aute. Aute nisi occaecat id commodo culpa labore ut.
+Cillum anim sunt ullamco ex minim.
+"""
+
+
 def natural_sort_key(s):
     """
     Key function for natural sorting of file names.

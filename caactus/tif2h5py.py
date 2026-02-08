@@ -12,8 +12,10 @@ import vigra
 from caactus.utils import load_config
 
 
-def convert_tif_to_h5(input_dir, output_dir):
+def convert_tif_to_h5(main_folder, input_path, output_path):
     """Convert all .tif files in input_dir to .h5 format in output_dir."""
+    input_dir = os.path.join(main_folder, input_path)
+    output_dir = os.path.join(main_folder, output_path)
 
     os.makedirs(output_dir, exist_ok=True)
 
@@ -79,10 +81,8 @@ def main():
 
     section = config[script_key][args.mode]
     main_folder = config["main_folder"]
-    input_dir = os.path.join(main_folder, section["input_path"])
-    output_dir = os.path.join(main_folder, section["output_path"])
 
-    convert_tif_to_h5(input_dir, output_dir)
+    convert_tif_to_h5(main_folder, section["input_path"], section["output_path"])
 
 
 if __name__ == "__main__":

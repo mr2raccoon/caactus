@@ -1,1 +1,8 @@
+__pycache__/
+*.py[cod]
+/build/
+/dist/
+
 caactus.egg-info/
+
+.DS_Store

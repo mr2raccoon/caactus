@@ -7,31 +7,32 @@ import dearpygui.dearpygui as dpg
 from caactus.gui.steps import STEPS, run_step
 from caactus.utils import get_config_step, load_config
 
-STATE = {}  # step_name -> {param_name: value}
+STATE = {}
+
+
+def get_asset_path(path: str) -> str:
+    """Return the absolute string path to an asset."""
+    return str(resources.files("caactus").joinpath("gui/assets", path))
 
 class DPGLogger:
     def __init__(self, tag):
         self.tag = tag
         self._log_buffer = ""
-        
+
         self.stderr = sys.stderr
         self.stdout = sys.stdout
         sys.stdout = self
         sys.stderr = self
 
     def write(self, string):
-        # Append the new string to the existing text in the widget
         self.stdout.write(string)  # type: ignore
         current_text = dpg.get_value(self.tag)
         new_text = current_text + string
         dpg.set_value(self.tag, new_text)
-        dpg.set_item_height(self.tag, dpg.get_text_size(new_text)[1] + 30)
-        # dpg.set_item_user_data(self.tag, "scrolling") 
-        # dpg.set_y_scroll(self.tag, -1.0)
+        dpg.set_item_height(self.tag, int(dpg.get_text_size(new_text)[1] + 30))
 
     def flush(self):
-        # Required for file-like objects
-        pass
+        pass  # Required for file-like objects
 
     def close(self):
         sys.stdout = self.stdout
@@ -39,29 +40,19 @@ class DPGLogger:
 
 
 def load_font():
-    with resources.as_file(
-        resources.files("caactus")
-        / "gui/assets/fonts"
-        / "Inter-Regular.ttf"
-    ) as font_path:
+    font_path = get_asset_path("fonts/Inter-Regular.ttf")
+    with dpg.font_registry():
+        font = dpg.add_font(str(font_path), 20)
 
-        with dpg.font_registry():
-            font = dpg.add_font(str(font_path), 20)
+    dpg.bind_font(font)
 
-        dpg.bind_font(font)
 
 def set_theme():
     with dpg.theme() as global_theme:
         with dpg.theme_component(dpg.mvAll):
-            dpg.add_theme_style(
-                dpg.mvStyleVar_ItemSpacing, 8, 6
-            )
-            dpg.add_theme_style(
-                dpg.mvStyleVar_WindowPadding, 12, 12
-            )
-            dpg.add_theme_style(
-                dpg.mvStyleVar_FramePadding, 6, 4
-            )
+            dpg.add_theme_style(dpg.mvStyleVar_ItemSpacing, 8, 6)
+            dpg.add_theme_style(dpg.mvStyleVar_WindowPadding, 12, 12)
+            dpg.add_theme_style(dpg.mvStyleVar_FramePadding, 6, 4)
 
     dpg.bind_theme(global_theme)
 
@@ -69,7 +60,9 @@ def set_theme():
 def init_state(config):
     STATE["main_folder"] = config["main_folder"]
     for step in STEPS:
-        STATE[step["name"]] = get_config_step(config, step["config_key"])
+        key = step["config_key"]
+        if key is not None:
+            STATE[step["name"]] = get_config_step(config, step["config_key"])
 
 
 def on_param_change(step_name, param_name):
@@ -119,13 +112,19 @@ def build_param_controls(step_name, params):
 
 def build_step_tab(step):
     step_name = step["name"]
-    params = STATE[step_name]
+    params = STATE.get(step_name, {})
 
     with dpg.tab(label=step_name):
+        desc = step.get("description", "")
+        dpg.add_text(desc)
+        dpg.add_separator()
         build_param_controls(step_name, params)
         dpg.add_separator()
-        with dpg.group(horizontal=True, horizontal_spacing=50):
-            dpg.add_button(label="Run", callback=on_run_step(step), width=250, height=60)
+
+        if step.get("func", None) is not None:
+            dpg.add_button(
+                label="Run", callback=on_run_step(step), width=250, height=60
+            )
 
 
 def build_ui():
@@ -137,23 +136,31 @@ def build_ui():
                 build_step_tab(step)
         with dpg.child_window():
             dpg.add_input_text(
-            tag="log_widget",
-            multiline=True,
-            width=-1,
-            height=-1,
-            readonly=True,
-            tracked=True,
-            track_offset=1
-        )
+                tag="log_widget",
+                multiline=True,
+                width=-1,
+                height=-1,
+                readonly=True,
+                tracked=True,
+                track_offset=1,
+            )
     DPGLogger("log_widget")
-    
+
     dpg.set_primary_window("main", True)
+
 
 def run_gui(config):
     dpg.create_context()
     load_font()
     set_theme()
-    dpg.create_viewport(title="caactus", width=800, height=600)
+    icon_path = get_asset_path("favicon.ico")
+    dpg.create_viewport(
+        title="caactus",
+        width=800,
+        height=600,
+    )
+    dpg.set_viewport_small_icon(icon_path)
+    dpg.set_viewport_large_icon(icon_path)
     init_state(config)
     build_ui()
     dpg.setup_dearpygui()
@@ -165,9 +172,7 @@ def run_gui(config):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-c", "--config",
-        default="config.toml",
-        help="Path to config file"
+        "-c", "--config", default="config.toml", help="Path to config file"
     )
     args = parser.parse_args()
 

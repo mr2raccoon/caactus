@@ -38,16 +38,19 @@ def process_image(image_path):
         print(f"Error processing file {image_path}: {e}")
 
 
-def batch_process_images(input_directory):
+def batch_process_images(main_folder, input_path):
     """
     Process all matching HDF5 segmentation files in the given directory.
 
     Parameters:
         input_directory (str): Folder containing .h5 files to process.
     """
-    for filename in os.listdir(input_directory):
+
+    input_dir = os.path.join(main_folder, input_path)
+    print(f"Input directory: {input_dir}")
+    for filename in os.listdir(input_dir):
         if filename.endswith("Segmentation.h5"):
-            input_path = os.path.join(input_directory, filename)
+            input_path = os.path.join(input_dir, filename)
             print(f"Processing: {input_path}")
             process_image(input_path)
             print(f"Finished:   {filename}")
@@ -77,10 +80,8 @@ def main():
 
     section = config[script_key][args.mode]
     main_folder = config.get("main_folder", ".")
-    input_path = section["input_path"]
-    input_dir = os.path.join(main_folder, input_path)
 
-    batch_process_images(input_dir)
+    batch_process_images(main_folder, section["input_path"])
 
 
 if __name__ == "__main__":
