@@ -171,7 +171,7 @@ project_directory
 
 ### 4.2. Pixel Classification
 #### 4.2.1 Project setup
-1.Open ilastik
+1. Open ilastik
 2. Press “Pixel Classification” 
 3. Create the `1_pixel_classification.ilp`-project file inside the project directory.  
 4. For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
@@ -194,12 +194,12 @@ In prediction export change the settings to
 
 ### 4.3 Boundary-based Segmentation with Multicut
 #### 4.3.1 Project setup
-1.Open ilastik
-2.Press “Pixel Classification”
-3.Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
-4.In `DT Watershed` use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
-5.Start annotating edges.
-6.For more in detail information, follow the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
+1. Open ilastik
+2. Press “Pixel Classification”
+3. Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
+4. In `DT Watershed` use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
+5. Start annotating edges.
+6. For more in detail information, follow the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
 
 ![watershed](https://github.com/mr2raccoon/caactus/blob/main/images/watershed.png)
 
@@ -233,12 +233,12 @@ For futher processing in the object classification, the background needs to elim
 
 ### 4.5. Object Classification
 #### 4.5.1 Project setup
-1.Open ilastik
+1. Open ilastik
 2. Press “Object classification [Inputs: Raw Data, Predicition Map]” 
 3. Create the `3_object_classification.ilp`-project file inside the project directory.  
 4. define your cell types plus an additional category for "not-usable" objects, e.g. cell debris and cut-off objects on the side of the images
 5. Start training.
-6.For more in detail information, follow the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
+6. For more in detail information, follow the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
 
 #### 4.5.2 Export Object Information
 In `Choose Export Imager Settings` change settings to
