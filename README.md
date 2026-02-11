@@ -39,10 +39,10 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 3. **Create** project directory
 4. **Rename** Files with the caactus-script ```renaming```
 5. **Convert** files to HDF5 Format with the caactus-script  ```tif2h5py```
-6. Train a [pixel classification](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) model in ilastik for and later run it batch-mode.
-7. Train a [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) model in ilastik for and later run it batch-mode.
+6. **Train** a [pixel classification](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) model in **ilastik** for and later run it batch-mode.
+7. **Train** a [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) model in **ilastik** for and later run it batch-mode.
 8. **Remove** the background from the images using ```background_processing```
-9. Train a [object classification](https://www.ilastik.org/documentation/objects/objects) model in ilastik for  and later run it batch-mode.
+9. **Train** a [object classification](https://www.ilastik.org/documentation/objects/objects) model in **ilastik** for  and later run it batch-mode.
 10. **Pool** all csv-tables  from the individual images into one global table with ```csv_summary```
 - output generated: 
     - "df_clean.csv"
@@ -171,9 +171,12 @@ project_directory
 
 ### 4.2. Pixel Classification
 #### 4.2.1 Project setup
-- Follow the the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
-- Create the `1_pixel_classification.ilp`-project file inside the project directory.  
-- For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
+1.Open ilastik
+2. Press “Pixel Classification” 
+3. Create the `1_pixel_classification.ilp`-project file inside the project directory.  
+4. For working with neighbouring / touching cells, it is suggested to create three classes: 0 = interior, 1 = background, 2 = boundary (This follows python's 0-indexing logic where counting is started at 0).
+5. Start annotating pixels.
+6.. For more in detail information, follow the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification).
 
 ![pixel_classes](https://github.com/mr2raccoon/caactus/blob/main/images/pixel_classification_classes.JPG)
 
@@ -191,9 +194,12 @@ In prediction export change the settings to
 
 ### 4.3 Boundary-based Segmentation with Multicut
 #### 4.3.1 Project setup
-- Follow the the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
-- Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
-- In `DT Watershed` use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
+1.Open ilastik
+2.Press “Pixel Classification”
+3.Create the `2_boundary_segmentation.ilp`-project file inside the project directory.
+4.In `DT Watershed` use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
+5.Start annotating edges.
+6.For more in detail information, follow the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
 
 ![watershed](https://github.com/mr2raccoon/caactus/blob/main/images/watershed.png)
 
@@ -227,8 +233,13 @@ For futher processing in the object classification, the background needs to elim
 
 ### 4.5. Object Classification
 #### 4.5.1 Project setup
-- Follow the the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
-- define your cell types plus an additional category for "not-usuable" objects, e.g. cell debris and cut-off objects on the side of the images
+1.Open ilastik
+2. Press “Object classification [Inputs: Raw Data, Predicition Map]” 
+3. Create the `3_object_classification.ilp`-project file inside the project directory.  
+4. define your cell types plus an additional category for "not-usable" objects, e.g. cell debris and cut-off objects on the side of the images
+5. Start training.
+6.For more in detail information, follow the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
+
 #### 4.5.2 Export Object Information
 In `Choose Export Imager Settings` change settings to
 - `Convert to Data Type: integer 8-bit`
