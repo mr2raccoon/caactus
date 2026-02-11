@@ -1,83 +1,47 @@
 import argparse
-import sys
+import threading
 from importlib import resources
 
 import dearpygui.dearpygui as dpg
 
-from caactus.gui.steps import STEPS, run_step
+from caactus.gui import helpers
+from caactus.gui.steps import STEPS, CaactusStep, run_step
 from caactus.utils import get_config_step, load_config
 
 STATE = {}
 
 
-def get_asset_path(path: str) -> str:
-    """Return the absolute string path to an asset."""
-    return str(resources.files("caactus").joinpath("gui/assets", path))
-
-class DPGLogger:
-    def __init__(self, tag):
-        self.tag = tag
-        self._log_buffer = ""
-
-        self.stderr = sys.stderr
-        self.stdout = sys.stdout
-        sys.stdout = self
-        sys.stderr = self
-
-    def write(self, string):
-        self.stdout.write(string)  # type: ignore
-        current_text = dpg.get_value(self.tag)
-        new_text = current_text + string
-        dpg.set_value(self.tag, new_text)
-        dpg.set_item_height(self.tag, int(dpg.get_text_size(new_text)[1] + 30))
-
-    def flush(self):
-        pass  # Required for file-like objects
-
-    def close(self):
-        sys.stdout = self.stdout
-        sys.stderr = self.stderr
-
-
-def load_font():
-    font_path = get_asset_path("fonts/Inter-Regular.ttf")
-    with dpg.font_registry():
-        font = dpg.add_font(str(font_path), 20)
-
-    dpg.bind_font(font)
-
-
-def set_theme():
-    with dpg.theme() as global_theme:
-        with dpg.theme_component(dpg.mvAll):
-            dpg.add_theme_style(dpg.mvStyleVar_ItemSpacing, 8, 6)
-            dpg.add_theme_style(dpg.mvStyleVar_WindowPadding, 12, 12)
-            dpg.add_theme_style(dpg.mvStyleVar_FramePadding, 6, 4)
-
-    dpg.bind_theme(global_theme)
-
-
 def init_state(config):
     STATE["main_folder"] = config["main_folder"]
     for step in STEPS:
-        key = step["config_key"]
+        key = step.config_key
         if key is not None:
-            STATE[step["name"]] = get_config_step(config, step["config_key"])
+            STATE[step.name] = get_config_step(config, key)
 
 
-def on_param_change(step_name, param_name):
+def on_param_change(step_name: str, param_name: str):
     def callback(sender, app_data):
         STATE[step_name][param_name] = app_data
 
     return callback
 
 
-def on_run_step(step):
-    def callback():
-        run_step(
-            step["func"],
-            {"main_folder": STATE["main_folder"]} | STATE[step["name"]],
-        )
+def on_run_step(step: CaactusStep):
+    def callback(sender, app_data, user_data):
+
+        dpg.set_item_label(sender, "Running...")
+        dpg.disable_item(sender)
+
+        def worker():
+            assert step.func is not None
+            run_step(
+                step.func,
+                {"main_folder": STATE["main_folder"]} | STATE[step.name],
+            )
+            dpg.configure_item(sender, enabled=True)
+            dpg.set_item_label(sender, "Run")
+
+        threading.Thread(target=worker, daemon=True).start()
 
     return callback
 
@@ -110,18 +74,18 @@ def build_param_controls(step_name, params):
             )
 
 
-def build_step_tab(step):
-    step_name = step["name"]
+def build_step_tab(step: CaactusStep):
+    step_name = step.name
     params = STATE.get(step_name, {})
 
     with dpg.tab(label=step_name):
-        desc = step.get("description", "")
+        desc = step.description
         dpg.add_text(desc)
         dpg.add_separator()
         build_param_controls(step_name, params)
         dpg.add_separator()
 
-        if step.get("func", None) is not None:
+        if step.func is not None:
             dpg.add_button(
                 label="Run", callback=on_run_step(step), width=250, height=60
             )
@@ -144,23 +108,21 @@ def build_ui():
                 tracked=True,
                 track_offset=1,
             )
-    DPGLogger("log_widget")
+    helpers.DPGLogger("log_widget")
 
     dpg.set_primary_window("main", True)
 
 
 def run_gui(config):
     dpg.create_context()
-    load_font()
-    set_theme()
-    icon_path = get_asset_path("favicon.ico")
+    helpers.load_font()
+    helpers.set_theme()
     dpg.create_viewport(
         title="caactus",
         width=800,
         height=600,
     )
-    dpg.set_viewport_small_icon(icon_path)
-    dpg.set_viewport_large_icon(icon_path)
+    helpers.set_icons()
     init_state(config)
     build_ui()
     dpg.setup_dearpygui()
