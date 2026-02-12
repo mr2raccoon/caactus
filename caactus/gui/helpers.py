@@ -44,7 +44,7 @@ def load_font():
 def set_theme():
     with dpg.theme() as global_theme:
         with dpg.theme_component(dpg.mvAll):
-            dpg.add_theme_style(dpg.mvStyleVar_ItemSpacing, 8, 6)
+            dpg.add_theme_style(dpg.mvStyleVar_ItemSpacing, 12, 8)
             dpg.add_theme_style(dpg.mvStyleVar_WindowPadding, 12, 12)
             dpg.add_theme_style(dpg.mvStyleVar_FramePadding, 6, 4)
 

@@ -93,12 +93,16 @@ def build_step_tab(step: CaactusStep):
 
 def build_ui():
     with dpg.window(label="caactus", autosize=True, tag="main"):
-        build_param_controls("Global settings", {"main_folder": STATE["main_folder"]})
-        dpg.add_separator()
-        with dpg.tab_bar():
-            for step in STEPS:
-                build_step_tab(step)
-        with dpg.child_window():
+        with dpg.child_window(height=-210):
+            build_param_controls(
+                "Global settings", {"main_folder": STATE["main_folder"]}
+            )
+            dpg.add_separator()
+            with dpg.tab_bar():
+                for step in STEPS:
+                    build_step_tab(step)
+
+        with dpg.child_window(height=200):
             dpg.add_input_text(
                 tag="log_widget",
                 multiline=True,
@@ -120,7 +124,7 @@ def run_gui(config):
     dpg.create_viewport(
         title="caactus",
         width=800,
-        height=600,
+        height=760,
     )
     helpers.set_icons()
     init_state(config)
