@@ -5,13 +5,9 @@ import os  # For path operations
 import sys  # For exit handling
 import pandas as pd  # For data handling
 import seaborn.objects as so  # For plotting
-import tomli  # For reading TOML config
 import argparse  # For CLI args
 
-
-def load_config(path="config.toml"):
-    with open(path, "rb") as f:
-        return tomli.load(f)
+from utils import load_config  # Custom utility to load config
 
 
 def parse_filename(filename, variable_names):
