@@ -10,7 +10,6 @@ from caactus.utils import get_config_step, load_config
 
 STATE = {}
 
-
 def init_state(config):
     STATE["full_config"] = copy.deepcopy(config)
     STATE["main_folder"] = config["main_folder"]
@@ -90,7 +89,7 @@ def build_step_tab(step: CaactusStep):
 
     with dpg.tab(label=step.name):
         desc = step.description
-        dpg.add_text(desc)
+        dpg.add_text(desc, wrap=0)
         dpg.add_separator()
         if step.stages:
             dpg.add_combo(
@@ -114,9 +113,25 @@ def build_step_tab(step: CaactusStep):
 def build_ui():
     with dpg.window(label="caactus", autosize=True, tag="main"):
         with dpg.child_window(height=-210):
-            build_param_controls(
-                "Global settings", {"main_folder": STATE["main_folder"]}
-            )
+            with dpg.group(horizontal=True):
+                build_param_controls(
+                    "Global settings", {"main_folder": STATE["main_folder"]}
+                )
+
+                # def main_folder_selected(sender, app_data):
+                #     STATE["main_folder"] = app_data
+                #     dpg.set_value("main_folder", app_data)
+
+                # dpg.add_file_dialog(
+                #     directory_selector=True,
+                #     show=False,
+                #     callback=main_folder_selected,
+                #     tag="file_dialog_id",
+                #     cancel_callback=lambda: None,
+                #     width=700,
+                #     height=400,
+                # )
+                # dpg.add_button(label="Select", callback=dpg.add_file_dialog)
             dpg.add_separator()
             with dpg.tab_bar():
                 for step in STEPS:
