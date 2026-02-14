@@ -135,16 +135,19 @@ def build_ui():
                 for step in STEPS:
                     build_step_tab(step)
 
-        with dpg.child_window(height=200):
-            dpg.add_input_text(
-                tag="log_widget",
-                multiline=True,
-                width=-1,
-                height=-1,
-                readonly=True,
-                tracked=True,
-                track_offset=1,
-            )
+        with dpg.group(horizontal=True):
+            with dpg.child_window(height=200, width=-212):
+                dpg.add_input_text(
+                    tag="log_widget",
+                    multiline=True,
+                    height=-1,
+                    width=-1,
+                    readonly=True,
+                    tracked=True,
+                    track_offset=1,
+                )
+            logo = descriptions.load_texture_from_package("logo.png")
+            dpg.add_image(logo, width=200, height=200, tag="logo")
     helpers.DPGLogger("log_widget")
 
     dpg.set_primary_window("main", True)
