@@ -1,4 +1,5 @@
 import argparse
+import copy
 import threading
 
 import dearpygui.dearpygui as dpg
@@ -11,17 +12,31 @@ STATE = {}
 
 
 def init_state(config):
-    STATE["full_config"] = config
+    STATE["full_config"] = copy.deepcopy(config)
     STATE["main_folder"] = config["main_folder"]
     for step in STEPS:
         key = step.config_key
         if key is not None:
+            if len(step.stages) > 0:
+                stage = step.stages[0]
+                key = f"{key}.{stage}"
             STATE[step.name] = get_config_step(config, key)
 
 
 def on_param_change(step_name: str, param_name: str):
     def callback(sender, app_data):
         STATE[step_name][param_name] = app_data
+
+    return callback
+
+def on_stage_selected(step: CaactusStep):
+    def callback(sender, app_data):
+        stage = app_data
+
+        newcfg = get_config_step(STATE["full_config"], f"{step.config_key}.{stage}")
+        for key, value in newcfg.items():
+            STATE[step.name][key] = value
+            dpg.set_value(f"{step.name}_{key}", value)
 
     return callback
 
@@ -77,7 +92,14 @@ def build_step_tab(step: CaactusStep):
         desc = step.description
         dpg.add_text(desc)
         dpg.add_separator()
-        build_param_controls(step.name, params, tag_prefix=step.name)
+        if step.stages:
+            dpg.add_combo(
+                items=step.stages,
+                tag=step.name + "_stage",
+                default_value=step.stages[0],
+                callback=on_stage_selected(step),
+            )
+        build_param_controls(step.name, params, tag_prefix=step.name + "_")
         dpg.add_separator()
 
         if step.func is not None:

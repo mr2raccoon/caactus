@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Callable
 
 from caactus import background_processing, csv_summary, renaming, tif2h5py
@@ -10,6 +10,7 @@ class CaactusStep:
     func: Callable | None = None
     config_key: str | None = None
     description: str = ""
+    stages: list[str] = field(default_factory=list)
 
 
 STEPS = [
@@ -22,8 +23,9 @@ STEPS = [
     CaactusStep(
         name="Tif to h5",
         func=tif2h5py.convert_tif_to_h5,
-        config_key="tif2h5py.batch",
+        config_key="tif2h5py",
         description=tif2h5py.DESCRIPTION,
+        stages=["batch", "training"],
     ),
     CaactusStep(
         name="Pixel classification",
@@ -39,7 +41,8 @@ STEPS = [
     CaactusStep(
         name="Background processing",
         func=background_processing.batch_process_images,
-        config_key="background_processing.batch",
+        config_key="background_processing",
+        stages=["training", "batch"],
     ),
     CaactusStep(
         name="Object classification",
