@@ -11,6 +11,7 @@ STATE = {}
 
 
 def init_state(config):
+    STATE["full_config"] = config
     STATE["main_folder"] = config["main_folder"]
     for step in STEPS:
         key = step.config_key
@@ -25,7 +26,7 @@ def on_param_change(step_name: str, param_name: str):
     return callback
 
 
-def on_run_step(step: CaactusStep):
+def create_run_step_callback(step: CaactusStep):
     def callback(sender, app_data, user_data):
 
         dpg.set_item_label(sender, "Running...")
@@ -33,60 +34,58 @@ def on_run_step(step: CaactusStep):
 
         def worker():
             assert step.func is not None
-            run_step(
-                step.func,
-                {"main_folder": STATE["main_folder"]} | STATE[step.name],
-            )
-            dpg.configure_item(sender, enabled=True)
-            dpg.set_item_label(sender, "Run")
+            try:
+                run_step(
+                    step.func,
+                    {"main_folder": STATE["main_folder"]} | STATE[step.name],
+                )
+            finally:
+                dpg.configure_item(sender, enabled=True)
+                dpg.set_item_label(sender, "Run")
 
         threading.Thread(target=worker, daemon=True).start()
 
     return callback
 
 
-def build_param_controls(step_name, params):
+def build_param_controls(step_name, params, tag_prefix=""):
     for key, value in params.items():
+        label = key.replace("_", " ").title()
+
+        ui_element = dpg.add_input_text
         if isinstance(value, bool):
-            dpg.add_checkbox(
-                label=key,
-                default_value=value,
-                callback=on_param_change(step_name, key),
-            )
+            ui_element = dpg.add_checkbox
         elif isinstance(value, int):
-            dpg.add_input_int(
-                label=key,
-                default_value=value,
-                callback=on_param_change(step_name, key),
-            )
+            ui_element = dpg.add_input_int
         elif isinstance(value, float):
-            dpg.add_input_float(
-                label=key,
-                default_value=value,
-                callback=on_param_change(step_name, key),
-            )
-        else:
-            dpg.add_input_text(
-                label=key,
-                default_value=str(value),
-                callback=on_param_change(step_name, key),
-            )
+            ui_element = dpg.add_input_float
+        elif isinstance(value, str):
+            ui_element = dpg.add_input_text
+
+        ui_element(
+            label=label,
+            default_value=value,  # type: ignore
+            callback=on_param_change(step_name, key),
+            tag=tag_prefix + key,
+        )
 
 
 def build_step_tab(step: CaactusStep):
-    step_name = step.name
-    params = STATE.get(step_name, {})
+    params = STATE.get(step.name, {})
 
-    with dpg.tab(label=step_name):
+    with dpg.tab(label=step.name):
         desc = step.description
         dpg.add_text(desc)
         dpg.add_separator()
-        build_param_controls(step_name, params)
+        build_param_controls(step.name, params, tag_prefix=step.name)
         dpg.add_separator()
 
         if step.func is not None:
             dpg.add_button(
-                label="Run", callback=on_run_step(step), width=250, height=60
+                label="Run",
+                callback=create_run_step_callback(step),
+                width=250,
+                height=60,
             )
 
 
