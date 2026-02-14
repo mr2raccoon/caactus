@@ -4,7 +4,7 @@ import threading
 
 import dearpygui.dearpygui as dpg
 
-from caactus.gui import helpers
+from caactus.gui import descriptions, helpers
 from caactus.gui.steps import STEPS, CaactusStep, run_step
 from caactus.utils import get_config_step, load_config
 
@@ -88,9 +88,6 @@ def build_step_tab(step: CaactusStep):
     params = STATE.get(step.name, {})
 
     with dpg.tab(label=step.name):
-        desc = step.description
-        dpg.add_text(desc, wrap=0)
-        dpg.add_separator()
         if step.stages:
             dpg.add_combo(
                 items=step.stages,
@@ -108,7 +105,8 @@ def build_step_tab(step: CaactusStep):
                 width=250,
                 height=60,
             )
-
+        desc = step.description
+        descriptions.render_description(desc)
 
 def build_ui():
     with dpg.window(label="caactus", autosize=True, tag="main"):

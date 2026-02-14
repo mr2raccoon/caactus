@@ -1,3 +1,4 @@
+import re
 import sys
 from importlib import resources
 
@@ -56,16 +57,5 @@ def set_icons(path: str = "logo.png"):
     dpg.set_viewport_small_icon(icon_path)
     dpg.set_viewport_large_icon(icon_path)
 
-
-def make_button_themes():
-    with dpg.theme(tag="enabled_theme"):
-        with dpg.theme_component(dpg.mvButton):
-            dpg.add_theme_color(
-                dpg.mvThemeCol_Text, (255, 255, 255), category=dpg.mvThemeCat_Core
-            )
-    # - This theme should make the label text on the button red
-    with dpg.theme(tag="disabled_theme"):
-        with dpg.theme_component(dpg.mvAll):
-            dpg.add_theme_color(
-                dpg.mvThemeCol_Text, (255, 0, 0), category=dpg.mvThemeCat_Core
-            )
+def replace_single_newline(text, replacement=""):
+    return re.sub(r"(?<!\n)\n(?!\n)", replacement, text)

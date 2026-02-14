@@ -12,8 +12,9 @@ import pandas as pd  # For handling CSV data
 
 from caactus.utils import load_config
 
-
 DESCRIPTION = """Rename input files to match common naming scheme used in caactus.
+
+<example-image.png>
 
 More description. Dolor tempor dolore ut aliqua mollit enim Lorem ad culpa laboris
 consectetur dolore. Id laboris cillum adipisicing laborum consectetur ex tempor. Eu

@@ -5,10 +5,6 @@ from typing import Callable
 from caactus import background_processing, csv_summary, renaming, tif2h5py
 
 
-def replace_single_newline(text, replacement=""):
-    return re.sub(r"(?<!\n)\n(?!\n)", replacement, text)
-
-
 @dataclass
 class CaactusStep:
     name: str
@@ -22,14 +18,14 @@ STEPS = [
     CaactusStep(
         name="Renaming",
         func=renaming.run,
-        description=replace_single_newline(renaming.DESCRIPTION),
+        description=renaming.DESCRIPTION,
         config_key="renaming",
     ),
     CaactusStep(
         name="Tif to h5",
         func=tif2h5py.convert_tif_to_h5,
         config_key="tif2h5py",
-        description=replace_single_newline(tif2h5py.DESCRIPTION),
+        description=tif2h5py.DESCRIPTION,
         stages=["batch", "training"],
     ),
     CaactusStep(
