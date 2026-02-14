@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Callable
 
-from caactus import background_processing, renaming, tif2h5py
+from caactus import background_processing, csv_summary, renaming, tif2h5py
 
 
 @dataclass
@@ -23,12 +23,12 @@ STEPS = [
         name="Tif to h5",
         func=tif2h5py.convert_tif_to_h5,
         config_key="tif2h5py.batch",
+        description=tif2h5py.DESCRIPTION,
     ),
     CaactusStep(
         name="Pixel classification",
         func=None,
         description="Train a pixel classification model in ilastik.",
-        config_key=None,
     ),
     CaactusStep(
         name="Boundary segmentation",
@@ -46,6 +46,12 @@ STEPS = [
         func=None,
         description="Perform object classification in ilastik.",
         config_key=None,
+    ),
+    CaactusStep(
+        name="CSV summary",
+        func=csv_summary.process_csv_files,
+        config_key="csv_summary",
+        description=csv_summary.DESCRIPTION,
     ),
 ]
 

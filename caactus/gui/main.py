@@ -1,6 +1,5 @@
 import argparse
 import threading
-from importlib import resources
 
 import dearpygui.dearpygui as dpg
 

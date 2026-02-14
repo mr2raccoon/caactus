@@ -51,7 +51,7 @@ def set_theme():
     dpg.bind_theme(global_theme)
 
 
-def set_icons(path: str = "favicon.ico"):
+def set_icons(path: str = "logo.png"):
     icon_path = get_asset_path(path)
     dpg.set_viewport_small_icon(icon_path)
     dpg.set_viewport_large_icon(icon_path)

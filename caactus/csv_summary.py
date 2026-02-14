@@ -9,10 +9,10 @@ import tomli  # For reading .toml configuration files
 import argparse  # For command-line argument parsing
 import sys  # For exit handling
 
+from caactus.utils import load_config
 
-def load_config(path="config.toml"):
-    with open(path, "rb") as f:
-        return tomli.load(f)
+
+DESCRIPTION = """Process CSV files and generate a cleaned summary CSV."""
 
 
 def parse_filename(filename):
@@ -39,7 +39,7 @@ def parse_filename(filename):
     return file_metadata
 
 
-def process_csv_files(input_dir, output_dir, pixel_size):
+def process_csv_files(main_folder, input_path, output_path, pixel_size):
     """
     Process all .csv files in the input directory and output a cleaned CSV.
 
@@ -48,7 +48,11 @@ def process_csv_files(input_dir, output_dir, pixel_size):
         output_dir (str): Directory to save cleaned summary CSV.
         pixel_size (float): Size of a pixel (used to compute microm size).
     """
-    input_path = Path(input_dir)
+    input_path = os.path.join(main_folder, input_path)
+    output_path = os.path.join(main_folder, output_path)
+    pixel_size = float(pixel_size)
+
+    input_path = Path(input_path)
     files = input_path.glob('*.csv')
 
     dfs = []
@@ -62,11 +66,15 @@ def process_csv_files(input_dir, output_dir, pixel_size):
         data['filename'] = f.stem
         dfs.append(data)
 
+    if len(dfs) == 0:
+        print("No .csv files found in the input directory.")
+        return
+
     df = pd.concat(dfs, ignore_index=True)
     df["size_microm"] = df["Size in pixels"] * pixel_size ** 2
 
-    os.makedirs(output_dir, exist_ok=True)
-    df.to_csv(os.path.join(output_dir, 'df_clean.csv'), index=False)
+    os.makedirs(output_path, exist_ok=True)
+    df.to_csv(os.path.join(output_path, "df_clean.csv"), index=False)
 
     print(df.info())
     print(df.head())
@@ -95,10 +103,7 @@ def main():
     output_path = section["output_path"]
     pixel_size = float(section["pixel_size"])
 
-    input_dir = os.path.join(main_folder, input_path)
-    output_dir = os.path.join(main_folder, output_path)
-
-    process_csv_files(input_dir, output_dir, pixel_size)
+    process_csv_files(main_folder, input_path, output_path, pixel_size)
 
 
 if __name__ == "__main__":
