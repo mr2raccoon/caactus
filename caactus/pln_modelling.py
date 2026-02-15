@@ -4,22 +4,22 @@
 
 import os
 import sys
-import tomli
 import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
-from pyPLNmodels import ZIPln  # For statistical modeling
+
+from caactus.utils import load_config
 
 
-def load_config(path="config.toml"):
-    """Load the TOML config file."""
-    with open(path, "rb") as f:
-        return tomli.load(f)
+DESCRIPTION = """
+This script runs ZIPln modelling on input data with dynamic design and generates PCA visualizations.
+"""
+
 
 
 def modelling(input_dir, output_dir, variable_names, dynamic_columns):
     """Run ZIPln modelling on input data with dynamic design."""
-
+    from pyPLNmodels import ZIPln  # For statistical modeling
     # Load counts data
     counts = pd.read_csv(
         os.path.join(input_dir, 'counts_df.csv'),
@@ -98,11 +98,20 @@ def modelling(input_dir, output_dir, variable_names, dynamic_columns):
     plt.show()
 
 
-    # Plot correlation circle (direct rendering)
+    # Correlation circle
+    fig_corr = plt.figure(figsize=(6, 6))
+
     zipln.plot_correlation_circle(
         column_names=[variable_names[0], variable_names[1]],
         column_index=[0, 2]
     )
+
+    fig_corr.savefig(
+        os.path.join(output_dir, "correlation_circle.png"),
+        bbox_inches="tight"
+    )
+
+    plt.close(fig_corr)
 
 
 def main():

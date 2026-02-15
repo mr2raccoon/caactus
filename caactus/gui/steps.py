@@ -2,7 +2,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Callable
 
-from caactus import background_processing, csv_summary, renaming, tif2h5py
+from caactus import background_processing, csv_summary, renaming, tif2h5py, pixel_classification, boundary_segmentation, object_classification, summary_statistics, summary_statistics_eucast, pln_modelling
 
 
 @dataclass
@@ -31,24 +31,26 @@ STEPS = [
     CaactusStep(
         name="Pixel classification",
         func=None,
-        description="Train a pixel classification model in ilastik.",
+        description=pixel_classification.DESCRIPTION,
+        config_key=None,
     ),
     CaactusStep(
         name="Boundary segmentation",
         func=None,
-        description="Perform boundary segmentation in ilastik.",
+        description=boundary_segmentation.DESCRIPTION,
         config_key=None,
     ),
     CaactusStep(
         name="Background processing",
         func=background_processing.batch_process_images,
+        description=background_processing.DESCRIPTION,
         config_key="background_processing",
         stages=["training", "batch"],
     ),
     CaactusStep(
         name="Object classification",
         func=None,
-        description="Perform object classification in ilastik.",
+        description=object_classification.DESCRIPTION,
         config_key=None,
     ),
     CaactusStep(
@@ -56,6 +58,24 @@ STEPS = [
         func=csv_summary.process_csv_files,
         config_key="csv_summary",
         description=csv_summary.DESCRIPTION,
+    ),
+    CaactusStep(
+        name="Summary statistics",
+        func=summary_statistics.process_cleaned_data,
+        config_key="summary_statistics",
+        description=summary_statistics.DESCRIPTION,
+    ),
+    CaactusStep(
+        name="Summary statistics EUCAST",
+        func=summary_statistics_eucast.process_eucast_data,
+        config_key="summary_statistics_eucast",
+        description=summary_statistics_eucast.DESCRIPTION,
+    ),
+    CaactusStep(
+    name="PLN modelling",
+    func=pln_modelling.modelling,
+    config_key="pln_modelling",
+    description=pln_modelling.DESCRIPTION,
     ),
 ]
 

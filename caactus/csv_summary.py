@@ -5,14 +5,19 @@
 from pathlib import Path  # For handling file system paths
 import pandas as pd  # For data manipulation
 import os  # For file I/O operations
-import tomli  # For reading .toml configuration files
 import argparse  # For command-line argument parsing
 import sys  # For exit handling
 
 from caactus.utils import load_config
 
 
-DESCRIPTION = """Process CSV files and generate a cleaned summary CSV."""
+DESCRIPTION = """Process CSV files and generate a cleaned summary CSV.
+
+This script reads all .csv files in the specified input directory, extracts metadata from filenames.
+Also, it compiles a cleaned summary CSV with computed cell sizes in microm2.
+
+The expected filename format is: var1-value1_var2-value2_table.csv
+"""
 
 
 def parse_filename(filename):
@@ -71,7 +76,7 @@ def process_csv_files(main_folder, input_path, output_path, pixel_size):
         return
 
     df = pd.concat(dfs, ignore_index=True)
-    df["size_microm"] = df["Size in pixels"] * pixel_size ** 2
+    df["size_microm2"] = df["Size in pixels"] * pixel_size ** 2
 
     os.makedirs(output_path, exist_ok=True)
     df.to_csv(os.path.join(output_path, "df_clean.csv"), index=False)

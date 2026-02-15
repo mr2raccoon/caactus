@@ -7,8 +7,11 @@ import pandas as pd  # For data handling
 import seaborn.objects as so  # For plotting
 import argparse  # For CLI args
 
-from utils import load_config  # Custom utility to load config
+from caactus.utils import load_config
 
+DESCRIPTION = """
+This script processes cleaned data to generate summary statistics and a stacked bar plot of predicted classes.
+"""
 
 def parse_filename(filename, variable_names):
     filename = filename.replace('_table', '')
@@ -63,7 +66,7 @@ def process_cleaned_data(input_dir, output_dir, variable_names, color_mapping, c
     )
 
     avg_size = df_clean.groupby(group_cols + ["Predicted Class"])[
-        "size_microm"
+        "size_microm2"
     ].mean().round(2)
 
     merged_complete_df = merged_df.merge(

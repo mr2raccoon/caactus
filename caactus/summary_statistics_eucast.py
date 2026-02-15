@@ -4,15 +4,15 @@
 import os
 import sys
 import argparse
-import tomli
 import pandas as pd
 import seaborn.objects as so  # For plotting
 
+from caactus.utils import load_config
 
-def load_config(path="config.toml"):
-    """Load the TOML config file."""
-    with open(path, "rb") as f:
-        return tomli.load(f)
+
+DESCRIPTION = """
+This script processes EUCAST data and generates summary statistics and a stacked bar plot of predicted classes.
+"""
 
 
 def process_eucast_data(
@@ -95,7 +95,7 @@ def process_eucast_data(
     )
 
     avg_size = (
-        df_clean.groupby(["conc", "timepoint", "Predicted Class"])["size_microm"]
+        df_clean.groupby(["conc", "timepoint", "Predicted Class"])["size_microm2"]
         .mean()
         .round(2)
     )

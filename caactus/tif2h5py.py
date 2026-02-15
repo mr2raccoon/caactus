@@ -12,6 +12,9 @@ import vigra
 from caactus.utils import load_config
 
 DESCRIPTION = """Convert all .tif files in input_dir to .h5 format in output_dir.
+
+Select training or batch from the drop down menu above to specify the input and 
+output directories correctly.
 """
 
 

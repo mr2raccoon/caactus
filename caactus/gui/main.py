@@ -1,6 +1,7 @@
 import argparse
 import copy
 import threading
+import vigra
 
 import dearpygui.dearpygui as dpg
 
@@ -146,7 +147,7 @@ def build_ui():
                     tracked=True,
                     track_offset=1,
                 )
-            logo = descriptions.load_texture_from_package("logo.png")
+            logo = descriptions.load_texture_from_package("images/logo.png")
             dpg.add_image(logo, width=200, height=200, tag="logo")
     helpers.DPGLogger("log_widget")
 

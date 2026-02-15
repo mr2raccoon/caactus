@@ -8,6 +8,9 @@ import numpy as np
 import tomli
 import argparse
 
+DESCRIPTION = """
+This script processes HDF5 segmentation files by zeroing the largest ID in the 'exported_data' dataset.
+"""
 
 def load_config(path="config.toml"):
     """Load TOML configuration file."""
