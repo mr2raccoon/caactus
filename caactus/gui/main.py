@@ -1,8 +1,8 @@
 import argparse
 import copy
 import threading
-import vigra
 
+import vigra  # somehow needed earlier to avoid import error later.
 import dearpygui.dearpygui as dpg
 
 from caactus.gui import descriptions, helpers
@@ -46,6 +46,7 @@ def create_run_step_callback(step: CaactusStep):
 
         dpg.set_item_label(sender, "Running...")
         dpg.disable_item(sender)
+        dpg.configure_item("log_widget", tracked=True)
 
         def worker():
             assert step.func is not None
@@ -57,6 +58,7 @@ def create_run_step_callback(step: CaactusStep):
             finally:
                 dpg.configure_item(sender, enabled=True)
                 dpg.set_item_label(sender, "Run")
+                dpg.configure_item("log_widget", tracked=False)
 
         threading.Thread(target=worker, daemon=True).start()
 
