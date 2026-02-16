@@ -6,8 +6,9 @@ import sys  # For exit handling
 import pandas as pd  # For data handling
 import seaborn.objects as so  # For plotting
 import argparse  # For CLI args
+import tomli
 
-from caactus.utils import load_config
+from caactus.utils import load_config, parse_if_needed
 
 DESCRIPTION = """
 This script processes cleaned data to generate summary statistics and a stacked bar plot of predicted classes.
@@ -25,7 +26,20 @@ def parse_filename(filename, variable_names):
     return metadata
 
 
-def process_cleaned_data(input_dir, output_dir, variable_names, color_mapping, class_order):
+def process_cleaned_data(
+    main_folder,
+    input_path,
+    output_path,
+    variable_names,
+    color_mapping,
+    class_order,
+):
+    input_dir = os.path.join(main_folder, input_path)
+    output_dir = os.path.join(main_folder, output_path)
+    variable_names = parse_if_needed(variable_names)
+    color_mapping = parse_if_needed(color_mapping)
+    class_order = parse_if_needed(class_order)
+
     df_clean = pd.read_csv(
         os.path.join(input_dir, 'df_clean.csv'), index_col=0
     )
@@ -186,14 +200,9 @@ def main():
     class_order = section["class_order"]
     color_mapping = section["color_mapping"]
 
-    input_dir = os.path.join(main_folder, input_path)
-    output_dir = os.path.join(main_folder, output_path)
 
     process_cleaned_data(
-        input_dir, output_dir,
-        variable_names,
-        color_mapping,
-        class_order
+        main_folder, input_path, output_path, variable_names, color_mapping, class_order
     )
 
 

@@ -7,7 +7,7 @@ import argparse
 import pandas as pd
 import seaborn.objects as so  # For plotting
 
-from caactus.utils import load_config
+from caactus.utils import load_config, parse_if_needed
 
 
 DESCRIPTION = """
@@ -16,11 +16,25 @@ This script processes EUCAST data and generates summary statistics and a stacked
 
 
 def process_eucast_data(
-    input_dir, output_dir, variable_names,
-    class_order, color_mapping,
-    conc_order, timepoint_order
+    main_folder,
+    input_path,
+    output_path,
+    variable_names,
+    class_order,
+    color_mapping,
+    conc_order,
+    timepoint_order,
 ):
     """Process EUCAST data and generate a stacked bar plot."""
+
+    input_dir = os.path.join(main_folder, input_path)
+    output_dir = os.path.join(main_folder, output_path)
+
+    variable_names = parse_if_needed(variable_names)
+    class_order = parse_if_needed(class_order)
+    color_mapping = parse_if_needed(color_mapping)
+    conc_order = parse_if_needed(conc_order)
+    timepoint_order = parse_if_needed(timepoint_order)
 
     df_clean = pd.read_csv(
         os.path.join(input_dir, 'df_clean.csv'), index_col=0
@@ -217,14 +231,7 @@ def main():
         sys.exit(1)
 
     section = config[script_key]
-    section["main_folder"] = config.get("main_folder", ".")
 
-    input_dir = os.path.join(
-        section["main_folder"], section["input_path"]
-    )
-    output_dir = os.path.join(
-        section["main_folder"], section["output_path"]
-    )
     variable_names = section["variable_names"]
     class_order = section["class_order"]
     color_mapping = section["color_mapping"]
@@ -232,10 +239,14 @@ def main():
     timepoint_order = section["timepoint_order"]
 
     process_eucast_data(
-        input_dir, output_dir,
-        variable_names, class_order,
-        color_mapping, conc_order,
-        timepoint_order
+        config.get("main_folder", "."),
+        section["input_path"],
+        section["output_path"],
+        variable_names,
+        class_order,
+        color_mapping,
+        conc_order,
+        timepoint_order,
     )
 
 

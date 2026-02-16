@@ -11,3 +11,8 @@ def get_config_step(config: dict, key: str):
     for section in key.split("."):
         data = data[section]
     return data
+
+def parse_if_needed(val):
+    if isinstance(val, str):
+        return tomli.loads(f"val={val}")["val"]
+    return val
