@@ -40,11 +40,11 @@ output_path = "9_data_analysis" # path for data analysis files
 variable_names = ["strain", "timepoint"] # for grouping summary statisitcs and facetting plot, first variable x-axis, second variable facetting
 class_order = ["resting", "swollen", "germling", "hyphae"]
 
-[summary_statistics.color_mapping]
-resting = "yellow"
-swollen = "blue"
-germling = "red"
-hyphae = "cyan"
+[summary_statistics.color_mapping] # colorblind friendly IBM palette
+resting = "#FE6100"
+swollen = "#648FFF"
+germling = "#785EF0"
+hyphae = "#DC267F"
 
 [summary_statistics_eucast]
 input_path = "9_data_analysis" # path for data analysis files
@@ -54,12 +54,12 @@ class_order = ["resting", "swollen", "germling", "hyphae", "mycelium"]
 conc_order = ["16", "8", "4", "2", "1", "0.5", "0.25", "0.125", "0.0625", "0.03", "0"]
 timepoint_order = ["4h", "7h", "10h", "24h"]
 
-[summary_statistics_eucast.color_mapping]
-resting = "yellow"
-swollen = "blue"
-germling = "red"
-hyphae = "cyan"
-mycelium = "green"
+[summary_statistics_eucast.color_mapping] # colorblind friendly IBM palette
+resting = "#FE6100"
+swollen = "#648FFF"
+germling = "#785EF0"
+hyphae = "#DC267F"
+mycelium = "#2CA02C"
 
 # config for plnmodelling
 [pln_modelling]
