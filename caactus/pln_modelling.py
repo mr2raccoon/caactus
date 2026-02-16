@@ -8,7 +8,7 @@ import argparse
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from caactus.utils import load_config
+from caactus.utils import load_config, parse_if_needed
 
 
 DESCRIPTION = """
@@ -17,8 +17,14 @@ This script runs ZIPln modelling on input data with dynamic design and generates
 
 
 
-def modelling(input_dir, output_dir, variable_names, dynamic_columns):
+def modelling(main_folder, input_path, output_path, variable_names, dynamic_columns):
     """Run ZIPln modelling on input data with dynamic design."""
+    input_dir = os.path.join(main_folder, input_path)
+    output_dir = os.path.join(main_folder, output_path)
+
+    variable_names = parse_if_needed(variable_names)
+    dynamic_columns = parse_if_needed(dynamic_columns)
+
     from pyPLNmodels import ZIPln  # For statistical modeling
     # Load counts data
     counts = pd.read_csv(
@@ -133,12 +139,16 @@ def main():
 
     section = config[script_key]
     main_folder = config["main_folder"]
-    input_dir = os.path.join(main_folder, section["input_path"])
-    output_dir = os.path.join(main_folder, section["output_path"])
     variable_names = section["variable_names"]
     dynamic_columns = section["dynamic_columns"]
 
-    modelling(input_dir, output_dir, variable_names, dynamic_columns)
+    modelling(
+        main_folder,
+        section["input_path"],
+        section["output_path"],
+        variable_names,
+        dynamic_columns,
+    )
 
 
 if __name__ == "__main__":
