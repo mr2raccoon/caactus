@@ -21,12 +21,23 @@ output_path = "1_images" # path for the .h5py-files for training
 input_path = "0_3_batch_tif_renamed" # path of renamed .tif-files
 output_path = "5_batch_images" # path for the renamed .h5py-files for batch-mode
 
+#config for pixel_classification
+[pixel_classification.training]
+[pixel_classification.batch]
+
+#config for boundary_segmentation
+[boundary_segmentation.training]
+[boundary_segmentation.batch]
 
 # config for background_processing
 [background_processing.training]
 input_path = "3_multicut" # path to the training files
 [background_processing.batch]
 input_path = "7_batch_multicut" # path to the batch iles
+
+#config for object_classification
+[object_classification.training]
+[object_classification.batch]
 
 # config for csv_summary
 [csv_summary]
