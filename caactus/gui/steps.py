@@ -3,7 +3,10 @@ from typing import Callable
 
 from caactus import (
     background_processing,
+    boundary_segmentation,
     csv_summary,
+    object_classification,
+    pixel_classification,
     pln_modelling,
     renaming,
     summary_statistics,
@@ -38,12 +41,13 @@ STEPS = [
     CaactusStep(
         name="Pixel classification",
         func=None,
-        description="Train a pixel classification model in ilastik.",
+        description=pixel_classification.DESCRIPTION,
+        config_key=None,
     ),
     CaactusStep(
         name="Boundary segmentation",
         func=None,
-        description="Perform boundary segmentation in ilastik.",
+        description=boundary_segmentation.DESCRIPTION,
         config_key=None,
     ),
     CaactusStep(
@@ -55,7 +59,7 @@ STEPS = [
     CaactusStep(
         name="Object classification",
         func=None,
-        description="Perform object classification in ilastik.",
+        description=object_classification.DESCRIPTION,
         config_key=None,
     ),
     CaactusStep(
