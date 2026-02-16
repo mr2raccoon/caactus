@@ -13,8 +13,7 @@ DESCRIPTION = """
 
 <images/watershed.png>
 
-7. Annotate the edges by clicking on the edges between cells.
- Annotate the background by clicking on the background.
+7. Annotate the edges by clicking on the edges between cells. Annotate the background by clicking on the background.
 
 8. Export the Multicut Segmentation.
 

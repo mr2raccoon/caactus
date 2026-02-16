@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Callable
+import textwrap
 
 from caactus import (
     background_processing,
@@ -35,21 +36,52 @@ STEPS = [
         name="Tif to h5",
         func=tif2h5py.convert_tif_to_h5,
         config_key="tif2h5py",
-        description={"training": tif2h5py.DESCRIPTION, "batch": "batch lala"},
+        description={"training": tif2h5py.DESCRIPTION, "batch": """lala"""
+    },
         stages=["training", "batch"],
     ),
     CaactusStep(
         name="Pixel classification",
         func=None,
         config_key="pixel_classification",
-        description={"training": pixel_classification.DESCRIPTION, "batch": "batch lala"},
+        description={"training": pixel_classification.DESCRIPTION, "batch": textwrap.dedent("""
+        1. Open ilastik.
+
+        2. Open your trained ilastik pixel classification project (1_pixel_classification.ilp).
+
+        3. Go to "Batch processing" tab.6_batch_predictions
+
+        4. Under "Raw data", add the .h5 files from 5_batch_images folder.
+
+        5. Under "Output", select "Export predictions" and choose a folder for the output (e.g. 6_batch_probabilities).
+
+        6. Click "Run batch".
+        
+        7. The output will be saved as _Probabilities.h5 files in the output folder.
+    """)},
         stages=["training", "batch"],
     ),
     CaactusStep(
         name="Boundary segmentation",
         func=None,
         config_key="boundary_segmentation",
-        description={"training": boundary_segmentation.DESCRIPTION, "batch": "batch lala"},
+        description={"training": boundary_segmentation.DESCRIPTION, "batch": textwrap.dedent("""
+        1. Open ilastik.
+
+        2. Open your trained ilastik boundary-Segmentation project (2_boundary_segmentation.ilp).
+
+        3. Go to "Batch processing" tab.
+
+        4. Under "Raw data", add the .h5 files from 5_batch_images folder.
+                                                                                                                                                                                  
+        5. Under "Probabilities", add the data_Probabilities.h5 files from 6_batch_probabilities folder.
+
+        6. Under "Output", select "Export predictions" and choose a folder for the output (e.g. 7_batch_multicut).
+
+        7. Click "Run batch".
+        
+        8. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
+    """)},
         stages=["training", "batch"],
     ),
     CaactusStep(
@@ -62,7 +94,23 @@ STEPS = [
     CaactusStep(
         name="Object classification",
         func=None,
-        description={"training": object_classification.DESCRIPTION, "batch": "batch lala"},
+        description={"training": object_classification.DESCRIPTION, "batch": textwrap.dedent("""
+        1. Open ilastik.
+
+        2. Open your trained ilastik object classification project (3_object_classification.ilp).
+
+        3. Go to "Batch processing" tab.
+
+        4. Under "Raw data", add the .h5 files from 5_batch_images folder.
+                                                                                                                                                                                  
+        5. Under "Segmentation", add the data_Multicut Segmentation.h5 files from 7_batch_multicut folder.
+
+        6. Under "Output", select "Export predictions" and choose a folder for the output (e.g. 8_batch_objectclassification).
+
+        7. Click "Run batch".
+        
+        8. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
+    """)},
         config_key="object_classification",
         stages=["training", "batch"],
     ),
