@@ -65,16 +65,21 @@ def load_texture_from_package(filename: str) -> str:
 
     return texture_tag
 
-def render_description(text: str):
+def render_description(text: str, tag: str):
     blocks = parse_description(text)
+
+    if dpg.get_alias_id(tag):
+        dpg.delete_item(tag, children_only=True)
+    else:
+        dpg.add_group(tag=tag)
 
     for block in blocks:
         if block.type == "paragraph":
-            dpg.add_text(replace_single_newline(block.content), wrap=0)
+            dpg.add_text(replace_single_newline(block.content), wrap=0, parent=tag)
 
         elif block.type == "image":
             try:
                 texture_tag = load_texture_from_package(block.content)
-                dpg.add_image(texture_tag)
+                dpg.add_image(texture_tag, parent=tag)
             except FileNotFoundError:
-                dpg.add_text(f"[{block.content}]")
+                dpg.add_text(f"[{block.content}]", parent=tag)

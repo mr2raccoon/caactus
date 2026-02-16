@@ -38,6 +38,11 @@ def on_stage_selected(step: CaactusStep):
             STATE[step.name][key] = value
             dpg.set_value(f"{step.name}_{key}", value)
 
+        if isinstance(step.description, dict):
+            descriptions.render_description(
+                step.description[stage], tag=f"{step.name}_description"
+            )
+
     return callback
 
 
@@ -89,7 +94,6 @@ def build_param_controls(step_name, params, tag_prefix=""):
 
 def build_step_tab(step: CaactusStep):
     params = STATE.get(step.name, {})
-
     with dpg.tab(label=step.name):
         if step.stages:
             dpg.add_combo(
@@ -109,7 +113,9 @@ def build_step_tab(step: CaactusStep):
                 height=60,
             )
         desc = step.description
-        descriptions.render_description(desc)
+        if isinstance(desc, dict):
+            desc = desc[step.stages[0]]
+        descriptions.render_description(desc, tag=step.name + "_description")
 
 def build_ui():
     with dpg.window(label="caactus", autosize=True, tag="main"):

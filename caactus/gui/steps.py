@@ -1,8 +1,15 @@
-import re
 from dataclasses import dataclass, field
 from typing import Callable
 
-from caactus import background_processing, csv_summary, renaming, tif2h5py
+from caactus import (
+    background_processing,
+    csv_summary,
+    pln_modelling,
+    renaming,
+    summary_statistics,
+    summary_statistics_eucast,
+    tif2h5py,
+)
 
 
 @dataclass
@@ -10,7 +17,7 @@ class CaactusStep:
     name: str
     func: Callable | None = None
     config_key: str | None = None
-    description: str = ""
+    description: str | dict[str, str] = ""
     stages: list[str] = field(default_factory=list)
 
 
@@ -25,7 +32,7 @@ STEPS = [
         name="Tif to h5",
         func=tif2h5py.convert_tif_to_h5,
         config_key="tif2h5py",
-        description=tif2h5py.DESCRIPTION,
+        description={"batch": tif2h5py.DESCRIPTION, "training": "training"},
         stages=["batch", "training"],
     ),
     CaactusStep(
@@ -56,6 +63,24 @@ STEPS = [
         func=csv_summary.process_csv_files,
         config_key="csv_summary",
         description=csv_summary.DESCRIPTION,
+    ),
+    CaactusStep(
+        name="Summary statistics",
+        func=summary_statistics.process_cleaned_data,
+        config_key="summary_statistics",
+        description=summary_statistics.DESCRIPTION,
+    ),
+    CaactusStep(
+        name="Summary statistics EUCAST",
+        func=summary_statistics_eucast.process_eucast_data,
+        config_key="summary_statistics_eucast",
+        description=summary_statistics_eucast.DESCRIPTION,
+    ),
+    CaactusStep(
+        name="PLN modelling",
+        func=pln_modelling.modelling,
+        config_key="pln_modelling",
+        description=pln_modelling.DESCRIPTION,
     ),
 ]
 
