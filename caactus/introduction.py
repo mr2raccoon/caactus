@@ -10,8 +10,12 @@ The workflow is organized into multiple steps, each with its own specific purpos
 
 To begin, select a step from the tabs on the left. Each tab provides detailed instructions for completing that stage.
 
-Some steps allow you to choose between training mode and batch processing mode.  
+Some steps allow you to choose between training mode and batch processing mode.
 Use the dropdown menu within the step to select the desired stage.
+
+Three steps need to be performed in ilastik, a user-friendly tool for image analysis. 
+The instructions for these steps will guide you through the necessary actions in ilastik.
+
 
 All folder names referenced in the instructions correspond to the structure of your main project directory.
 

@@ -51,17 +51,21 @@ STEPS = [
         func=None,
         config_key="pixel_classification",
         description={"training": pixel_classification.DESCRIPTION, "batch": textwrap.dedent("""
+        Select training or batch from the drop down menu above to specify the input and 
+        output directories correctly.
+                                                                                            
         1. Open ilastik.
 
         2. Open your trained ilastik pixel classification project (1_pixel_classification.ilp).
 
-        3. Go to "Batch processing" tab.6_batch_predictions
+        3. Go to "5. Batch processing" tab.6_batch_predictions
 
-        4. Under "Raw data", add the .h5 files from 5_batch_images folder.
+        4. Under "1.Input Data","Raw data", add the .h5 files from 5_batch_images folder.                                                                  
 
-        5. Under "Output", select "Export predictions" and choose a folder for the output (e.g. 6_batch_probabilities).
-
-        6. Click "Run batch".
+        5. Under "4. Prediction Export", select "Export predictions" and choose a folder for the output (e.g. 6_batch_probabilities).
+        <images/batch_pixel.png>
+                                                                                            
+        6. Go to "5. Batch Processing" and click "Process all files".
         
         7. The output will be saved as _Probabilities.h5 files in the output folder.
     """)},
@@ -72,19 +76,22 @@ STEPS = [
         func=None,
         config_key="boundary_segmentation",
         description={"training": boundary_segmentation.DESCRIPTION, "batch": textwrap.dedent("""
+        Select training or batch from the drop down menu above to specify the input and 
+        output directories correctly.
         1. Open ilastik.
 
         2. Open your trained ilastik boundary-Segmentation project (2_boundary_segmentation.ilp).
 
-        3. Go to "Batch processing" tab.
+        3. Go to "5. Batch processing" tab.
 
-        4. Under "Raw data", add the .h5 files from 5_batch_images folder.
+        4. Under "1.Input Data","Raw data", add the .h5 files from 5_batch_images folder.
                                                                                                                                                                                   
-        5. Under "Probabilities", add the data_Probabilities.h5 files from 6_batch_probabilities folder.
+        5. Under "1.Input Data","Probabilities", add the data_Probabilities.h5 files from 6_batch_probabilities folder.
 
-        6. Under "Output", select "Export predictions" and choose a folder for the output (e.g. 7_batch_multicut).
+        6. Under "4. Data Export", select "Choose Export Image Settings" and choose a folder for the output (e.g. 7_batch_multicut).
+        <images/batch_multicut.png>
 
-        7. Click "Run batch".
+        7. Go to "5. Batch Processing" and click "Process all files".
         
         8. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
     """)},
@@ -105,17 +112,24 @@ STEPS = [
 
         2. Open your trained ilastik object classification project (3_object_classification.ilp).
 
-        3. Go to "Batch processing" tab.
+        3. Go to "5. Batch processing" tab.
 
-        4. Under "Raw data", add the .h5 files from 5_batch_images folder.
+        4. Under "1.Input Data", "Raw data", add the .h5 files from 5_batch_images folder.
                                                                                                                                                                                   
-        5. Under "Segmentation", add the data_Multicut Segmentation.h5 files from 7_batch_multicut folder.
+        5. Under "1.Input Data","Segmentation Image", add the data_Multicut Segmentation.h5 files from 7_batch_multicut folder.
 
-        6. Under "Output", select "Export predictions" and choose a folder for the output (e.g. 8_batch_objectclassification).
+        6. Under "4. Object Information Export", choose "Export Image Settings" with the following settings:
+        <images/batch_object_image.png>
 
-        7. Click "Run batch".
-        
-        8. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
+        7. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
+        <images/feature_table_export.png>
+                                                                               
+        8. Under "Configure Feature Table Export", choose " Features" to choose the Feature you are interested in exporting for each object.
+        <images/features_of_featuretable.png>
+
+        9. Go to "5. Batch Processing" and click "Process all files".
+                                                                                             
+        10. The output will be saved as data_Object Predictions.h5 files and data_table.csv in the output folder.
     """)},
         config_key="object_classification",
         stages=["training", "batch"],
