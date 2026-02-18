@@ -13,6 +13,7 @@ from caactus import (
     summary_statistics,
     summary_statistics_eucast,
     tif2h5py,
+    introduction,
 )
 
 
@@ -24,8 +25,13 @@ class CaactusStep:
     description: str | dict[str, str] = ""
     stages: list[str] = field(default_factory=list)
 
-
 STEPS = [
+    CaactusStep(
+        name="Introduction",
+        func=None,
+        description=introduction.DESCRIPTION,
+        config_key=None,
+    ),
     CaactusStep(
         name="Renaming",
         func=renaming.run,

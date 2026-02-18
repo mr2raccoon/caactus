@@ -53,6 +53,7 @@ dependencies = [
         "tomli",
         "argparse",
         "seaborn",
+        "textwrap",
 ]
 
 [project.urls]
@@ -60,6 +61,7 @@ Repository = "https://github.com/mr2raccoon/caactus"
 Documentation = "https://github.com/mr2raccoon/caactus"
 
 [project.scripts]
+introduction = "caactus.introduction:main"
 tif2h5py = "caactus.tif2h5py:main"
 renaming = "caactus.renaming:main"
 pixel_classification = "caactus.pixel_classification:main"
