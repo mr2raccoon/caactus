@@ -14,6 +14,9 @@ STATE = {}
 def init_state(config):
     STATE["full_config"] = copy.deepcopy(config)
     STATE["main_folder"] = config["main_folder"]
+
+    STATE["Global settings"] = {"main_folder": STATE["main_folder"]}
+
     for step in STEPS:
         key = step.config_key
         if key is not None:
@@ -26,6 +29,10 @@ def init_state(config):
 def on_param_change(step_name: str, param_name: str):
     def callback(sender, app_data):
         STATE[step_name][param_name] = app_data
+
+        if step_name == "Global settings" and param_name == "main_folder":
+            STATE["main_folder"] = app_data
+            STATE["full_config"]["main_folder"] = app_data  # optional but sensible
 
     return callback
 

@@ -6,7 +6,10 @@ import os
 import sys
 import argparse
 import pandas as pd
+import matplotlib
+matplotlib.use("Agg")  # non-interactive backend (no X11 windows)
 import matplotlib.pyplot as plt
+
 
 from caactus.utils import load_config, parse_if_needed
 
@@ -95,13 +98,13 @@ def modelling(main_folder, input_path, output_path, variable_names, dynamic_colu
         bbox_to_anchor=(1, 0.5),
         title='Combined Category'
     )
-    
+
     # Save PCA plot
-    plt.savefig(
+    fig.savefig(
         os.path.join(output_dir, 'pca_plot.png'),
         bbox_inches='tight'
     )
-    plt.show()
+    plt.close(fig)
 
 
     # Correlation circle
