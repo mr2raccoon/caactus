@@ -15,6 +15,10 @@ DESCRIPTION = """Convert all .tif files in input_dir to .h5 format in output_dir
 
 Select training or batch from the drop down menu above to specify the input and 
 output directories correctly.
+
+ The `.h5-format` allows for better performance when working with ilastik.
+ 
+ Fore more information, please consult https://www.ilastik.org/documentation/basics/performance_tips. 
 """
 
 

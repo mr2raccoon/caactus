@@ -4,7 +4,11 @@ DESCRIPTION = """
 
 Welcome to the caactus pipeline.
 
-This pipeline is designed to process and analyze microscopy images, with a focus on cell segmentation and classification.
+caactus (cell analysis and counting tool using ilastik software) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/).
+
+It includes data preparation, processing and analysis. 
+
+It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures.
 
 The workflow is organized into multiple steps, each with its own specific purpose and requirements.
 

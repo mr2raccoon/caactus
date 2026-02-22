@@ -11,7 +11,24 @@ from caactus.utils import load_config, parse_if_needed
 
 
 DESCRIPTION = """
-This script processes EUCAST data and generates summary statistics and a stacked bar plot of predicted classes.
+This script processes EUCAST data and generates summary statistics and a stacked bar plot of predicted classes cell categories.
+
+For the stacked bar plot, it groups data by the two variables that you enter.
+
+It computes the average count and percentage of each predicted class, across replicates (technical and biological), for each combination of the two grouping variables.
+
+
+
+It visualizes the distribution in stacked bar plots of classes across different conditions.
+
+The first variable you enter will be displayed on the x-axis (drug concentrtion), and the second variable will be used for faceting (timepoint).
+
+
+This will create separate subplots for each level of that variable.
+
+The plot will show the percentage distribution of predicted classes for each condition, allowing you to compare how the classes are distributed across different experimental conditions defined by the two grouping variables.
+
+ The colors of the bars will correspond to the predicted classes, as defined in your color mapping.
 """
 
 

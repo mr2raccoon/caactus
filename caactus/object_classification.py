@@ -12,7 +12,7 @@ output directories correctly.
 
 5. Under "Segmentation Image", add the data_Multicut Segmentation.h5 files from 3_multicut folder.
 
-6. Define your cell types plus an additional category for "not-usuable" objects, e.g. cell debris and cut-off objects on the side of the images.
+6. Define your cell types plus an additional category for "not-usable" objects, e.g. cell debris and cut-off objects on the side of the images.
 
 <images/watershed.png>
 

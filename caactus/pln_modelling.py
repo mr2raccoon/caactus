@@ -15,7 +15,15 @@ from caactus.utils import load_config, parse_if_needed
 
 
 DESCRIPTION = """
-This script runs ZIPln modelling on input data with dynamic design and generates PCA visualizations.
+This script runs ZIPln modelling on input data with dynamic design and generates PCA visualizations and a correlation circle plot.
+
+The two grouping variables you enter will be used in the model formula and for visualizing the PCA results.
+
+The will be combined into a single factor for the model, and the PCA plot will show the latent variable projections colored by this combined category.
+
+The correlation circle plot will show how the original variables relate to the latent dimensions, helping you interpret the PCA results in terms of the original grouping variables.
+
+
 """
 
 
