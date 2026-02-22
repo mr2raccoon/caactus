@@ -195,10 +195,6 @@ In prediction export change the settings to
 
 - For more information, consult the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
 
-![pixel_classes](./images/pixel_classification_classes.JPG)
-
-
-
 
 ### 4.3 Boundary-based Segmentation with Multicut
 1. When first training a boundary-based Segmentation model in ilastik, open ilastik.
@@ -452,5 +448,30 @@ The next script will combine all tables from all images into one global table fo
     - b) "pca_plot.png"
 
 
+## 7. Tutorial
+### 7.1 Download Sample Data
+1. Go to [zenodo](https://doi.org/10.5281/zenodo.17590576) to download the sample data.
+2. Unpack the `.zip`-file into your project folder.
+3. The path to where you unpacked the sample data will be your main folder.
+4. To showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps.
+5. Make sure you have caactus installed, the caactus-env activated and the caactus GUI open and running.
 
+### 7.2 Renaming
+1. Inspect the `renaming.csv` spreadsheet.
+2. Go the renaming tab inside the caactus GUI.
+3. Enter the main folder path fro 7.3
+4. Click `Run`
 
+## 7.3 Batch Pixel Classification
+
+## 7.4 Batch Processing Multicut Segmentation
+
+## 7.5 Batch Background Processing
+
+## 7.8 Batch Object classification
+
+## 7.9 CSV summary
+
+## 7.10 Summary Statistics
+
+## 7.11 PLN modelling
