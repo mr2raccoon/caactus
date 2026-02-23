@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib
 matplotlib.use("Agg")  # non-interactive backend (no X11 windows)
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 
 from caactus.utils import load_config, parse_if_needed
@@ -82,53 +83,58 @@ def modelling(main_folder, input_path, output_path, variable_names, dynamic_colu
 
     print(zipln)
 
-    # PCA visualization with proper legend labels
+
+    # PCA visualization with legend labels (with font sizes + legend outside)
     fig, ax = plt.subplots(figsize=(10, 6))
-    
-    # Plot each combined category separately with its label
+
     for cat in sorted(set(combined_dict["combined_category"])):
         mask = combined_dict["combined_category"] == cat
         ax.scatter(
             zipln.latent_variables[mask, 0],
             zipln.latent_variables[mask, 1],
-            label=cat
+            label=cat,
         )
-    
-    ax.set_xlabel("Latent Dimension 1")
-    ax.set_ylabel("Latent Dimension 2")
-    ax.set_title("ZIPln PCA Projection")
-    
-    # Adjust layout and add legend
+
+    ax.set_xlabel("Latent Dimension 1", fontsize=22)
+    ax.set_ylabel("Latent Dimension 2", fontsize=22)
+    ax.set_title("ZIPln PCA Projection", fontsize=22)
+
+    ax.tick_params(axis="both", labelsize=20)
+
+    # Legend outside
     box = ax.get_position()
     ax.set_position([box.x0, box.y0, box.width * 0.75, box.height])
-    ax.legend(
-        loc='center left',
+    leg = ax.legend(
+        loc="center left",
         bbox_to_anchor=(1, 0.5),
-        title='Combined Category'
+        title="Combined Category",
     )
 
-    # Save PCA plot
-    fig.savefig(
-        os.path.join(output_dir, 'pca_plot.png'),
-        bbox_inches='tight'
-    )
+    if leg:
+        leg.set_title(leg.get_title().get_text(), prop={"size": 20})
+        for t in leg.get_texts():
+            t.set_fontsize(18)
+
+    fig.savefig(os.path.join(output_dir, "pca_plot.png"), bbox_inches="tight", dpi=300)
     plt.close(fig)
 
 
     # Correlation circle
-    fig_corr = plt.figure(figsize=(6, 6))
+    with mpl.rc_context({
+        "font.size": 20,        # helps arrow labels if they’re matplotlib text
+        "axes.titlesize": 22,
+        "axes.labelsize": 22,
+        "xtick.labelsize": 20,
+        "ytick.labelsize": 20,
+    }):
+        zipln.plot_correlation_circle(
+            column_names=[variable_names[0], variable_names[1]],
+            column_index=[0, 2],
+        )
 
-    zipln.plot_correlation_circle(
-        column_names=[variable_names[0], variable_names[1]],
-        column_index=[0, 2]
-    )
+        plt.savefig(os.path.join(output_dir, "correlation_circle.png"), bbox_inches="tight", dpi=300)
+        plt.close(plt.gcf())
 
-    fig_corr.savefig(
-        os.path.join(output_dir, "correlation_circle.png"),
-        bbox_inches="tight"
-    )
-
-    plt.close(fig_corr)
 
 
 def main():

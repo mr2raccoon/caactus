@@ -186,7 +186,14 @@ def process_cleaned_data(
         so.Bar(), so.Stack()
     ).scale(
         color=color_palette
-    )
+    ).theme({
+        "xtick.labelsize": 20,
+        "ytick.labelsize": 20,
+        "axes.labelsize": 22,
+        "axes.titlesize": 22,
+        "legend.fontsize": 20,
+        "legend.title_fontsize": 22,
+    })
 
     plot.plot()
     plot.save(os.path.join(output_dir, 'barchart.png'), bbox_inches="tight")
