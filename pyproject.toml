@@ -53,7 +53,6 @@ dependencies = [
         "tomli",
         "argparse",
         "seaborn",
-        "textwrap",
 ]
 
 [project.urls]
