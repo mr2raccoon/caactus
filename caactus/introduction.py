@@ -4,7 +4,7 @@ DESCRIPTION = """
 
 Welcome to the caactus pipeline.
 
-caactus (cell analysis and counting tool using ilastik software) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/).
+caactus (cell analysis and counting tool using ilastik software) is a collection of python scripts to provide a streamlined workflow for ilastik (https://www.ilastik.org/).
 
 It includes data preparation, processing and analysis. 
 
