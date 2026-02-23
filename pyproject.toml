@@ -60,6 +60,7 @@ Repository = "https://github.com/mr2raccoon/caactus"
 Documentation = "https://github.com/mr2raccoon/caactus"
 
 [project.scripts]
+caactus = "caactus.main:main"
 introduction = "caactus.introduction:main"
 tif2h5py = "caactus.tif2h5py:main"
 renaming = "caactus.renaming:main"
