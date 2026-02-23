@@ -1,7 +1,7 @@
 # caactus
 caactus (**c**ell **a**nalysis **a**nd **c**ounting **t**ool **u**sing ilastik **s**oftware) is a collection of python scripts to provide a streamlined workflow for [ilastik-software](https://www.ilastik.org/), including data preparation, processing and analysis. It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures.
 
- ![workflow](./images/caactus-workflow(1).png)
+ ![workflow](caactus/gui/assets/images/caactus-workflow(1).png)
  
 
 # Introduction
@@ -176,7 +176,7 @@ project_directory
 1 = background, 
 2 = boundary 
 (This follows python's 0-indexing logic where counting is started at 0).
-![pixel_classes](./images/pixel_classification_classes.JPG)
+![pixel_classes](caactus/gui/assets/images/pixel_classification_classes.JPG)
 
 
 7. Annotate the classes by drawing on the images.
@@ -190,7 +190,7 @@ In prediction export change the settings to
   {dataset_dir}/../2_probabilties/{nickname}_{result_type}.h5
   ```
 
-![export_prob](./images/export_probabilities.JPG)
+![export_prob](caactus/gui/assets/images/export_probabilities.JPG)
 
 
 - For more information, consult the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
@@ -209,7 +209,7 @@ In prediction export change the settings to
 
 6. in DT Watershed,  use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
 
-![watershed](./images/watershed.png)
+![watershed](caactus/gui/assets/images/watershed.png)
 
 
 7. Annotate the edges by clicking on the edges between cells. Annotate the background by clicking on the background.
@@ -224,7 +224,7 @@ In prediction export change the settings to
   {dataset_dir}/../3_multicut/{nickname}_{result_type}.h5
   ```
 
-![export_multicut](./images/export_multicut.JPG)
+![export_multicut](caactus/gui/assets/images/export_multicut.JPG)
 
 
 - For more information follow the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
@@ -264,7 +264,7 @@ In `Choose Export Imager Settings` change settings to
   {dataset_dir}/../4_objectclassification/{nickname}_{result_type}.h5
   ```
 
-![export_multicut](./images/export_objectclassification.JPG)
+![export_multicut](caactus/gui/assets/images/export_objectclassification.JPG)
 
 
 9. Export the Object data_table.csv-files
@@ -274,7 +274,7 @@ In `Configure Feature Table Export General` change seetings to
   {dataset_dir}/../4_objectclassification/{nickname}.csv`
   ```
 - select your features of interest for exporting
-![export_prob](./images/object_tableexport.JPG)
+![export_prob](caactus/gui/assets/images/object_tableexport.JPG)
 
 For more information follow the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
 
@@ -293,7 +293,7 @@ For more information follow the [documentation for object classification](https:
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 
 2. Select the Renaming tab in the caactus GUI. When the file path are correct, click ```Run```.
-![96_well](./images/96_well_setup.png)
+![96_well](caactus/gui/assets/images/96_well_setup.png)
 
 CAVE: Do not use underscores or dashes in the column names or values, as they will be used as delimiters in the new file names.
 
@@ -321,7 +321,7 @@ CAVE: The only hardcoded column names needed are "biorep", and "techrep". They a
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
   ```
 
-![batch_pixel](./images/batch_pixel.png)
+![batch_pixel](caactus/gui/assets/images/batch_pixel.png)
                                                                                     
 6. Go to `5. Batch Processing` and click `Process all files`.
 
@@ -341,7 +341,7 @@ CAVE: The only hardcoded column names needed are "biorep", and "techrep". They a
 
 6. Under `4. Data Export`, select `Choose Export Image Settings` and choose a folder for the output (e.g. 7_batch_multicut).
 
-![batch_multicut](./images/batch_multicut.png)
+![batch_multicut](caactus/gui/assets/images/batch_multicut.png)
 
 
 7. Go to `5. Batch Processing` and click `Process all files`.
@@ -377,17 +377,17 @@ For futher processing in the object classification, the background needs to elim
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
   ```
-![object_image](./images/batch_object_image.png)
+![object_image](caactus/gui/assets/images/batch_object_image.png)
 
 
 7. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
-![feature_table](./images/feature_table_export.png)
+![feature_table](caactus/gui/assets/images/feature_table_export.png)
                                                                         
 8. In `Configure Feature Table Export General` choose format `.csv` and change output directory to:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
   ```
-![feature_features](./images/features_of_featuretable.png)
+![feature_features](caactus/gui/assets/images/features_of_featuretable.png)
 
 Choose  `Features` to choose the Feature you are interested in exporting
 
