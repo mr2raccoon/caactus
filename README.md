@@ -142,11 +142,7 @@ project_directory
 ```bash
 conda activate caactus-env
 ```
-- once activated change to directory where caactus is installed
-```bash 
-cd caactus
-```
-- now simply enter caactus to start the graphical user interace
+- now simply type `caactus` and hit `enter`to start the graphical user interace
 ```bash
 caactus
 ```
@@ -469,11 +465,7 @@ The next script will combine all tables from all images into one global table fo
 ```bash
 conda activate caactus-env
 ```
-- once activated change to directory where caactus is installed
-```bash 
-cd caactus
-```
-- now simply enter caactus to start the graphical user interace
+- now simply type `caactus` and hit `enter`to start the graphical user interace
 ```bash
 caactus
 ```
