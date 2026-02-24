@@ -42,7 +42,16 @@ STEPS = [
         name="Tif to h5",
         func=tif2h5py.convert_tif_to_h5,
         config_key="tif2h5py",
-        description={"training": tif2h5py.DESCRIPTION, "batch": """lala"""
+        description={"training": tif2h5py.DESCRIPTION, "batch": """
+Convert all .tif files in input_dir to .h5 format in output_dir.
+
+Select training or batch from the drop down menu above to specify the input and 
+output directories correctly.
+
+ The `.h5-format` allows for better performance when working with ilastik.
+ 
+ Fore more information, please consult https://www.ilastik.org/documentation/basics/performance_tips. 
+"""
     },
         stages=["training", "batch"],
     ),
@@ -101,7 +110,16 @@ STEPS = [
         name="Background processing",
         func=background_processing.batch_process_images,
         config_key="background_processing",
-        description={"training": background_processing.DESCRIPTION, "batch": "batch lala"},
+        description={"training": background_processing.DESCRIPTION, "batch": """This script processes HDF5 segmentation files by zeroing the largest ID in the 'exported_data' dataset.
+
+For futher processing in the object classification, the background needs to eliminated from the multicut data sets.
+
+ For this the next script will set the numerical value of the largest region to 0. 
+ 
+ It will thus be shown as transpartent in the next step of the workflow. 
+ 
+ This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/7_batch_multicut/`.
+"""},
         stages=["training", "batch"],
     ),
     CaactusStep(
