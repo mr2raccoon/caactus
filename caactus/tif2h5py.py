@@ -29,7 +29,7 @@ def convert_tif_to_h5(main_folder, input_path, output_path):
 
     os.makedirs(output_dir, exist_ok=True)
 
-    tif_files = [f for f in os.listdir(input_dir) if f.endswith('.tif')]
+    tif_files = [f for f in os.listdir(input_dir) if f.lower().endswith(".tif")]
     if not tif_files:
         print("No .tif files found in input directory.")
         return
@@ -39,26 +39,46 @@ def convert_tif_to_h5(main_folder, input_path, output_path):
 
         with tifffile.TiffFile(tif_path) as tiff:
             image_data = tiff.asarray()
-            print("Image data shape:", image_data.shape)
+            print(f"{tif_file} - image data shape: {image_data.shape}, dtype: {image_data.dtype}")
 
-            if len(image_data.shape) == 3:
-                image_data_5d = image_data.reshape((1, 1, *image_data.shape))
-            elif len(image_data.shape) == 4:
-                image_data_5d = image_data.reshape((1, *image_data.shape))
+            # Normalize to 5D: (t, z, y, x, c) == "tzyxc"
+            if image_data.ndim == 2:
+                # single-plane grayscale: (y, x) -> (1, 1, y, x, 1)
+                image_data_5d = image_data.reshape((1, 1, image_data.shape[0], image_data.shape[1], 1))
+
+            elif image_data.ndim == 3:
+                # Treat as grayscale stack: (z, y, x) -> (1, z, y, x, 1)
+                # (This matches your previous behavior, just makes it explicit 5D.)
+                z, y, x = image_data.shape
+                image_data_5d = image_data.reshape((1, z, y, x, 1))
+
+            elif image_data.ndim == 4:
+                # Assume: (z, y, x, c) -> (1, z, y, x, c)
+                z, y, x, c = image_data.shape
+                image_data_5d = image_data.reshape((1, z, y, x, c))
+
+            elif image_data.ndim == 5:
+                # Already (t, z, y, x, c)
+                image_data_5d = image_data
+
             else:
                 raise ValueError(f"Unexpected image shape: {image_data.shape}")
 
             data_shape = image_data_5d.shape
             axistags = vigra.defaultAxistags("tzyxc")
 
-            h5_file = os.path.splitext(tif_file)[0] + '.h5'
+            h5_file = os.path.splitext(tif_file)[0] + ".h5"
             h5_path = os.path.join(output_dir, h5_file)
 
-            with h5py.File(h5_path, 'w') as h5:
+            # Robust chunking (must not exceed any dimension sizes)
+            t, z, y, x, c = data_shape
+            chunks = (1, 1, min(256, y), min(256, x), c)
+
+            with h5py.File(h5_path, "w") as h5:
                 ds = h5.create_dataset(
-                    name='data',
+                    name="data",
                     data=image_data_5d,
-                    chunks=(1, 1, 256, 256, 1)
+                    chunks=chunks,
                 )
                 ds.attrs["axistags"] = axistags.toJSON()
                 ds.attrs["data_shape"] = data_shape
@@ -68,17 +88,17 @@ def convert_tif_to_h5(main_folder, input_path, output_path):
 
 def main():
     """Main CLI entry point."""
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description=DESCRIPTION)
     parser.add_argument(
         "-c", "--config",
         required=True,
-        help="Path to config file"
+        help="Path to config file",
     )
     parser.add_argument(
         "-m", "--mode",
         required=True,
         choices=["training", "batch"],
-        help="Define if training or batch mode"
+        help="Define if training or batch mode",
     )
     args = parser.parse_args()
 
