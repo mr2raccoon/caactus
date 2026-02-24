@@ -1,6 +1,7 @@
 import argparse
 import copy
 import threading
+from pathlib import Path
 
 import vigra  # somehow needed earlier to avoid import error later.
 import dearpygui.dearpygui as dpg
@@ -188,13 +189,23 @@ def run_gui(config):
 
 
 def main():
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-c", "--config", default="config.toml", help="Path to config file"
+        "-c",
+        "--config",
+        default=None,
+        help="Path to config file",
     )
     args = parser.parse_args()
 
-    config = load_config(args.config)
+    if args.config:
+        config_path = Path(args.config)
+    else:
+        # Resolve path relative to THIS file
+        config_path = Path(__file__).parent / "assets" / "config.toml"
+
+    config = load_config(str(config_path))
     run_gui(config)
 
 
