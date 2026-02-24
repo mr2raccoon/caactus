@@ -138,9 +138,18 @@ project_directory
 
 ## 3.2 Getting started
 - open the the caacuts Graphical User Interface (GUI) by opening the command line in Unix or Anaconda Powershell in Windows.
-- make sure you have the caactus environmnet activated
-- enter 
-``` main.py ```/home/kuba/miniconda3/envs/caactus-env-314/bin/python /home/kuba/dev/caactus/caactus/gui/main.py
+- make sure you have the caactus environmnet activated 
+```bash
+conda activate caactus-env
+```
+- once activated change to directory where caactus is installed
+```bash 
+cd caactus
+```
+- now simply enter caactus to the graphical user interace
+```bash
+caactus
+```
 - On the top, enter the path to your mainfolder.
 - For steps where it is relevant, choose between training and batch mode.
 - The subdirectories have default naming according to 3.1. You can rename them.
