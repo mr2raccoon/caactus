@@ -53,6 +53,7 @@ dependencies = [
         "tomli",
         "argparse",
         "seaborn",
+        "dearpygui",
 ]
 
 [project.urls]
