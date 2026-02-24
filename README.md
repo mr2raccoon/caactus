@@ -146,7 +146,7 @@ conda activate caactus-env
 ```bash 
 cd caactus
 ```
-- now simply enter caactus to the graphical user interace
+- now simply enter caactus to start the graphical user interace
 ```bash
 caactus
 ```
