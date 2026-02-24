@@ -533,7 +533,7 @@ caactus
 1. Switch back to the caactus GUI.
 2. Select the `background-processing` tab in the GUI.
 3. Select `Batch` mode from the dropdown menu.
-4. When the file path are correct, click ```Run```.
+4. When the file paths are correct, click ```Run```.
 5. The background now has been deleted and you can continue with object classification in ilastik.
 
 
@@ -576,23 +576,25 @@ Choose  `Features` to choose the Feature you are interested in exporting
 1. Switch back to the caactus GUI.
 2. Go to the `CSV summary` tab in the caactus GUI.
 2. You can leave the default pixel size for cell size calculation.
-3. When the file path are correct, click ```Run```.
-4. The output generated will be `df_clean.csv`.
+3. When the file paths are correct, click ```Run```.
+4. Inspect the generated results. The output generated will be `df_clean.csv`.
 5. This spreadsheet now has all feature tables that are the output of 5.6 Object classification united in one spreadsheet.
-5. You can use this spreadsheet now, to continue with analysis in the software of your choice.
+6. You can use this spreadsheet now, to continue with analysis in the software of your choice.
 
 ## 7.10 Summary Statistics
 1. Go to the `Summary Statistics` tab in the caactus GUI.
-2. When the file path are correct, click ```Run```.
-3. The output generated will be 
+2. Change the variable names to `['condition1','condition2']` . 
+3. When the file paths are correct, click ```Run```.
+4. Inspect the generated results. The output generated will be 
     - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
     - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
     - c) "counts.csv" dataframe used in PlnModelling
-    - d) bar graph ("barchart.png")
+    - d) bar graph ("barchart.png") (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.)
 
 ## 7.11 PLN modelling
 1. Go to the `PLN modelling` tab in the caactus GUI.
-2. When the file path are correct, click ```Run```.
-3. The output generated will be 
-    - a) "correlation_circle.png"
-    - b) "pca_plot.png"
+2. Change the variable names to `['condition1','condition2']` . 
+3. When the file path are correct, click ```Run```.
+4. Inspect the generated results. The output generated will be 
+    - a) "correlation_circle.png". Shows that PCA1, accounting for 52.699% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for 25.242% of the variance based on condition1.
+    - b) "pca_plot.png". The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2.
