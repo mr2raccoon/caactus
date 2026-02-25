@@ -611,4 +611,4 @@ Choose  `Features` to choose the Feature you are interested in exporting
 3. When the file path are correct, click ```Run```.
 4. Inspect the generated results. The output generated will be 
     - a) "correlation_circle.png". Shows that PCA1, accounting for 52.699% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for 25.242% of the variance based on condition1.
-    - b) "pca_plot.png". The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2.
+    - b) "pca_plot.png". The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2 (the categorical levels will be combined).
