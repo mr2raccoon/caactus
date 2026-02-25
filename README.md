@@ -58,7 +58,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
     - b) "pca_plot.png"
 
 ## Sample Dataset
-- a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.17590576)
+- a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.18769993)
 - to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes.
 
 
