@@ -472,7 +472,7 @@ The next script will combine all tables from all images into one global table fo
 1. Go to [zenodo](https://doi.org/10.5281/zenodo.18769993) to download the sample data.
 2. Unpack the `.zip`-file into your project folder.
 3. The path to where you unpacked the sample data will be your main folder.
-4. To showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps.
+4. To showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps. Please note, we intentionally left some subdirectories empty for the tutorial. The intend of the the tutorial is that potential users learn how to run the batch mode with pretrained models. The subdirectory `0_1_original_tif_training_images`is empty and will stay empty. The other empty subdirectories will get filled with data once the user follows the below explained steps. 
 5. 
 - make sure you have caactus installed (see Installation above)
 - make sure you have the caactus environmnet activated 
