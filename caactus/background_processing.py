@@ -8,6 +8,17 @@ import numpy as np
 import tomli
 import argparse
 
+DESCRIPTION = """
+This script processes HDF5 segmentation files by zeroing the largest ID in the 'exported_data' dataset.
+
+For futher processing in the object classification, the background needs to eliminated from the multicut data sets.
+
+ For this the next script will set the numerical value of the largest region to 0. 
+ 
+ It will thus be shown as transpartent in the next step of the workflow. 
+ 
+ This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+"""
 
 def load_config(path="config.toml"):
     """Load TOML configuration file."""
@@ -38,16 +49,19 @@ def process_image(image_path):
         print(f"Error processing file {image_path}: {e}")
 
 
-def batch_process_images(input_directory):
+def batch_process_images(main_folder, input_path):
     """
     Process all matching HDF5 segmentation files in the given directory.
 
     Parameters:
         input_directory (str): Folder containing .h5 files to process.
     """
-    for filename in os.listdir(input_directory):
+
+    input_dir = os.path.join(main_folder, input_path)
+    print(f"Input directory: {input_dir}")
+    for filename in os.listdir(input_dir):
         if filename.endswith("Segmentation.h5"):
-            input_path = os.path.join(input_directory, filename)
+            input_path = os.path.join(input_dir, filename)
             print(f"Processing: {input_path}")
             process_image(input_path)
             print(f"Finished:   {filename}")
@@ -77,10 +91,8 @@ def main():
 
     section = config[script_key][args.mode]
     main_folder = config.get("main_folder", ".")
-    input_path = section["input_path"]
-    input_dir = os.path.join(main_folder, input_path)
 
-    batch_process_images(input_dir)
+    batch_process_images(main_folder, section["input_path"])
 
 
 if __name__ == "__main__":

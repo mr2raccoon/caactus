@@ -4,23 +4,54 @@
 import os
 import sys
 import argparse
-import tomli
 import pandas as pd
 import seaborn.objects as so  # For plotting
 
+from caactus.utils import load_config, parse_if_needed
 
-def load_config(path="config.toml"):
-    """Load the TOML config file."""
-    with open(path, "rb") as f:
-        return tomli.load(f)
+
+DESCRIPTION = """
+This script processes EUCAST data and generates summary statistics and a stacked bar plot of predicted classes cell categories.
+
+For the stacked bar plot, it groups data by the two variables that you enter.
+
+It computes the average count and percentage of each predicted class, across replicates (technical and biological), for each combination of the two grouping variables.
+
+
+
+It visualizes the distribution in stacked bar plots of classes across different conditions.
+
+The first variable you enter will be displayed on the x-axis (drug concentrtion), and the second variable will be used for faceting (timepoint).
+
+
+This will create separate subplots for each level of that variable.
+
+The plot will show the percentage distribution of predicted classes for each condition, allowing you to compare how the classes are distributed across different experimental conditions defined by the two grouping variables.
+
+ The colors of the bars will correspond to the predicted classes, as defined in your color mapping.
+"""
 
 
 def process_eucast_data(
-    input_dir, output_dir, variable_names,
-    class_order, color_mapping,
-    conc_order, timepoint_order
+    main_folder,
+    input_path,
+    output_path,
+    variable_names,
+    class_order,
+    color_mapping,
+    conc_order,
+    timepoint_order,
 ):
     """Process EUCAST data and generate a stacked bar plot."""
+
+    input_dir = os.path.join(main_folder, input_path)
+    output_dir = os.path.join(main_folder, output_path)
+
+    variable_names = parse_if_needed(variable_names)
+    class_order = parse_if_needed(class_order)
+    color_mapping = parse_if_needed(color_mapping)
+    conc_order = parse_if_needed(conc_order)
+    timepoint_order = parse_if_needed(timepoint_order)
 
     df_clean = pd.read_csv(
         os.path.join(input_dir, 'df_clean.csv'), index_col=0
@@ -217,14 +248,7 @@ def main():
         sys.exit(1)
 
     section = config[script_key]
-    section["main_folder"] = config.get("main_folder", ".")
 
-    input_dir = os.path.join(
-        section["main_folder"], section["input_path"]
-    )
-    output_dir = os.path.join(
-        section["main_folder"], section["output_path"]
-    )
     variable_names = section["variable_names"]
     class_order = section["class_order"]
     color_mapping = section["color_mapping"]
@@ -232,10 +256,14 @@ def main():
     timepoint_order = section["timepoint_order"]
 
     process_eucast_data(
-        input_dir, output_dir,
-        variable_names, class_order,
-        color_mapping, conc_order,
-        timepoint_order
+        config.get("main_folder", "."),
+        section["input_path"],
+        section["output_path"],
+        variable_names,
+        class_order,
+        color_mapping,
+        conc_order,
+        timepoint_order,
     )
 
 

@@ -5,14 +5,31 @@ import os  # For path operations
 import sys  # For exit handling
 import pandas as pd  # For data handling
 import seaborn.objects as so  # For plotting
-import tomli  # For reading TOML config
 import argparse  # For CLI args
+import tomli
+
+from caactus.utils import load_config, parse_if_needed
+
+DESCRIPTION = """
+This script processes cleaned data to generate summary statistics and a stacked bar plot of predicted classes.
+
+For the stacked bar plot, it groups data by the two variables that you enter.
+
+It computes the average count and percentage of each predicted class, across replicates (technical and biological), for each combination of the two grouping variables.
 
 
-def load_config(path="config.toml"):
-    with open(path, "rb") as f:
-        return tomli.load(f)
+It visualizes the distribution in stacked bar plots of classes across different conditions.
 
+The first variable you enter will be displayed on the x-axis (e.g. incubation temperature), and the second variable will be used for faceting (e.g. timepoint).
+
+This will create separate subplots for each level of that variable.
+
+The plot will show the percentage distribution of predicted classes for each condition, allowing you to compare how the classes are distributed across different experimental conditions defined by the two grouping variables.
+
+ The colors of the bars will correspond to the predicted classes, as defined in your color mapping.
+
+ By default the IBM coloor-blind friendly palette is used, but you can customize the colors by providing the HEX color code.
+ """
 
 def parse_filename(filename, variable_names):
     filename = filename.replace('_table', '')
@@ -26,7 +43,20 @@ def parse_filename(filename, variable_names):
     return metadata
 
 
-def process_cleaned_data(input_dir, output_dir, variable_names, color_mapping, class_order):
+def process_cleaned_data(
+    main_folder,
+    input_path,
+    output_path,
+    variable_names,
+    color_mapping,
+    class_order,
+):
+    input_dir = os.path.join(main_folder, input_path)
+    output_dir = os.path.join(main_folder, output_path)
+    variable_names = parse_if_needed(variable_names)
+    color_mapping = parse_if_needed(color_mapping)
+    class_order = parse_if_needed(class_order)
+
     df_clean = pd.read_csv(
         os.path.join(input_dir, 'df_clean.csv'), index_col=0
     )
@@ -156,7 +186,14 @@ def process_cleaned_data(input_dir, output_dir, variable_names, color_mapping, c
         so.Bar(), so.Stack()
     ).scale(
         color=color_palette
-    )
+    ).theme({
+        "xtick.labelsize": 20,
+        "ytick.labelsize": 20,
+        "axes.labelsize": 22,
+        "axes.titlesize": 22,
+        "legend.fontsize": 20,
+        "legend.title_fontsize": 22,
+    })
 
     plot.plot()
     plot.save(os.path.join(output_dir, 'barchart.png'), bbox_inches="tight")
@@ -187,14 +224,9 @@ def main():
     class_order = section["class_order"]
     color_mapping = section["color_mapping"]
 
-    input_dir = os.path.join(main_folder, input_path)
-    output_dir = os.path.join(main_folder, output_path)
 
     process_cleaned_data(
-        input_dir, output_dir,
-        variable_names,
-        color_mapping,
-        class_order
+        main_folder, input_path, output_path, variable_names, color_mapping, class_order
     )
 
 
