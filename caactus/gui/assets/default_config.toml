@@ -48,7 +48,7 @@ pixel_size = "0.454" # pixel size as read out from image acquisition software e.
 [summary_statistics]
 input_path = "9_data_analysis" # path for data analysis files
 output_path = "9_data_analysis" # path for data analysis files
-variable_names = ["strain", "timepoint"] # for grouping summary statisitcs and facetting plot, first variable x-axis, second variable facetting
+variable_names = ["strain", "timepoint"] # for grouping summary statistics and facetting plot, first variable x-axis, second variable facetting
 class_order = ["resting", "swollen", "germling", "hyphae"]
 
 [summary_statistics.color_mapping] # colorblind friendly IBM palette
@@ -60,7 +60,7 @@ hyphae = "#DC267F"
 [summary_statistics_eucast]
 input_path = "9_data_analysis" # path for data analysis files
 output_path = "9_data_analysis" # path for data analysis files
-variable_names = ["conc", "timepoint"] # for grouping summary statisitcs and facetting plot, first variable x-axis, second variable facetting
+variable_names = ["conc", "timepoint"] # for grouping summary statistics and facetting plot, first variable x-axis, second variable facetting
 class_order = ["resting", "swollen", "germling", "hyphae", "mycelium"]
 conc_order = ["16", "8", "4", "2", "1", "0.5", "0.25", "0.125", "0.0625", "0.03", "0"]
 timepoint_order = ["4h", "7h", "10h", "24h"]
