@@ -52,7 +52,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
     - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
     - c) "counts.csv" dataframe used in PlnModelling
     - d) bar graph ("barchart.png")
-13. **Model** the count data with ```pln_modelling```
+12. **Model** the count data with ```pln_modelling```
   - output generated:
     - a) "correlation_circle.png"
     - b) "pca_plot.png"
@@ -313,6 +313,8 @@ For more information follow the [documentation for object classification](https:
 CAVE: Do not use underscores or dashes in the column names or values, as they will be used as delimiters in the new file names.
 
 CAVE: The only hardcoded column names needed are "biorep", and "techrep". They are needed in downstream analysis for calculating averages.
+
+CAVE: After successfully having renamed the files, we recommend deleting the content of 0_2_original_tif_batch_images in order to save disk space.
 """
 
 #### 5.2 Conversion
@@ -320,6 +322,8 @@ CAVE: The only hardcoded column names needed are "biorep", and "techrep". They a
 - The script in the background will convert `.tif-files` to `.h5-format`. 
 - The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
 2. When the file path are correct, click ```Run```.
+
+CAVE: After successfully having converted the files, we recommend deleting the content of 0_3_batch_renamed in order to save disk space.
 
 ### 5.3 Batch Processing Pixel Classification
 
@@ -599,7 +603,7 @@ Choose  `Features` to choose the Feature you are interested in exporting
     - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
     - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
     - c) "counts.csv" dataframe used in PlnModelling
-    - d) bar graph ("barchart.png") (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.)
+    - d) bar graph ("barchart.png") (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.) You can play around by putting 'condition2' first and 'condition1' second to see how it changes the plot.
 
 ## 7.11 PLN modelling
 1. Go to the `PLN modelling` tab in the caactus GUI.
