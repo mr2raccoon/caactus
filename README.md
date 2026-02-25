@@ -469,7 +469,7 @@ The next script will combine all tables from all images into one global table fo
 
 ## 7. Tutorial
 ### 7.1 Download Sample Data
-1. Go to [zenodo](https://doi.org/10.5281/zenodo.17590576) to download the sample data.
+1. Go to [zenodo](https://doi.org/10.5281/zenodo.18769993) to download the sample data.
 2. Unpack the `.zip`-file into your project folder.
 3. The path to where you unpacked the sample data will be your main folder.
 4. To showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps.
