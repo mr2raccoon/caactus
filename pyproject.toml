@@ -82,6 +82,7 @@ caactus = [
         "gui/assets/fonts/*.ttf",
         "gui/assets/fonts/*.txt",
         "gui/assets/favicon.ico",
+        "gui/assets/default_config.toml",
 ]
 
 [tool.setuptools.packages.find]

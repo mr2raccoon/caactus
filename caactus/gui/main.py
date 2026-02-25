@@ -203,7 +203,8 @@ def main():
         config_path = Path(args.config)
     else:
         # Resolve path relative to THIS file
-        config_path = Path(__file__).parent / "assets" / "config.toml"
+        # config_path = Path(__file__).parent / "assets" / "config.toml"
+        config_path = helpers.get_asset_path("default_config.toml")
 
     config = load_config(str(config_path))
     run_gui(config)
