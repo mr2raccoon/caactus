@@ -137,7 +137,7 @@ project_directory
 ```
 
 ## 3.2 Getting started
-- open the the caacuts Graphical User Interface (GUI) by opening the command line in Unix or Anaconda Powershell in Windows.
+- open the the caacuts Graphical User Interface (GUI) by opening the command line in Unix or Anaconda Powershell/Prompt in Windows.
 - make sure you have the caactus environmnet activated 
 ```bash
 conda activate caactus-env
@@ -264,6 +264,7 @@ For futher processing in the object classification, the background needs to elim
 5. Under "Segmentation Image", add the data_Multicut Segmentation.h5 files from 3_multicut folder.
 
 6. Define your cell types plus an additional category for "not-usable" objects, e.g. cell debris and cut-off objects on the side of the images.
+Please note: default settings for the cell names in caactus are `resting`, `swollen`, `germling`, `hyphae`, `notusable` (and `mycelium` for EUCAST steps). You are welcome to change the names. Make sure to also change the names in the caactus GUI when performing analysis steps below.
 
 
 7. Annotate the edges by clicking on the edges between cells.
@@ -331,18 +332,20 @@ CAVE: After successfully having converted the files, we recommend deleting the c
 
 2. Open your trained ilastik pixel classification project (e.g. `1_pixel_classification.ilp`).
 
-3. Go to `5. Batch processing` tab
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Slection 3. Training when running Batch Processing!
 
-4. Under `1.Input Data`,`Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
-
-5. Under `4. Prediction Export`, select `Export predictions` and choose a folder for the output (e.g. change the export directory to `File`:
+3. Under `4. Prediction Export`, select `Export predictions` and choose a folder for the output to `File`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
   ```
 
 ![batch_pixel](caactus/gui/assets/images/batch_pixel.png)
+
+4. Go to `5. Batch processing` tab
+
+5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
                                                                                     
-6. Go to `5. Batch Processing` and click `Process all files`.
+6. Now click `Process all files`.
 
 7. The output will be saved as _Probabilities.h5 files in the output folder.
 
@@ -351,26 +354,27 @@ CAVE: After successfully having converted the files, we recommend deleting the c
 1. Open ilastik.
 
 2. Open your trained ilastik boundary-Segmentation project (e.g. open the `2_boundary_segmentation.ilp` project file).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, 3. Training and Multicut, when running Batch Processing!
 
-3. Go to `5. Batch processing`.
 
-4. Under `1.Input Data`,`Raw data`, add the .h5 files from `5_batch_images` folder.
+3.  Under `4. Data Export`, select `Choose Export Image Settings` and choose a folder for the output (e.g. 7_batch_multicut).
+- under `Choose Export Image Settings` change the export directory to `File`:
+  ```bash
+  {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
+  ```
+4. Go to `5. Batch processing`.
+
+5. Under,`Raw data`, add the .h5 files from `5_batch_images` folder.
                                                                                                                                                                           
-5. Under `1.Input Data`,`Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
-
-6. Under `4. Data Export`, select `Choose Export Image Settings` and choose a folder for the output (e.g. 7_batch_multicut).
+6. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
 
 ![batch_multicut](caactus/gui/assets/images/batch_multicut.png)
-
 
 7. Go to `5. Batch Processing` and click `Process all files`.
 
 8. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
 
-- under `Choose Export Image Settings` change the export directory to `File`:
-  ```bash
-  {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
-  ```
+
 
 
 ### 5.5 Background Processing 
@@ -385,30 +389,33 @@ For futher processing in the object classification, the background needs to elim
 1. Open ilastik.
 
 2. Open your trained ilastik object classification project (`3_object_classification.ilp`).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, 3. Object Classification, when running Batch Processing!
 
-3. Go to `5. Batch processing` tab.
-
-4. Under `1.Input Data`, `Raw data`, add the .h5 files from `5_batch_images` folder.
-                                                                                                                                                                          
-5. Under `1.Input Data`,`Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
-
-6. Under `4. Object Information Export`, choose  `Export Image Settings` change the export directory to `File`:
+3. Under `4. Object Information Export`, choose  `Export Image Settings` change the export directory to `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
   ```
 ![object_image](caactus/gui/assets/images/batch_object_image.png)
 
-
-7. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
+4. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
 ![feature_table](caactus/gui/assets/images/feature_table_export.png)
                                                                         
-8. In `Configure Feature Table Export General` choose format `.csv` and change output directory to:
+5. In `Configure Feature Table Export General` choose format `.csv` and change output directory to:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
   ```
-![feature_features](caactus/gui/assets/images/features_of_featuretable.png)
 
 Choose  `Features` to choose the Feature you are interested in exporting
+
+![feature_features](caactus/gui/assets/images/features_of_featuretable.png)
+
+6. Go to 5. `Batch Processing` tab
+
+7. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
+                                                                                                                                                                          
+8. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
+
+
 
 9. Go to `5. Batch Processing` and click `Process all files`.
                                                                                       
@@ -497,49 +504,47 @@ caactus
 1. Open ilastik.
 
 2. Open the pre-trained ilastik pixel classification project from the sample data in the main folder (`1_pixel_classification.ilp`).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Slection 3. Training when running Batch Processing!
 
-3. Go to `5. Batch processing` tab
-
-4. Under `1.Input Data`,`Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
-
-5. Under `4. Prediction Export`, select `Export predictions` and choose a folder for the output (e.g. change the export directory to `File`:
+3. Under `4. Prediction Export`, select `Export predictions` and choose a folder for the output to `File`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
   ```
 
 ![batch_pixel](caactus/gui/assets/images/batch_pixel.png)
+
+4. Go to `5. Batch processing` tab
+
+5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
                                                                                     
-6. Go to `5. Batch Processing` and click `Process all files`.
+6. Now click `Process all files`.
 
-7. The output will be saved as _Probabilities.h5 files in the output folder (`6_batch_probabilities`).
-
-8. Close the `1_pixel_classification.ilp`project-file in ilastik.
+7. The output will be saved as _Probabilities.h5 files in the output folder.
 
 
 ## 7.4 Batch Processing Multicut Segmentation
 1. In ilastik open the next project file.
  
 2. Open the pre-trained ilastik boundary-Segmentation project from the sample data in the main folder (`2_boundary_segmentation.ilp` project file).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, 3. Training and Multicut, when running Batch Processing!
 
-3. Go to `5. Batch processing`.
+3.  Under `4. Data Export`, select `Choose Export Image Settings` and choose a folder for the output (e.g. 7_batch_multicut).
+- under `Choose Export Image Settings` change the export directory to `File`:
+  ```bash
+  {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
+  ```
+4. Go to `5. Batch processing`.
 
-4. Under `1.Input Data`,`Raw data`, add the .h5 files from `5_batch_images` folder.
+5. Under,`Raw data`, add the .h5 files from `5_batch_images` folder.
                                                                                                                                                                           
-5. Under `1.Input Data`,`Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
-
-6. Under `4. Data Export`, select `Choose Export Image Settings` and choose a folder for the output (e.g. 7_batch_multicut).
+6. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
 
 ![batch_multicut](caactus/gui/assets/images/batch_multicut.png)
-
 
 7. Go to `5. Batch Processing` and click `Process all files`.
 
 8. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
 
-- under `Choose Export Image Settings` change the export directory to `File`:
-  ```bash
-  {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
-  ```
 9. Close the `2_boundary_segmentation.ilp`project-file in ilastik.
 
 
@@ -556,32 +561,36 @@ caactus
 
 2. Open the pre-trained ilastik object classification project from the sample data in the main folder (`3_object_classification.ilp`).
 
-3. Go to `5. Batch processing` tab.
+1. Open ilastik.
 
-4. Under `1.Input Data`, `Raw data`, add the .h5 files from `5_batch_images` folder.
-                                                                                                                                                                          
-5. Under `1.Input Data`,`Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
+2. Open your trained ilastik object classification project (`3_object_classification.ilp`).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, 3. Object Classification, when running Batch Processing!
 
-6. Under `4. Object Information Export`, choose  `Export Image Settings` change the export directory to `File`:
+3. Under `4. Object Information Export`, choose  `Export Image Settings` change the export directory to `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
   ```
 ![object_image](caactus/gui/assets/images/batch_object_image.png)
 
-
-7. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
+4. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
 ![feature_table](caactus/gui/assets/images/feature_table_export.png)
                                                                         
-8. In `Configure Feature Table Export General` choose format `.csv` and change output directory to:
+5. In `Configure Feature Table Export General` choose format `.csv` and change output directory to:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
   ```
-![feature_features](caactus/gui/assets/images/features_of_featuretable.png)
 
 Choose  `Features` to choose the Feature you are interested in exporting
 
-9. Go to `5. Batch Processing` and click `Process all files`.
-                                                                                      
+![feature_features](caactus/gui/assets/images/features_of_featuretable.png)
+
+6. Go to 5. `Batch Processing` tab
+
+7. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
+                                                                                                                                                                          
+8. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
+
+9. Go to `5. Batch Processing` and click `Process all files`.                                                                                                                               
 10. The output will be saved as data_Object Predictions.h5 files and data_table.csv in the output folder.
 
 11. Now you have performed all steps in ilastik. You can close ilastik.
@@ -598,8 +607,9 @@ Choose  `Features` to choose the Feature you are interested in exporting
 ## 7.10 Summary Statistics
 1. Go to the `Summary Statistics` tab in the caactus GUI.
 2. Change the variable names to `['condition1','condition2']` . 
-3. When the file paths are correct, click ```Run```.
-4. Inspect the generated results. The output generated will be 
+3. You may also change the colors change the default `{'resting': '#FE6100', 'swollen': '#648FFF', 'germling': '#785EF0', 'hyphae': '#DC267F'}` to `{'resting': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}`
+4. When the file paths are correct, click ```Run```.
+5. Inspect the generated results. The output generated will be 
     - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
     - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
     - c) "counts.csv" dataframe used in PlnModelling

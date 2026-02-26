@@ -51,14 +51,21 @@ def process_cleaned_data(
     color_mapping,
     class_order,
 ):
+    color_mapping = parse_if_needed(color_mapping)
+
+    if not isinstance(color_mapping, dict):
+        raise TypeError(
+            f"color_mapping must be dict after parsing, got {type(color_mapping)}"
+        )
     input_dir = os.path.join(main_folder, input_path)
     output_dir = os.path.join(main_folder, output_path)
+
     variable_names = parse_if_needed(variable_names)
-    color_mapping = parse_if_needed(color_mapping)
     class_order = parse_if_needed(class_order)
+    # (color_mapping already parsed above, no need to parse twice)
 
     df_clean = pd.read_csv(
-        os.path.join(input_dir, 'df_clean.csv'), index_col=0
+        os.path.join(input_dir, "df_clean.csv"), index_col=0
     )
 
     counts = df_clean.groupby([

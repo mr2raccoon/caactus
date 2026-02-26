@@ -42,20 +42,30 @@ def process_eucast_data(
     conc_order,
     timepoint_order,
 ):
-    """Process EUCAST data and generate a stacked bar plot."""
-
     input_dir = os.path.join(main_folder, input_path)
     output_dir = os.path.join(main_folder, output_path)
 
     variable_names = parse_if_needed(variable_names)
-    class_order = parse_if_needed(class_order)
-    color_mapping = parse_if_needed(color_mapping)
-    conc_order = parse_if_needed(conc_order)
-    timepoint_order = parse_if_needed(timepoint_order)
+    if not isinstance(variable_names, list):
+        raise TypeError(f"variable_names must be list after parsing, got {type(variable_names)}")
 
-    df_clean = pd.read_csv(
-        os.path.join(input_dir, 'df_clean.csv'), index_col=0
-    )
+    class_order = parse_if_needed(class_order)
+    if not isinstance(class_order, list):
+        raise TypeError(f"class_order must be list after parsing, got {type(class_order)}")
+
+    color_mapping = parse_if_needed(color_mapping)
+    if not isinstance(color_mapping, dict):
+        raise TypeError(f"color_mapping must be dict after parsing, got {type(color_mapping)}")
+
+    conc_order = parse_if_needed(conc_order)
+    if not isinstance(conc_order, list):
+        raise TypeError(f"conc_order must be list after parsing, got {type(conc_order)}")
+
+    timepoint_order = parse_if_needed(timepoint_order)
+    if not isinstance(timepoint_order, list):
+        raise TypeError(f"timepoint_order must be list after parsing, got {type(timepoint_order)}")
+
+    df_clean = pd.read_csv(os.path.join(input_dir, "df_clean.csv"), index_col=0)
 
     counts = (
         df_clean.groupby(['filename', 'Predicted Class'])
@@ -215,6 +225,13 @@ def process_eucast_data(
     )
 
     # Plot using seaborn.objects
+    missing = [c for c in existing_classes if c not in color_mapping]
+    if missing:
+        raise KeyError(f"Missing colors for classes: {missing}")
+
+    color_palette = [color_mapping[c] for c in existing_classes]
+
+
     plot = (
         so.Plot(
             counts2_melted_df,
@@ -223,7 +240,7 @@ def process_eucast_data(
         .facet(row="timepoint")
         .layout(size=(15, 4))
         .add(so.Bar(), so.Stack())
-        .scale(color=color_mapping)
+        .scale(color=color_palette)
         .label(x="drug concentration (µg/mL)")
     )
 
