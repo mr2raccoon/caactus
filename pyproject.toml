@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "caactus"
-version = "0.2.3"
+version = "0.2.4"
 description = "Package for pre- and post-processing of images and data for working with ilastik-software"
 readme = "README.md"
 license = {text = "MIT License"}
@@ -84,4 +84,4 @@ caactus = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include =["caactus"]
+include =["caactus*"]
