@@ -15,7 +15,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
   - Miniconda provides a lightweight package and environment manager. It allows you to create isolated environments so that Python versions and package dependencies required by caactus do not interfere with your system Python or other projects.
 - Once installed, create an environment for using `caactus` with the following command from your cmd-line
   ```bash
-conda create -n caactus-env -c conda-forge python=3.12 vigra
+  conda create -n caactus-env -c conda-forge python=3.12 vigra
   ```
 
 ## Install caactus
