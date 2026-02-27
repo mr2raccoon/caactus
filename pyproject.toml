@@ -1,13 +1,11 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
-
-[tool.setuptools_scm]
 
 
 [project]
 name = "caactus"
-version = "0.2.2"
+version = "0.2.3"
 description = "Package for pre- and post-processing of images and data for working with ilastik-software"
 readme = "README.md"
 license = {text = "MIT License"}
@@ -46,14 +44,13 @@ dependencies = [
         "tifffile",
         "h5py",
         "numpy",
-        "pathlib",
         "pandas",
         "matplotlib",
         "pyPLNmodels",
-        "tomli",
-        "argparse",
+        "tomli; python_version < '3.11'",
         "seaborn",
         "dearpygui",
+        "setuptools>=61",
 ]
 
 [project.urls]
