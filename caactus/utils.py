@@ -1,6 +1,9 @@
-import tomli
 import ast
 import json
+try:
+    import tomllib as tomli  # Python 3.11+
+except ModuleNotFoundError:
+    import tomli  # Python 3.10
 
 def load_config(path="config.toml"):
     """Load a TOML configuration file."""

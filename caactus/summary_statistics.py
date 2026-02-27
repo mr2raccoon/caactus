@@ -6,8 +6,6 @@ import sys  # For exit handling
 import pandas as pd  # For data handling
 import seaborn.objects as so  # For plotting
 import argparse  # For CLI args
-import tomli
-
 from caactus.utils import load_config, parse_if_needed
 
 DESCRIPTION = """

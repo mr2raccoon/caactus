@@ -5,8 +5,11 @@ import os
 import sys
 import h5py
 import numpy as np
-import tomli
 import argparse
+try:
+    import tomllib as tomli  # Python 3.11+
+except ModuleNotFoundError:
+    import tomli  # Python 3.10
 
 DESCRIPTION = """
 This script processes HDF5 segmentation files by zeroing the largest ID in the 'exported_data' dataset.

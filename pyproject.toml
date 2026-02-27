@@ -1,15 +1,14 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
-
 
 [project]
 name = "caactus"
-version = "0.2.5"
+version = "0.2.6"
 description = "Package for pre- and post-processing of images and data for working with ilastik-software"
 readme = "README.md"
 license = {text = "MIT License"}
-requires-python = ">=3.10.12"
+requires-python = ">=3.10.12,<3.14"
 keywords = [
         "python",
         "count",
@@ -47,7 +46,7 @@ dependencies = [
         "pandas",
         "matplotlib",
         "pyPLNmodels",
-        "tomli",
+        "tomli; python_version < '3.11'",
         "seaborn",
         "dearpygui",
         "setuptools>=61",
@@ -75,12 +74,7 @@ pln_modelling = "caactus.pln_modelling:main"
 include-package-data = true
 
 [tool.setuptools.package-data]
-caactus = [
-        "gui/assets/fonts/*.ttf",
-        "gui/assets/fonts/*.txt",
-        "gui/assets/favicon.ico",
-        "gui/assets/default_config.toml",
-]
+caactus = ["gui/assets/**/*"]
 
 [tool.setuptools.packages.find]
 where = ["."]
