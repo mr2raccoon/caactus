@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "caactus"
-version = "0.2.4"
+version = "0.2.5"
 description = "Package for pre- and post-processing of images and data for working with ilastik-software"
 readme = "README.md"
 license = {text = "MIT License"}
@@ -47,7 +47,7 @@ dependencies = [
         "pandas",
         "matplotlib",
         "pyPLNmodels",
-        "tomli; python_version < '3.11'",
+        "tomli",
         "seaborn",
         "dearpygui",
         "setuptools>=61",
