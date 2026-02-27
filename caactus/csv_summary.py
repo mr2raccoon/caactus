@@ -84,6 +84,7 @@ def process_csv_files(main_folder, input_path, output_path, pixel_size):
 
     print(df.info())
     print(df.head())
+    print("CSV summary processing completed.", flush=True)
 
 
 def main():

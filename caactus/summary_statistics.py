@@ -204,6 +204,9 @@ def process_cleaned_data(
 
     plot.plot()
     plot.save(os.path.join(output_dir, 'barchart.png'), bbox_inches="tight")
+    
+    print("Summary Statistics completed.", flush=True)
+
 
 
 def main():
@@ -235,6 +238,7 @@ def main():
     process_cleaned_data(
         main_folder, input_path, output_path, variable_names, color_mapping, class_order
     )
+
 
 
 if __name__ == "__main__":

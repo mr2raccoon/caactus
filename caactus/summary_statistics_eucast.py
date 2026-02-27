@@ -247,6 +247,8 @@ def process_eucast_data(
     g = plot.plot()
     g.save(os.path.join(output_dir, 'barchart.png'), bbox_inches="tight")
 
+    print("EUCAST Summary Statistics completed.", flush=True)
+
 
 def main():
     parser = argparse.ArgumentParser()

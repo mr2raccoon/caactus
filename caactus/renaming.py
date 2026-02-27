@@ -77,7 +77,7 @@ def run(main_folder, input_path, output_path, csv_rename):
             shutil.copy(current_file_path, new_file_path)
             print(f"Renamed '{current_file_name}' to '{new_file_name}'")
 
-        print("Batch renaming completed.")
+        print("Batch renaming completed.", flush=True)
 
 
 def main():

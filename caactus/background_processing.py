@@ -65,6 +65,7 @@ def batch_process_images(main_folder, input_path):
             print(f"Processing: {input_path}")
             process_image(input_path)
             print(f"Finished:   {filename}")
+    print("Background processing completed.", flush=True)
 
 
 def main():
@@ -93,6 +94,7 @@ def main():
     main_folder = config.get("main_folder", ".")
 
     batch_process_images(main_folder, section["input_path"])
+    
 
 
 if __name__ == "__main__":

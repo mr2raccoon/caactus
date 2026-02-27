@@ -29,13 +29,13 @@ The correlation circle plot will show how the original variables relate to the l
 
 
 
-def modelling(main_folder, input_path, output_path, variable_names, dynamic_columns):
+def modelling(main_folder, input_path, output_path, variable_names, class_order):
     """Run ZIPln modelling on input data with dynamic design."""
     input_dir = os.path.join(main_folder, input_path)
     output_dir = os.path.join(main_folder, output_path)
 
     variable_names = parse_if_needed(variable_names)
-    dynamic_columns = parse_if_needed(dynamic_columns)
+    class_order = parse_if_needed(class_order)
 
     from pyPLNmodels import ZIPln  # For statistical modeling
     # Load counts data
@@ -70,7 +70,7 @@ def modelling(main_folder, input_path, output_path, variable_names, dynamic_colu
         variable_names[0]: pivot_df[variable_names[0]].to_numpy(),
         variable_names[1]: pivot_df[variable_names[1]].to_numpy(),
         "combined_category": pivot_df["combined_category"].to_numpy(),
-        "counts": pivot_df[dynamic_columns].to_numpy()
+        "counts": pivot_df[class_order].to_numpy()
     }
 
     print("Counts dataframe for dictionary:")
@@ -135,6 +135,8 @@ def modelling(main_folder, input_path, output_path, variable_names, dynamic_colu
         plt.savefig(os.path.join(output_dir, "correlation_circle.png"), bbox_inches="tight", dpi=300)
         plt.close(plt.gcf())
 
+    print("PLN Modelling completed.", flush=True)
+
 
 
 def main():
@@ -157,14 +159,14 @@ def main():
     section = config[script_key]
     main_folder = config["main_folder"]
     variable_names = section["variable_names"]
-    dynamic_columns = section["dynamic_columns"]
+    class_order = section["class_order"]
 
     modelling(
         main_folder,
         section["input_path"],
         section["output_path"],
         variable_names,
-        dynamic_columns,
+        class_order,
     )
 
 

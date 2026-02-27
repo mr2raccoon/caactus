@@ -174,6 +174,7 @@ def convert_tif_to_h5(main_folder: str, input_path: str, output_path: str) -> No
                 ds.attrs["data_shape"] = data_shape
 
         print(f"Converted {tif_file} -> {h5_file}")
+    print("Tif2h5 conversion completed.", file=sys.stderr, flush=True)
 
 
 def main() -> None:
@@ -200,7 +201,7 @@ def main() -> None:
     main_folder = config["main_folder"]
 
     convert_tif_to_h5(main_folder, section["input_path"], section["output_path"])
-
-
+    
+    
 if __name__ == "__main__":
     main()
