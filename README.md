@@ -15,7 +15,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
   - Miniconda provides a lightweight package and environment manager. It allows you to create isolated environments so that Python versions and package dependencies required by caactus do not interfere with your system Python or other projects.
 - Once installed, create an environment for using `caactus` with the following command from your cmd-line
   ```bash
-  conda create -n caactus-env -c conda-forge python=3.12 vigra
+  conda create -n caactus-env -c pytorch -c conda-forge python=3.12 pytorch vigra
   ```
 
 ## Install caactus
@@ -309,12 +309,13 @@ For more information follow the [documentation for object classification](https:
 
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 
-2. Select the Renaming tab in the caactus GUI. When the file path are correct, click ```Run```.
-![96_well](caactus/gui/assets/images/96_well_setup.png)
-
 CAVE: Do not use underscores or dashes in the column names or values, as they will be used as delimiters in the new file names.
 
 CAVE: The only hardcoded column names needed are "biorep", and "techrep". They are needed in downstream analysis for calculating averages.
+
+
+2. Select the Renaming tab in the caactus GUI. When the file path are correct, click ```Run```.
+![96_well](caactus/gui/assets/images/96_well_setup.png)
 
 CAVE: After successfully having renamed the files, we recommend deleting the content of 0_2_original_tif_batch_images in order to save disk space.
 """
@@ -606,7 +607,10 @@ Choose  `Features` to choose the Feature you are interested in exporting
 
 ## 7.10 Summary Statistics
 1. Go to the `Summary Statistics` tab in the caactus GUI.
-2. Change the variable names to `['condition1','condition2']` . 
+2. Change the variable names to 
+```bash
+['condition1','condition2']
+``` 
 3. When the file paths are correct, click ```Run```.
 4. Inspect the generated results. The output generated will be 
     - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
@@ -615,9 +619,13 @@ Choose  `Features` to choose the Feature you are interested in exporting
     - d) bar graph ("barchart.png") (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.) You can play around by putting 'condition2' first and 'condition1' second to see how it changes the plot.
 5. You may also change the colors:
  change the default 
-`{'resting': '#FE6100', 'swollen': '#648FFF', 'germling': '#785EF0', 'hyphae': '#DC267F'}` <br>
- to <br>
-`{'resting': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}` <br> 
+```bash 
+{'resting': '#FE6100', 'swollen': '#648FFF', 'germling': '#785EF0', 'hyphae': '#DC267F'}
+```
+ to
+```bash 
+{'resting': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}
+```
 
 6. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F`). Now re-do step `7.10 Summary Statistics`. Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`and `Color Mapping` fields.
 

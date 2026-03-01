@@ -52,7 +52,7 @@ def process_csv_files(main_folder, input_path, output_path, pixel_size):
     Parameters:
         input_dir (str): Directory containing .csv files.
         output_dir (str): Directory to save cleaned summary CSV.
-        pixel_size (float): Size of a pixel (used to compute microm size).
+        pixel_size (float): Size of a pixel (used to compute microm2 size).
     """
     input_path = os.path.join(main_folder, input_path)
     output_path = os.path.join(main_folder, output_path)
