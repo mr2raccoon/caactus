@@ -61,6 +61,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 ## Sample Dataset
 - a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.18799803)
 - to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes.
+- go to 7.1-7.11 for a detailed tutorial
 
 
 
