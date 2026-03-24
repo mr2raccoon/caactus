@@ -15,7 +15,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
   - Miniconda provides a lightweight package and environment manager. It allows you to create isolated environments so that Python versions and package dependencies required by caactus do not interfere with your system Python or other projects.
 - Once installed, create an environment for using `caactus` with the following command from your cmd-line
   ```bash
-  conda create -n caactus-env -c pytorch -c conda-forge python=3.12 pytorch vigra
+  conda create -n caactus-env -c pytorch -c conda-forge python=3.12 pytorch vigra h5py
   ```
 
 ## Install caactus
@@ -139,21 +139,21 @@ project_directory = Main folder
 ```
 
 ## 3.2 Getting started
-- open the the caacuts Graphical User Interface (GUI) by opening the command line in Unix or Anaconda Powershell/Prompt in Windows.
-- make sure you have the caactus environmnet activated 
+- Open the caactus Graphical User Interface (GUI) by opening the command line in Unix or Anaconda Powershell/Prompt in Windows.
+- Make sure you have the caactus environment activated:
 ```bash
 conda activate caactus-env
 ```
-- now simply type `caactus` and hit `enter`to start the graphical user interace
+- Type `caactus` and hit `Enter` to start the GUI:
 ```bash
 caactus
 ```
-- On the top, enter the path to your mainfolder.
-- For steps where it is relevant, choose between training and batch mode.
-- The subdirectories have default naming according to 3.1. You can rename them.
-- When all information have been entered, click ```Run```.
-- Processing messages will appear on the bottom.
-- The output can be accessed by inspecting the respective subdirectory from your main folder. 
+- At the top, enter the path to your **Main Folder** (use the Browse button or type/paste the full path).
+- Set shared analysis parameters once in **Global Settings**: Pixel Size, Variable Names, Class Order, Color Mapping. EUCAST-specific settings can be expanded below.
+- The workflow is shown as a numbered list of steps. For steps with training and batch modes, select the mode from the dropdown next to the step name.
+- Click **Run** to execute a step. For ilastik steps, click **? Help** to open the detailed instructions.
+- Processing messages appear in the log panel at the bottom.
+- The output can be accessed in the respective subdirectory of your main folder.
 
 ## 4. Training
 
@@ -172,10 +172,9 @@ In case absolute file path is selected, right click on the location and select `
 - store them in `0_1_original_tif_training_images`
 
 #### 4.1.2 Conversion
-1. Go to the `tif2h5py` tab. Select `Training` from the dropdown menu.
-- The script in the background will convert `.tif-files` to `.h5-format`. 
-- The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
-2. When the file path are correct, click ```Run```.
+1. In the caactus GUI, find **step 2 – Tif to H5**. Select `training` from the dropdown menu.
+- The script converts `.tif` files to `.h5` format for better [performance in ilastik](https://www.ilastik.org/documentation/basics/performance_tips).
+2. Click **Run**.
 
 ### 4.2. Pixel Classification
 1. When first training a pixel classification model in ilastik, open ilastik.
@@ -248,10 +247,9 @@ In prediction export change the settings to
 
 
 ### 4.4 Background Processing
-For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will thus be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
-1. Select the `background-processing` tab in the GUI.
-2. Select `Training` mode from the dropdown menu.
-3. When the file path are correct, click ```Run```.
+For further processing in object classification, the background must be removed from the multicut data sets. This script sets the numerical value of the largest region to 0, making it transparent in the next step. The operation runs in-place on all `*_Multicut Segmentation.h5` files in `3_multicut/`.
+1. In the caactus GUI, find **step 5 – Background Processing**. Select `training` from the dropdown.
+2. Click **Run**.
 
 
 ### 4.5. Object Classification
@@ -315,29 +313,32 @@ CAVE: Do not use underscores or dashes in the column names or values, as they wi
 CAVE: The only hardcoded column names needed are "biorep", and "techrep". They are needed in downstream analysis for calculating averages.
 
 
-2. Select the Renaming tab in the caactus GUI. When the file path are correct, click ```Run```.
+2. In the caactus GUI, find **step 1 – Renaming** and click **Run**.
 ![96_well](caactus/gui/assets/images/96_well_setup.png)
 
 CAVE: After successfully having renamed the files, we recommend deleting the content of 0_2_original_tif_batch_images in order to save disk space.
 """
 
 #### 5.2 Conversion
-1. Go to the `tif2h5py` tab. Select `Batch` from the dropdown menu.
-- The script in the background will convert `.tif-files` to `.h5-format`. 
-- The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
-2. When the file path are correct, click ```Run```.
+1. In the caactus GUI, find **step 2 – Tif to H5**. Select `batch` from the dropdown menu.
+- The script converts `.tif` files to `.h5` format for better [performance in ilastik](https://www.ilastik.org/documentation/basics/performance_tips).
+2. Click **Run**.
 
 CAVE: After successfully having converted the files, we recommend deleting the content of 0_3_batch_renamed in order to save disk space.
 
 ### 5.3 Batch Processing Pixel Classification
 
+In the caactus GUI, find **step 3 – Pixel Classification**, select `batch`, and click **? Help** for the full ilastik instructions. Summary:
+
 1. Open ilastik.
 
-2. Open your trained ilastik pixel classification project (e.g. `1_pixel_classification.ilp`).
+2. Open your trained pixel classification project (e.g. `1_pixel_classification.ilp`).
 
 CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection and 3. Training when running Batch Processing!
 
-3. Under `4. Prediction Export`, select `Export predictions` and name the folder for the output at `File`:
+3. Under `4. Prediction Export`:
+   - From the dropdown select **Probabilities** (not Simple Segmentation, Uncertainty, Features, or Labels).
+   - Click **Choose Export Image Settings** and set the output file path at `File`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
   ```
@@ -354,13 +355,16 @@ CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection and 3. Train
 
 ### 5.4 Batch Processing Multicut Segmentation
 
+In the caactus GUI, find **step 4 – Boundary Segmentation**, select `batch`, and click **? Help** for the full ilastik instructions. Summary:
+
 1. Open ilastik.
 
-2. Open your trained ilastik boundary-Segmentation project (e.g. open the `2_boundary_segmentation.ilp` project file).
+2. Open your trained Boundary Segmentation project (e.g. `2_boundary_segmentation.ilp`).
 CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, and 3. Training and Multicut, when running Batch Processing!
 
-3.  Under `4. Data Export`, select `Choose Export Image Settings` and choose a folder for the output (e.g. 7_batch_multicut).
-- under `Choose Export Image Settings` change the export directory to `File`:
+Note: the `*_Multicut Segmentation.h5` output files are generated by ilastik in this step — they do not exist beforehand.
+
+3. Under `4. Data Export`, click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
   ```
@@ -379,21 +383,22 @@ CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, and 3. Training 
 
 
 
-### 5.5 Background Processing 
-For futher processing in the object classification, the background needs to eliminated from the multicut data sets. For this the next script will set the numerical value of the largest region to 0. It will thus be shown as transpartent in the next step of the workflow. This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
-1. Select the `background-processing` tab in the GUI.
-2. Select `Batch` mode from the dropdown menu.
-3. When the file path are correct, click ```Run```.
+### 5.5 Background Processing
+In the caactus GUI, find **step 5 – Background Processing**. Select `batch` from the dropdown and click **Run**. This removes the background from all `*_Multicut Segmentation.h5` files in `7_batch_multicut/` by setting the largest region value to 0 (transparent in ilastik).
 
 
-### 5.6 Batch processing Object classification 
+### 5.6 Batch processing Object classification
+
+In the caactus GUI, find **step 6 – Object Classification**, select `batch`, and click **? Help** for the full ilastik instructions. Summary:
 
 1. Open ilastik.
 
-2. Open your trained ilastik object classification project (`3_object_classification.ilp`).
+2. Open your trained object classification project (`3_object_classification.ilp`).
 CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, 3. Object Classification, when running Batch Processing!
 
-3. Under `4. Object Information Export`, choose  `Export Image Settings` change the export directory to `File`:
+3. Under `4. Object Information Export`:
+   - From the dropdown select **Object Predictions** (default).
+   - Click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
   ```
@@ -431,9 +436,8 @@ Choose  `Features` to choose the Feature you are interested in exporting
 
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
-1. Go to the `CSV summary` tab in the caactus GUI.
-2. Enter the pixel size for cell size calculation.
-3. When the file path are correct, click ```Run```.
+1. In the caactus GUI, set **Pixel Size (µm)** in Global Settings.
+2. Find **step 7 – CSV Summary** and click **Run**.
 4. The output generated will be `df_clean.csv`.
 5. This spreadsheet now has all feature tables that are the output of 5.6 Object classification united in one spreadsheet.
 5. You can use this spreadsheet now, to continue with analysis in the software of your choice.
@@ -451,14 +455,14 @@ The next script will combine all tables from all images into one global table fo
 - The plot will show the percentage distribution of predicted classes for each condition, allowing you to compare how the classes are distributed across different experimental conditions defined by the two grouping variables.
 - The colors of the bars will correspond to the predicted classes, as defined in your color mapping.
 - By default the IBM coloor-blind friendly palette is used, but you can customize the colors by providing the HEX color code.
-1. Go to the `Summary Statistics` tab in the caactus GUI.
-2. When the file path are correct, click ```Run```.
-3. The output generated will be 
-    - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
-    - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
-    - c) "counts.csv" dataframe used in PlnModelling
-    - d) bar graph ("barchart.png")
-4. CAVE: all fields contain default values. You may change them to your needs. E.g. edit `Variable names`to enter the variables you are interested in for analysis. Edit `Class order` to name it according to your cell morphotype names and ordering. Change the `Color mapping`according to the logic of `Class order`. 
+1. In the caactus GUI, set **Variable Names**, **Class Order**, and **Color Mapping** in Global Settings.
+2. Find **step 8 – Summary Statistics** and click **Run**.
+3. Output:
+    - a) `df_summary_complete.csv` — full table including "not usable" category
+    - b) `df_refined_complete.csv` — table without "not usable" category
+    - c) `counts.csv` — count data used for PLN modelling
+    - d) `barchart.png` — stacked bar chart
+4. CAVE: defaults are provided. Edit **Variable Names** to match your experimental variables. Edit **Class Order** to match your morphotype names. Edit **Color Mapping** to use your preferred colors.
 
 ### 6.3 PLN Modelling 
 
@@ -472,12 +476,12 @@ The next script will combine all tables from all images into one global table fo
 
 - CAVE: the limit of categories for display in the PCA-plot is n=15
 
-1. Go to the `PLN modelling` tab in the caactus GUI.
-2. When the file path are correct, click ```Run```.
-3. The output generated will be 
-    - a) "correlation_circle.png"
-    - b) "pca_plot.png"
-4. CAVE: all fields contain default values. You may change them to your needs. E.g. edit `Variable names`to enter the variables you are interested in for analysis. Edit `Class order` to name it according to your cell morphotype names and ordering.
+1. In the caactus GUI, make sure **Variable Names** and **Class Order** are set correctly in Global Settings.
+2. Find **step 10 – PLN Modelling** and click **Run**.
+3. Output:
+    - a) `correlation_circle.png`
+    - b) `pca_plot.png`
+4. CAVE: **Variable Names** and **Class Order** are shared with Summary Statistics — set them once in Global Settings.
 
 
 ## 7. Tutorial
@@ -501,18 +505,21 @@ caactus
 7. We recommend working with two screens. This allows to follow the instructions implemented in the caactus GUI while performing the steps in ilastik and quickly switiching back to the caactus steps for fast completion of the pipeline.
 
 ### 7.2 Renaming
-1. Inspect the `renaming.csv` spreadsheet, to see how the `renaming.csv` is constucted and filled.
-2. Go the renaming tab inside the caactus GUI.
-3. Enter the main folder path fro 7.3
-4. Click `Run`
+1. Inspect the `renaming.csv` spreadsheet to see how it is constructed.
+2. In the caactus GUI, set the **Main Folder** path in Global Settings (use the Browse button or paste the full path).
+3. Find **step 1 – Renaming** and click **Run**.
 
 ## 7.3 Batch Pixel Classification
+In the caactus GUI, find **step 3 – Pixel Classification**, select `batch`, and click **? Help** for the full instructions. Summary:
+
 1. Open ilastik.
 
-2. Open the pre-trained ilastik pixel classification project from the sample data in the main folder (`1_pixel_classification.ilp`).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Slection 3. Training when running Batch Processing!
+2. Open the pre-trained pixel classification project from the sample data (`1_pixel_classification.ilp`).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection, or 3. Training when running Batch Processing!
 
-3. Under `4. Prediction Export`, select `Export predictions` and choose a folder for the output to `File`:
+3. Under `4. Prediction Export`:
+   - Select **Probabilities** from the dropdown.
+   - Click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
   ```
@@ -529,13 +536,14 @@ CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Slection 3. Training w
 
 
 ## 7.4 Batch Processing Multicut Segmentation
-1. In ilastik open the next project file.
- 
-2. Open the pre-trained ilastik boundary-Segmentation project from the sample data in the main folder (`2_boundary_segmentation.ilp` project file).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, 3. Training and Multicut, when running Batch Processing!
+In the caactus GUI, find **step 4 – Boundary Segmentation**, select `batch`, and click **? Help** for the full instructions. Summary:
 
-3.  Under `4. Data Export`, select `Choose Export Image Settings` and choose a folder for the output (e.g. 7_batch_multicut).
-- under `Choose Export Image Settings` change the export directory to `File`:
+1. In ilastik, open the pre-trained Boundary Segmentation project (`2_boundary_segmentation.ilp`).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, or 3. Training and Multicut when running Batch Processing!
+
+Note: the `*_Multicut Segmentation.h5` files are generated here — they do not exist beforehand.
+
+2. Under `4. Data Export`, click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
   ```
@@ -556,19 +564,21 @@ CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, 3. Training and 
 
 ## 7.5 Batch Background Processing
 1. Switch back to the caactus GUI.
-2. Select the `background-processing` tab in the GUI.
-3. Select `Batch` mode from the dropdown menu.
-4. When the file paths are correct, click ```Run```.
-5. The background now has been deleted and you can continue with object classification in ilastik.
+2. Find **step 5 – Background Processing**. Select `batch` from the dropdown.
+3. Click **Run**. The background is now removed and you can continue with object classification in ilastik.
 
 
-## 7.8 Batch Object classification
+## 7.6 Batch Object Classification
+In the caactus GUI, find **step 6 – Object Classification**, select `batch`, and click **? Help** for the full instructions. Summary:
+
 1. Switch back to ilastik.
 
-2. Open your trained ilastik object classification project (`3_object_classification.ilp`).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, 3. Object Classification, when running Batch Processing!
+2. Open your trained object classification project (`3_object_classification.ilp`).
+CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, or 3. Object Classification when running Batch Processing!
 
-3. Under `4. Object Information Export`, choose  `Export Image Settings` change the export directory to `File`:
+3. Under `4. Object Information Export`:
+   - Select **Object Predictions** from the dropdown.
+   - Click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
   ```
@@ -597,22 +607,15 @@ Choose  `Features` to choose the Feature you are interested in exporting
 
 11. Now you have performed all steps in ilastik. You can close ilastik.
 
-## 7.9 CSV summary
+## 7.7 CSV Summary
 1. Switch back to the caactus GUI.
-2. Go to the `CSV summary` tab in the caactus GUI.
-2. You can leave the default pixel size for cell size calculation.
-3. When the file paths are correct, click ```Run```.
-4. Inspect the generated results. The output generated will be `df_clean.csv`.
-5. This spreadsheet now has all feature tables that are the output of 5.6 Object classification united in one spreadsheet.
-6. You can use this spreadsheet now, to continue with analysis in the software of your choice.
+2. The default Pixel Size is already set in Global Settings — you can leave it as-is for the sample data.
+3. Find **step 7 – CSV Summary** and click **Run**.
+4. Inspect the generated `df_clean.csv`. This spreadsheet combines all feature tables from Object Classification into one file for downstream analysis.
 
-## 7.10 Summary Statistics
-1. Go to the `Summary Statistics` tab in the caactus GUI.
-2. Change the variable names to 
-```bash
-['condition1','condition2']
-``` 
-3. When the file paths are correct, click ```Run```.
+## 7.8 Summary Statistics
+1. In Global Settings, change **Variable Names** to `['condition1','condition2']`.
+2. Find **step 8 – Summary Statistics** and click **Run**.
 4. Inspect the generated results. The output generated will be 
     - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
     - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
@@ -630,10 +633,9 @@ Choose  `Features` to choose the Feature you are interested in exporting
 
 6. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F`). Now re-do step `7.10 Summary Statistics`. Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`and `Color Mapping` fields.
 
-## 7.11 PLN modelling
-1. Go to the `PLN modelling` tab in the caactus GUI.
-2. Change the variable names to `['condition1','condition2']` . 
-3. When the file path are correct, click ```Run```.
+## 7.9 PLN Modelling
+1. **Variable Names** should already be set to `['condition1','condition2']` from step 7.8 — no change needed.
+2. Find **step 10 – PLN Modelling** and click **Run**.
 4. Inspect the generated results. The output generated will be 
     - a) "correlation_circle.png". Shows that PCA1, accounting for ~57% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for ~25% of the variance based on condition1.
     - b) "pca_plot.png". The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2 (the categorical levels will be combined).

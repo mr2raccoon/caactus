@@ -59,6 +59,13 @@ def process_csv_files(main_folder, input_path, output_path, pixel_size):
     pixel_size = float(pixel_size)
 
     input_path = Path(input_path)
+    if not input_path.is_dir():
+        print(
+            f"Error: Input directory does not exist: {input_path}\n"
+            "Please enter a full (absolute) path to the '8_batch_objectclassification' folder.",
+            flush=True,
+        )
+        return
     files = input_path.glob('*.csv')
 
     dfs = []

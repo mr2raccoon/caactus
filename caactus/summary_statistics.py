@@ -29,17 +29,6 @@ The plot will show the percentage distribution of predicted classes for each con
  By default the IBM coloor-blind friendly palette is used, but you can customize the colors by providing the HEX color code.
  """
 
-def parse_filename(filename, variable_names):
-    filename = filename.replace('_table', '')
-    parts = filename.split('_')
-    metadata = {}
-    for part in parts:
-        var_name, var_value = part.split('-')
-        if var_name in variable_names:
-            metadata[var_name] = var_value
-    print(f"Parsed metadata: {filename} -> {metadata}")
-    return metadata
-
 
 def process_cleaned_data(
     main_folder,
@@ -58,6 +47,21 @@ def process_cleaned_data(
     input_dir = os.path.join(main_folder, input_path)
     output_dir = os.path.join(main_folder, output_path)
 
+    if not os.path.isdir(input_dir):
+        print(
+            f"Error: Input directory does not exist: {input_dir}\n"
+            "Please enter a full (absolute) path to the '9_data_analysis' folder.",
+            flush=True,
+        )
+        return
+    if not os.path.isdir(output_dir):
+        print(
+            f"Error: Output directory does not exist: {output_dir}\n"
+            "Please enter a full (absolute) path to the '9_data_analysis' folder.",
+            flush=True,
+        )
+        return
+
     variable_names = parse_if_needed(variable_names)
     class_order = parse_if_needed(class_order)
     # (color_mapping already parsed above, no need to parse twice)
@@ -66,14 +70,23 @@ def process_cleaned_data(
         os.path.join(input_dir, "df_clean.csv"), index_col=0
     )
 
+    missing_cols = [v for v in variable_names if v not in df_clean.columns]
+    if missing_cols:
+        print(
+            f"Error: The following variable_names columns are missing from df_clean.csv: {missing_cols}\n"
+            f"Available columns: {list(df_clean.columns)}\n"
+            "Make sure your filenames contain 'variable-value' parts matching the configured variable_names "
+            "(e.g. 'strain-WT_timepoint-4h_biorep-1_techrep-1_table.csv').",
+            flush=True,
+        )
+        return
+
     counts = df_clean.groupby([
         'filename', 'Predicted Class'
     ]).size().reset_index(name='count')
 
-    for i, row in counts.iterrows():
-        file_metadata = parse_filename(row['filename'], variable_names)
-        for var in variable_names:
-            counts.at[i, var] = file_metadata.get(var, None)
+    filename_meta = df_clean.drop_duplicates('filename')[['filename'] + variable_names]
+    counts = counts.merge(filename_meta, on='filename', how='left')
 
     counts.to_csv(os.path.join(output_dir, 'counts_df.csv'))
 

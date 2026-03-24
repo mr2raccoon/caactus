@@ -43,6 +43,7 @@ dependencies = [
         "tifffile",
         "h5py",
         "numpy",
+        "Pillow",
         "pandas",
         "matplotlib",
         "pyPLNmodels",

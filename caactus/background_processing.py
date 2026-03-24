@@ -3,8 +3,6 @@
 
 import os
 import sys
-import h5py
-import numpy as np
 import argparse
 try:
     import tomllib as tomli  # Python 3.11+
@@ -36,6 +34,8 @@ def process_image(image_path):
     Parameters:
         image_path (str): Path to the HDF5 file.
     """
+    import h5py
+    import numpy as np
     try:
         with h5py.File(image_path, 'r+') as img:
             if 'exported_data' not in img:
@@ -62,6 +62,13 @@ def batch_process_images(main_folder, input_path):
 
     input_dir = os.path.join(main_folder, input_path)
     print(f"Input directory: {input_dir}")
+    if not os.path.isdir(input_dir):
+        print(
+            f"Error: Input directory does not exist: {input_dir}\n"
+            "Please enter a full (absolute) path to the '7_batch_multicut' folder.",
+            flush=True,
+        )
+        return
     for filename in os.listdir(input_dir):
         if filename.endswith("Segmentation.h5"):
             input_path = os.path.join(input_dir, filename)

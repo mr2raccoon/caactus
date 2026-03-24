@@ -45,6 +45,21 @@ def process_eucast_data(
     input_dir = os.path.join(main_folder, input_path)
     output_dir = os.path.join(main_folder, output_path)
 
+    if not os.path.isdir(input_dir):
+        print(
+            f"Error: Input directory does not exist: {input_dir}\n"
+            "Please enter a full (absolute) path to the '9_data_analysis' folder.",
+            flush=True,
+        )
+        return
+    if not os.path.isdir(output_dir):
+        print(
+            f"Error: Output directory does not exist: {output_dir}\n"
+            "Please enter a full (absolute) path to the '9_data_analysis' folder.",
+            flush=True,
+        )
+        return
+
     variable_names = parse_if_needed(variable_names)
     if not isinstance(variable_names, list):
         raise TypeError(f"variable_names must be list after parsing, got {type(variable_names)}")
@@ -67,15 +82,26 @@ def process_eucast_data(
 
     df_clean = pd.read_csv(os.path.join(input_dir, "df_clean.csv"), index_col=0)
 
+    required_cols = ['conc', 'timepoint', 'biorep', 'techrep']
+    missing_cols = [c for c in required_cols if c not in df_clean.columns]
+    if missing_cols:
+        print(
+            f"Error: The following required columns are missing from df_clean.csv: {missing_cols}\n"
+            f"Available columns: {list(df_clean.columns)}\n"
+            "For EUCAST data, filenames must contain 'conc-value', 'timepoint-value', 'biorep-N', and 'techrep-N' parts "
+            "(e.g. 'conc-1_timepoint-4h_biorep-1_techrep-1_table.csv').",
+            flush=True,
+        )
+        return
+
     counts = (
         df_clean.groupby(['filename', 'Predicted Class'])
         .size()
         .reset_index(name='count')
     )
 
-    split_cols = counts['filename'].str.split('_', expand=True)
-    counts['conc'] = split_cols[1].str.replace("conc-", "")
-    counts['timepoint'] = split_cols[2].str.replace("timepoint-", "")
+    filename_meta = df_clean.drop_duplicates('filename')[['filename', 'conc', 'timepoint']]
+    counts = counts.merge(filename_meta, on='filename', how='left')
 
     # Flag all entries from files that contain any mycelium as mycelium
     filenames_with_mycelium = counts.loc[
