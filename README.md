@@ -500,16 +500,24 @@ conda activate caactus-env
 ```bash
 caactus
 ```
-6. On the top, enter the path to your mainfolder.
+6. We recommend working with two screens. This allows to follow the instructions implemented in the caactus GUI while performing the steps in ilastik and quickly switiching back to the caactus steps for fast completion of the pipeline.
 
-7. We recommend working with two screens. This allows to follow the instructions implemented in the caactus GUI while performing the steps in ilastik and quickly switiching back to the caactus steps for fast completion of the pipeline.
+### 7.2 Global Settings
 
-### 7.2 Renaming
+1. On the top, enter the path to your mainfolder.
+
+2. Change the default values `['strain', 'timepoint']` to 
+
+```bash
+['condition1','condition2']
+```
+
+### 7.3 Renaming
 1. Inspect the `renaming.csv` spreadsheet to see how it is constructed.
 2. In the caactus GUI, set the **Main Folder** path in Global Settings (use the Browse button or paste the full path).
 3. Find **step 1 – Renaming** and click **Run**.
 
-## 7.3 Batch Pixel Classification
+## 7.4 Batch Pixel Classification
 In the caactus GUI, find **step 3 – Pixel Classification**, select `batch`, and click **? Help** for the full instructions. Summary:
 
 1. Open ilastik.
@@ -535,7 +543,7 @@ CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection, or 3. Train
 7. The output will be saved as _Probabilities.h5 files in the output folder.
 
 
-## 7.4 Batch Processing Multicut Segmentation
+## 7.5 Batch Processing Multicut Segmentation
 In the caactus GUI, find **step 4 – Boundary Segmentation**, select `batch`, and click **? Help** for the full instructions. Summary:
 
 1. In ilastik, open the pre-trained Boundary Segmentation project (`2_boundary_segmentation.ilp`).
@@ -562,13 +570,13 @@ Note: the `*_Multicut Segmentation.h5` files are generated here — they do not 
 9. Close the `2_boundary_segmentation.ilp`project-file in ilastik.
 
 
-## 7.5 Batch Background Processing
+## 7.6 Batch Background Processing
 1. Switch back to the caactus GUI.
 2. Find **step 5 – Background Processing**. Select `batch` from the dropdown.
 3. Click **Run**. The background is now removed and you can continue with object classification in ilastik.
 
 
-## 7.6 Batch Object Classification
+## 7.7 Batch Object Classification
 In the caactus GUI, find **step 6 – Object Classification**, select `batch`, and click **? Help** for the full instructions. Summary:
 
 1. Switch back to ilastik.
@@ -607,13 +615,13 @@ Choose  `Features` to choose the Feature you are interested in exporting
 
 11. Now you have performed all steps in ilastik. You can close ilastik.
 
-## 7.7 CSV Summary
+## 7.8 CSV Summary
 1. Switch back to the caactus GUI.
 2. The default Pixel Size is already set in Global Settings — you can leave it as-is for the sample data.
 3. Find **step 7 – CSV Summary** and click **Run**.
 4. Inspect the generated `df_clean.csv`. This spreadsheet combines all feature tables from Object Classification into one file for downstream analysis.
 
-## 7.8 Summary Statistics
+## 7.9 Summary Statistics
 1. In Global Settings, change **Variable Names** to `['condition1','condition2']`.
 2. Find **step 8 – Summary Statistics** and click **Run**.
 4. Inspect the generated results. The output generated will be 
@@ -631,11 +639,34 @@ Choose  `Features` to choose the Feature you are interested in exporting
 {'resting': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}
 ```
 
-6. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F`). Now re-do step `7.10 Summary Statistics`. Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`and `Color Mapping` fields.
+6. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F`). Now re-do step `7.9 Summary Statistics`. Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`
+```bash 
+['resting', 'swollen', 'germling', 'hyphae']
+```
 
-## 7.9 PLN Modelling
-1. **Variable Names** should already be set to `['condition1','condition2']` from step 7.8 — no change needed.
+and `Color Mapping` fields.
+
+```bash 
+{'dormant': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}
+```
+
+
+7. Let's imagine you only have 3 cell categories in your dataset.
+Again, open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `dormant`with `spores` (use `Ctrl+F`). Similarly, replace all `swollen`with `spores` (use `Ctrl+F`).
+Now change the `Class Order`field to
+```bash 
+['spores', 'germling', 'hyphae']
+```
+and the `Color Mapping`field to 
+
+```bash 
+{'spores': 'yellow', 'germling': 'blue', 'hyphae': 'magenta'}
+```
+
+
+## 7.10 PLN Modelling
+1. **Variable Names** should already be set to `['condition1','condition2']` from step 7.2 — no change needed.
 2. Find **step 10 – PLN Modelling** and click **Run**.
-4. Inspect the generated results. The output generated will be 
+4. Inspect the generated results in the subdirecory `/sampledata_CD6_zenodo/9_data_analysis/` The output generated will be 
     - a) "correlation_circle.png". Shows that PCA1, accounting for ~57% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for ~25% of the variance based on condition1.
     - b) "pca_plot.png". The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2 (the categorical levels will be combined).

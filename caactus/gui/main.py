@@ -98,6 +98,7 @@ def init_state(config):
     # Extract initial values for the global settings panel from their source steps.
     ss = STATE.get("Summary statistics", {})
     eu = STATE.get("EUCAST Summary statistics", {})
+    STATE["global_stage"] = "training"
     STATE["globals"] = {
         "pixel_size":           str(STATE.get("CSV summary", {}).get("pixel_size", "0.454")),
         "variable_names":       str(ss.get("variable_names", ["strain", "timepoint"])),
@@ -111,6 +112,26 @@ def init_state(config):
 
 
 # ── Callbacks ────────────────────────────────────────────────────────────────
+
+def on_global_stage_change(_sender, app_data):
+    """Switch all multi-stage steps to the selected mode at once."""
+    new_stage = app_data
+    STATE["global_stage"] = new_stage
+    for step in STEPS:
+        if step.stages and new_stage in step.stages:
+            old_stage = STATE.get(f"{step.name}__current_stage", step.stages[0])
+            STATE[f"{step.name}__{old_stage}"] = copy.deepcopy(STATE[step.name])
+            new_params = STATE[f"{step.name}__{new_stage}"]
+            STATE[step.name] = new_params
+            STATE[f"{step.name}__current_stage"] = new_stage
+            for k, v in new_params.items():
+                tag = f"adv__{step.name}__{k}"
+                if dpg.does_item_exist(tag):
+                    dpg.set_value(tag, str(v) if not isinstance(v, (str, bool, int, float)) else v)
+            if isinstance(step.description, dict):
+                desc_tag = f"__help_desc__{step.name}"
+                if dpg.does_item_exist(desc_tag):
+                    descriptions.render_description(step.description[new_stage], tag=desc_tag)
 
 def on_global_change(global_key: str):
     """Return a callback that updates STATE['globals'] and propagates to steps."""
@@ -278,8 +299,34 @@ def _build_advanced_section(step: CaactusStep):
 
 # ── Global settings panel ────────────────────────────────────────────────────
 
+def _show_introduction():
+    tag = "__intro_win__"
+    if dpg.does_item_exist(tag):
+        dpg.show_item(tag)
+        return
+    intro_step = next((s for s in STEPS if s.name == "Introduction"), None)
+    desc = intro_step.description if intro_step else ""
+    with dpg.window(
+        label="Introduction to caactus",
+        modal=True,
+        show=True,
+        tag=tag,
+        width=740,
+        height=560,
+    ):
+        with dpg.child_window(height=-50, border=False):
+            descriptions.render_description(desc, tag="__intro_desc__")
+        dpg.add_separator()
+        dpg.add_button(label="Close", width=-1, callback=lambda: dpg.hide_item(tag))
+
+
 def _build_global_settings():
-    dpg.add_text("Global Settings", color=[200, 200, 200])
+    with dpg.group(horizontal=True):
+        dpg.add_text("Global Settings", color=[200, 200, 200])
+        dpg.add_button(
+            label="? Introduction to caactus",
+            callback=lambda: _show_introduction(),
+        )
     dpg.add_separator()
 
     # Main folder row
@@ -289,7 +336,7 @@ def _build_global_settings():
             label="Main Folder##mf",
             default_value=STATE["main_folder"],
             tag=mf_tag,
-            width=420,
+            width=750,
             callback=on_main_folder_change,
         )
         dpg.add_button(
@@ -314,63 +361,71 @@ def _build_global_settings():
             label="Variable Names##vn",
             default_value=STATE["globals"]["variable_names"],
             tag="global__variable_names",
-            width=250,
+            width=300,
             callback=on_global_change("variable_names"),
         )
 
-    # Class order + Color mapping
-    with dpg.group(horizontal=True):
-        dpg.add_input_text(
-            label="Class Order##co",
-            default_value=STATE["globals"]["class_order"],
-            tag="global__class_order",
-            width=300,
-            callback=on_global_change("class_order"),
-        )
-        dpg.add_spacer(width=12)
-        dpg.add_input_text(
-            label="Color Mapping##cm",
-            default_value=STATE["globals"]["color_mapping"],
-            tag="global__color_mapping",
-            width=300,
-            callback=on_global_change("color_mapping"),
-        )
+    # Class order — own row for full visibility
+    dpg.add_input_text(
+        label="Class Order##co",
+        default_value=STATE["globals"]["class_order"],
+        tag="global__class_order",
+        width=560,
+        callback=on_global_change("class_order"),
+    )
+
+    # Color mapping — own row for full visibility
+    dpg.add_input_text(
+        label="Color Mapping##cm",
+        default_value=STATE["globals"]["color_mapping"],
+        tag="global__color_mapping",
+        width=700,
+        callback=on_global_change("color_mapping"),
+    )
 
     dpg.add_spacer(height=4)
 
     # EUCAST settings (collapsed by default)
     with dpg.collapsing_header(label="EUCAST Settings", default_open=False):
-        with dpg.group(horizontal=True):
-            dpg.add_input_text(
-                label="Class Order##eco",
-                default_value=STATE["globals"]["eucast_class_order"],
-                tag="global__eucast_class_order",
-                width=280,
-                callback=on_global_change("eucast_class_order"),
-            )
-            dpg.add_spacer(width=12)
-            dpg.add_input_text(
-                label="Color Mapping##ecm",
-                default_value=STATE["globals"]["eucast_color_mapping"],
-                tag="global__eucast_color_mapping",
-                width=280,
-                callback=on_global_change("eucast_color_mapping"),
-            )
-        with dpg.group(horizontal=True):
-            dpg.add_input_text(
-                label="Conc Order##cor",
-                default_value=STATE["globals"]["conc_order"],
-                tag="global__conc_order",
-                width=280,
-                callback=on_global_change("conc_order"),
-            )
-            dpg.add_spacer(width=12)
-            dpg.add_input_text(
-                label="Timepoint Order##to",
-                default_value=STATE["globals"]["timepoint_order"],
-                tag="global__timepoint_order",
-                width=280,
-                callback=on_global_change("timepoint_order"),
+        def _on_eucast_pixel_size(_s, app_data):
+            on_global_change("pixel_size")(_s, app_data)
+            if dpg.does_item_exist("global__pixel_size"):
+                dpg.set_value("global__pixel_size", app_data)
+
+        dpg.add_input_text(
+            label="Pixel Size (µm)##eps",
+            default_value=STATE["globals"]["pixel_size"],
+            tag="eucast__pixel_size",
+            width=80,
+            callback=_on_eucast_pixel_size,
+        )
+        dpg.add_input_text(
+            label="Class Order##eco",
+            default_value=STATE["globals"]["eucast_class_order"],
+            tag="global__eucast_class_order",
+            width=560,
+            callback=on_global_change("eucast_class_order"),
+        )
+        dpg.add_input_text(
+            label="Color Mapping##ecm",
+            default_value=STATE["globals"]["eucast_color_mapping"],
+            tag="global__eucast_color_mapping",
+            width=900,
+            callback=on_global_change("eucast_color_mapping"),
+        )
+        dpg.add_input_text(
+            label="Conc Order##cor",
+            default_value=STATE["globals"]["conc_order"],
+            tag="global__conc_order",
+            width=560,
+            callback=on_global_change("conc_order"),
+        )
+        dpg.add_input_text(
+            label="Timepoint Order##to",
+            default_value=STATE["globals"]["timepoint_order"],
+            tag="global__timepoint_order",
+            width=560,
+            callback=on_global_change("timepoint_order"),
             )
 
 
@@ -380,17 +435,6 @@ def _build_step_row(step: CaactusStep, number: int):
     """One step row + its collapsible advanced-paths section."""
     with dpg.group(horizontal=True):
         dpg.add_text(f"{number}. {step.name}")
-
-        if step.stages:
-            dpg.add_combo(
-                items=step.stages,
-                default_value=step.stages[0],
-                tag=f"stage__{step.name}",
-                width=100,
-                callback=on_stage_selected(step),
-            )
-        else:
-            dpg.add_spacer(width=108)
 
         if step.func is not None:
             dpg.add_button(
@@ -414,6 +458,19 @@ def _build_step_row(step: CaactusStep, number: int):
 
 
 def _build_workflow():
+    # Global training / batch toggle
+    with dpg.group(horizontal=True):
+        dpg.add_text("Mode:")
+        dpg.add_combo(
+            items=["training", "batch"],
+            default_value="training",
+            tag="global__stage",
+            width=120,
+            callback=on_global_stage_change,
+        )
+    dpg.add_separator()
+    dpg.add_spacer(height=4)
+
     seen_groups: list[str] = []
     number = 1
 
@@ -428,6 +485,11 @@ def _build_workflow():
             dpg.add_text(step.group, color=[160, 200, 255])
             dpg.add_separator()
 
+        if step.name == "EUCAST Summary statistics":
+            dpg.add_text(
+                "  Use 9. instead of step 8 for EUCAST antifungal susceptibility datasets",
+                color=[180, 180, 100],
+            )
         _build_step_row(step, number)
         number += 1
 
@@ -443,7 +505,7 @@ def build_ui():
     with dpg.window(label="caactus", autosize=True, tag="main"):
 
         # ── Global settings (fixed-height top panel) ──
-        with dpg.child_window(height=200, border=True):
+        with dpg.child_window(height=300, border=True):
             _build_global_settings()
 
         dpg.add_spacer(height=4)
@@ -479,7 +541,7 @@ def run_gui(config):
     dpg.create_context()
     helpers.load_font()
     helpers.set_theme()
-    dpg.create_viewport(title="caactus", width=900, height=800)
+    dpg.create_viewport(title="caactus", width=950, height=860)
     helpers.set_icons()
     init_state(config)
     build_ui()
