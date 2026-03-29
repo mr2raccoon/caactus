@@ -506,8 +506,7 @@ The next script will combine all tables from all images into one global table fo
  The intend of the the tutorial is that potential users learn how to run the batch mode with pretrained models. The subdirectory `0_1_original_tif_training_images`is empty and will stay empty. The other empty subdirectories will get filled with data once the user follows the below explained steps. 
 
 
-5. 
-- make sure you have caactus installed (see Installation above)
+5. make sure you have caactus installed (see Installation above)
 - make sure you have the caactus environmnet activated 
 ```bash
 conda activate caactus-env

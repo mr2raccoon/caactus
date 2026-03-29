@@ -151,7 +151,7 @@ Enter the full path to the folder and click Run.
         3. Under `4. Object Information Export`:
            - From the dropdown menu, select **Object Predictions** (default). This exports a label image with each object assigned its predicted class.
              (Other options: Blockwise Object Predictions, Pixel Probabilities — not needed.)
-           - Click **Choose Export Image Settings** and set the output path to `File`:
+           - Click on **Export Image Settings** and set the output path to `File`:
         {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
         <images/batch_object_image.png>
 
