@@ -574,7 +574,7 @@ The next script will combine all tables from all images into one global table fo
 > **Variable Names** and **Class Order** are shared with Summary Statistics — set them once in Global Settings.
 
 
-## 7Running caactus from the command line
+## 7. Running caactus from the command line
 ### 7.1 Setup config.toml-file
 - copy config/config.toml to your working directory and modify it as needed.
 - the caactus scripts are setup for pulling the information needed for running from the file
@@ -678,19 +678,19 @@ The next script will combine all tables from all images into one global table fo
 4. To showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps. From the dropdown menu in **Global settings** in the GUI, select `batch`
 
 > [!NOTE]
-> Some subdirectories are intentionally left empty. The tutorial is designed to teach batch mode with pretrained models. `0_1_original_tif_training_images` stays empty; the other empty subdirectories will be filled as you follow the steps below.
+> Some subdirectories are intentionally left empty. The tutorial is designed to show how the batch mode works with pretrained models. `0_1_original_tif_training_images` stays empty; the other empty subdirectories will be filled as you follow the steps below.
 
 
 5. make sure you have caactus installed (see Installation above)
-- make sure you have the caactus environmnet activated 
+6. make sure you have the caactus environmnet activated 
 ```bash
 conda activate caactus-env
 ```
-- now simply type `caactus` and hit `enter`to start the graphical user interace
+7. now simply type `caactus` and hit `enter`to start the graphical user interace
 ```bash
 caactus
 ```
-6. We recommend working with two screens. This allows to follow the instructions implemented in the caactus GUI while performing the steps in ilastik and quickly switiching back to the caactus steps for fast completion of the pipeline. 
+8. We recommend working with two screens. This allows to follow the instructions implemented in the caactus GUI while performing the steps in ilastik and quickly switiching back to the caactus steps for fast completion of the pipeline. 
 
 ### 8.2 Global Settings
 
