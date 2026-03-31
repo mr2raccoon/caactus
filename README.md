@@ -600,10 +600,11 @@ The next script will combine all tables from all images into one global table fo
   tif2h5py.exe -c $p -m training
 
 - For **batch processing** enter "-m batch" for batch mode.
-- whole command UNIX:
+  - whole command UNIX:
   ```bash
   tif2h5py -c "$p" -m batch
-- whole command Windows:
+  - whole command Windows:
+
   ```bash
   tif2h5py.exe -c $p -m batch
 
@@ -611,53 +612,53 @@ The next script will combine all tables from all images into one global table fo
 - call the `background-processing` script from the cmd prompt
 - enter "-c" and enter path to config.toml
 - enter "-m training" for training mode
-- whole command UNIX:
+  - whole command UNIX:
   ```bash
   background_processing -c "$p" -m training
-- whole command Windows:
+  - whole command Windows:
   ```bash
   background_processing.exe -c $p -m training
 
 - For **batch processing** enter "-m batch" for batch mode
-- whole command Unix:
+  - whole command Unix:
   ```bash
   background_processing -c "$p" -m batch
-- whole command Windows:
+  - whole command Windows:
   ```bash
   background_processing.exe -c $p -m batch
 
 ### 7.4 Rename Files
 - Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
-- whole command Unix:
+  - whole command Unix:
   ```bash
   renaming -c "$p"
-- whole command Windows:
+  - whole command Windows:
   ```bash
   renaming.exe -c $p
 
 ### 7.5 CSV-Summary
 - call the `csv_summary.py` script from the cmd prompt
-- whole command Unix:
+  - whole command Unix:
    ```bash
    csv_summary -c "$p"
-- whole command Windows
+  - whole command Windows
    ```bash
    csv_summary.exe -c $p
 
 ### 7.6 Creating Summary Statistics
 
 - call the `summary_statistics.py` script from the cmd prompt
-- whole command Unix:
+  - whole command Unix:
    ```bash
   summary_statistics -c "$p"
-- whole command Windows:
+  - whole command Windows:
    ```bash
    summary_statistics.exe -c $p
 - if working with EUCAST antifungal susceptibility testing, call 
-- whole command Unix:
+  - whole command Unix:
   ```bash
   summary_statistics_eucast -c "$p" 
-- whole command Windows:
+  - whole command Windows:
   ```bash 
   summary_statistics_eucast -c $p
 
