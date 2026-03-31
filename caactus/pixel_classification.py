@@ -1,26 +1,34 @@
 DESCRIPTION = """
-1. When first training a pixel classification model in ilastik, open ilastik.
+## Training: Pixel Classification
 
-2. Create a new project and select "Pixel Classification" as the workflow.
+1. Open **ilastik**.
 
-3. Save it as 1_pixel_classification.ilp inside the main project directory.
+2. Create a new project and select **Pixel Classification** as the workflow.
 
-4. Under Raw Data, add the .h5 files from 1_images folder.
+3. Save it as `1_pixel_classification.ilp` inside the main project directory.
 
-5. Feature selection. Select the features you want to use for training. It is recommended to use all features.
+4. Under **Raw Data**, add the `.h5` files from the `1_images` folder.
 
-6. For working with neighbouring / touching cells, it is suggested to create three classes: 
-0 = interior, 
-1 = background, 
-2 = boundary 
-(This follows python's 0-indexing logic where counting is started at 0).
+5. Under **Feature Selection**, select all features (recommended).
+
+6. Create **three classes** for neighbouring/touching cells:
+- `0` = interior
+- `1` = background
+- `2` = boundary
+(Follows Python's 0-indexing.)
 
 <images/pixel_classification_classes.JPG>
 
-7. Annotate the classes by drawing on the images.
+7. Annotate each class by drawing on the images.
 
-8. Export the Predictions.
+8. Under **4. Prediction Export**, click **Choose Export Image Settings** and set the output path to `File`:
+`{dataset_dir}/../2_probabilities/{nickname}_{result_type}.h5`
 
 <images/export_probabilities.JPG>
 
+9. Click **OK**.
+
+10. Click **Export All**. 
+
+11. The output will be saved as `*_Probabilities.h5` files in the `2_probabilities` folder.
 """

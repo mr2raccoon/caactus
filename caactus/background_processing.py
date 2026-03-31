@@ -10,15 +10,17 @@ except ModuleNotFoundError:
     import tomli  # Python 3.10
 
 DESCRIPTION = """
-This script processes HDF5 segmentation files by zeroing the largest ID in the 'exported_data' dataset.
+## Background Processing (Training)
 
-For futher processing in the object classification, the background needs to eliminated from the multicut data sets.
+Removes the **background** from multicut segmentation files.
 
- For this the next script will set the numerical value of the largest region to 0. 
- 
- It will thus be shown as transpartent in the next step of the workflow. 
- 
- This operation will be performed in-situ on all `.*data_Multicut Segmentation.h5`-files in the `project_directory/3_multicut/`.
+The largest region (background) is set to `0`, making it transparent in the subsequent **Object Classification** step in ilastik.
+
+This operation runs **in-place** on all `*_Multicut Segmentation.h5` files in the `3_multicut` folder.
+
+If your folder structure is different, you can use **Advanced mode** to enter the **full path** to the folder.
+
+Click **Run**.
 """
 
 def load_config(path="config.toml"):

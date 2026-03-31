@@ -16,15 +16,20 @@ from caactus.utils import load_config, parse_if_needed
 
 
 DESCRIPTION = """
-This script runs ZIPln modelling on input data with dynamic design and generates PCA visualizations and a correlation circle plot.
+## PLN Modelling
 
-The two grouping variables you enter will be used in the model formula and for visualizing the PCA results.
+Runs **ZIPln modelling** on count data and generates PCA visualisations and a correlation circle plot.
 
-The will be combined into a single factor for the model, and the PCA plot will show the latent variable projections colored by this combined category.
+### How it works
+- The two **Variable Names** are used in the model formula and for colouring the PCA plot
+- They are combined into a single factor; the PCA shows latent variable projections coloured by this combined category
+- The **correlation circle** shows how original variables relate to the latent dimensions
 
-The correlation circle plot will show how the original variables relate to the latent dimensions, helping you interpret the PCA results in terms of the original grouping variables.
+Note: maximum 15 categories are displayed in the PCA plot.
 
-
+### Output (saved to `9_data_analysis`)
+- `pca_plot.png` — latent variable projections coloured by combined category
+- `correlation_circle.png` — variable loadings on latent dimensions
 """
 
 

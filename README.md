@@ -32,7 +32,7 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 
 ## Install ilastik
 - [Download and install ilastik](https://www.ilastik.org/download) for your respective operating system.
-- Please note, we developed the pipeline on ilastik 1.4.0. For optimal user experience, we recommend installing ilastik 1.4.0. For this, scroll down to "Previous stable versions" on the ilastik download webpage. 
+- [!NOTE], we developed the pipeline on ilastik 1.4.0. For optimal user experience, we recommend installing ilastik 1.4.0. For this, scroll down to "Previous stable versions" on the ilastik download webpage. 
 
 # Quick Overview of the workflow
 1. **Culture** organism of interest in 96-well plate
@@ -46,22 +46,22 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 9. Train a [object classification](https://www.ilastik.org/documentation/objects/objects) model in ilastik for  and later run it batch-mode.
 10. **Pool** all csv-tables  from the individual images into one global table with ```csv_summary```
 - output generated: 
-    - "df_clean.csv"
+    - `df_clean.csv`
 11. **Summarize** the data with  ```summary_statistics```
 - output generated:
-    - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
-    - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
-    - c) "counts.csv" dataframe used in PlnModelling
-    - d) bar graph ("barchart.png")
+    - a) `df_summary_complete.csv` = .csv-table containing also **not usable** category,
+    - b) `df_refined_complete.csv` = .csv-table without **not usable** category", 
+    - c) `counts.csv` dataframe used in PlnModelling
+    - d) stacked bar graph (`barchart.png`)
 12. **Model** the count data with ```pln_modelling```
   - output generated:
-    - a) "correlation_circle.png"
-    - b) "pca_plot.png"
+    - a) `correlation_circle.png`
+    - b) `pca_plot.png`
 
 ## Sample Dataset
 - a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.18799803)
 - to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes.
-- go to 7.1-7.11 for a detailed tutorial
+- **go to 7.1-7.11 for a detailed tutorial**
 
 
 
@@ -69,15 +69,15 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 ## 1. Culturing
 - Culture your cells in a flat bottom plate of your choice and according to the needs of the organims being researched.
 ## 2. Image acquisition
-- In your respective microscopy software environment, save the images of interest to `.tif-format`.
+- In your respective microscopy software environment, export the images of interest to `.tif-format`.
 - From the image metadata, copy the pixel size. 
 
 ## 3. Data Preparation
 ### 3.1 Create Project Directory
 
 - For portability of the ilastik projects create the directory in the following structure:\
-(Please note: the below example already includes examples of resulting files in each sub-directory)
-- This allows you to copy an already trained workflow and use it multiple times with new datasets.
+([!NOTE]: the below example already includes examples of resulting files in each sub-directory)
+- This allows you to copy an already trained workflow and use it multiple times with new datasets, when relative paths are enabled.
 
 ```
 project_directory = Main folder  
@@ -148,16 +148,17 @@ conda activate caactus-env
 ```bash
 caactus
 ```
-- At the top, enter the path to your **Main Folder** (use the Browse button or type/paste the full path).
+- At the top, enter the path to your **Main Folder** (use the Browse button or type/ copy&paste the full path).
 - Set shared analysis parameters once in **Global Settings**: Pixel Size, Variable Names, Class Order, Color Mapping. EUCAST-specific settings can be expanded below.
-- The workflow is shown as a numbered list of steps. For steps with training and batch modes, select the mode from the dropdown next to the step name.
-- Click **Run** to execute a step. For ilastik steps, click **? Help** to open the detailed instructions.
+- The workflow is shown as a numbered list of steps. When in training or batch modes, select the respective mode from the dropdown **Global Settings**.
+- Click **Run** to execute a step. 
+- Each step includes description in **? Help** pop-up. For ilastik steps, detailed step-by-step instructions are included.
 - Processing messages appear in the log panel at the bottom.
 - The output can be accessed in the respective subdirectory of your main folder.
 
 ## 4. Training
 
-To facilitate cross-platform reusability of the ilastik models, make sure to store Raw Data, Probabilities and Prediction Maps in Relative Links. This allows for portability of the models to other storage locations.
+To facilitate cross-platform reusability of the ilastik models, make sure to store Raw Data, Probabilities and Prediction Maps in **Relative Links**. This allows for portability of the models to other storage locations.
 
 ![relative_link](caactus/gui/assets/images/relative_location.png)
 
@@ -172,18 +173,19 @@ In case absolute file path is selected, right click on the location and select `
 - store them in `0_1_original_tif_training_images`
 
 #### 4.1.2 Conversion
-1. In the caactus GUI, find **step 2 – Tif to H5**. Select `training` from the dropdown menu.
+1. In the caactus GUI, select `training` from the dropdown menu in **Global Settings**
+2. Find **2. Tif to H5**. 
 - The script converts `.tif` files to `.h5` format for better [performance in ilastik](https://www.ilastik.org/documentation/basics/performance_tips).
 2. Click **Run**.
 
 ### 4.2. Pixel Classification
 1. When first training a pixel classification model in ilastik, open ilastik.
 
-2. Create a new project and select "Pixel Classification" as the workflow.
+2. Create a new project and select **Pixel Classification** as the workflow.
 
-3. Save it as 1_pixel_classification.ilp inside the main project directory.
+3. Save it as `1_pixel_classification.ilp` inside the main project directory.
 
-4. Under Raw Data, add the .h5 files from 1_images folder.
+4. Under Raw Data, add the `*.h5` files from `1_images` folder.
 
 5. Feature selection. Select the features you want to use for training. It is recommended to use all features.
 
@@ -208,7 +210,12 @@ In prediction export change the settings to
 
 ![export_prob](caactus/gui/assets/images/export_probabilities.JPG)
 
-9. Click `OK`
+9. Click `OK`.
+
+10. Click `Export All`.
+
+11. The output will be saved as `*_Probabilities.h5` files in the `2_probabilities` folder.
+
 
 - For more information, consult the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
 
@@ -216,7 +223,7 @@ In prediction export change the settings to
 ### 4.3 Boundary-based Segmentation with Multicut
 1. When first training a boundary-based Segmentation model in ilastik, open ilastik.
 
-2. Create a new project and select "Boundary-based Segmentation with Multicut" as the workflow.
+2. Create a new project and select **Boundary-based Segmentation with Multicut** as the workflow.
 
 3. Save it as `2_boundary_segmentation.ilp` inside the main project directory.
 
@@ -243,30 +250,35 @@ In prediction export change the settings to
 
 ![export_multicut](caactus/gui/assets/images/export_multicut.JPG)
 
-9. Click `OK`
+9. Click `OK`.
+
+10. Click `Export All`.
+
+11. The output will be saved as `*_Multicut Segmentation.h5` files in the `3_multicut` folder.
 
 - For more information follow the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
 
 
 ### 4.4 Background Processing
 For further processing in object classification, the background must be removed from the multicut data sets. This script sets the numerical value of the largest region to 0, making it transparent in the next step. The operation runs in-place on all `*_Multicut Segmentation.h5` files in `3_multicut/`.
-1. In the caactus GUI, find **step 5 – Background Processing**. Select `training` from the dropdown.
+1. In the caactus GUI, find **5. Background Processing**.
+2. Make sure `training`is still selected in **Mode** under **Global Settings**.
 2. Click **Run**.
 
 
 ### 4.5. Object Classification
 1. When first training a Object classification model in ilastik, open ilastik.
 
-2. Create a new project and select "Object Classification [Inputs: Raw, Data, Pixel Prediction Map]" as the workflow.
+2. Create a new project and select **Object Classification [Inputs: Raw, Data, Pixel Prediction Map]** as the workflow.
 
-3. Save it as 3_object_classification.ilp inside the main project directory.
+3. Save it as `3_object_classification.ilp` inside the main project directory.
 
-4. Under "Raw Data", add the .h5 files from 1_images folder.
+4. Under **Raw Data**, add the `.h5` files from `1_images folder`.
 
-5. Under "Segmentation Image", add the data_Multicut Segmentation.h5 files from 3_multicut folder.
+5. Under **Segmentation Image**, add the `*_Multicut Segmentation.h5` files from `3_multicut` folder.
 
-6. Define your cell types plus an additional category for "not-usable" objects, e.g. cell debris and cut-off objects on the side of the images.
-Please note: default settings for the cell names in caactus are `resting`, `swollen`, `germling`, `hyphae`, `notusable` (and `mycelium` for EUCAST steps). You are welcome to change the names. Make sure to also change the names in the caactus GUI when performing analysis steps below.
+6. Define your cell types plus an additional category for **not usable** objects, e.g. cell debris and cut-off objects on the side of the images.
+[!NOTE]: default settings for the cell names in caactus are `resting`, `swollen`, `germling`, `hyphae`, `notusable` (and `mycelium` for EUCAST workflow). You are welcome to change the names. Make sure to also change the names in the caactus GUI when performing analysis steps below.
 
 
 7. Annotate the edges by clicking on the edges between cells.
@@ -294,34 +306,38 @@ In `Configure Feature Table Export General` change seetings to
 - select your features of interest for exporting
 ![export_prob](caactus/gui/assets/images/object_tableexport.JPG)
 
-10. Click `OK`
+10. Click `OK`.
+
+11. Click `Export All`.
+
+12. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the `4_objectclassification` folder.
 
 
-For more information follow the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
+- For more information follow the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
 
 
 ## 5. Batch Processing
 - Once you have successfully trained all three ilastik models, you are ready to process large image datasets with the caactus pipeline.
 1. store the images you want to process in the `0_2_original_tif_batch_images` directory
 2. Perform steps 4.1 to 4.5 in batch mode, as explained in detail below (5.1 to 5.5).
-3. When relevant select batch in the dropdown menu in the caactus GUI.
+3. Select **Mode** `batch` in the dropdown menu in **Global settings in the caactus GUI.
 - For more information, follow the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
   
 ### 5.1 Rename Files
 - Rename the `.tif-files` so that they contain information about your cells and experimental conditions
-1. Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as your images files are stored in the respective directory.
+1. Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as your images files are stored in the respective directory (alphabetically).
 
 - The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 
-CAVE: Do not use underscores or dashes in the column names or values, as they will be used as delimiters in the new file names.
+[!CAUTION]: Do not use underscores or dashes in the column names or values, as they will be used as delimiters in the new file names.
 
-CAVE: The only hardcoded column names needed are "biorep", and "techrep". They are needed in downstream analysis for calculating averages.
+[!IMPORTANT]: The only hardcoded column names needed are **biorep**, and **techrep**. They are needed in downstream analysis for calculating averages.
 
 
 2. In the caactus GUI, find **step 1 – Renaming** and click **Run**.
 ![96_well](caactus/gui/assets/images/96_well_setup.png)
 
-CAVE: After successfully having renamed the files, we recommend deleting the content of 0_2_original_tif_batch_images in order to save disk space.
+[!TIP]: After successfully having renamed the files, we recommend deleting the content of `0_2_original_tif_batch_images` in order to save disk space.
 """
 
 #### 5.2 Conversion
@@ -329,7 +345,7 @@ CAVE: After successfully having renamed the files, we recommend deleting the con
 - The script converts `.tif` files to `.h5` format for better [performance in ilastik](https://www.ilastik.org/documentation/basics/performance_tips).
 2. Click **Run**.
 
-CAVE: After successfully having converted the files, we recommend deleting the content of 0_3_batch_renamed in order to save disk space.
+[!TIP]: After successfully having converted the files, we recommend deleting the content of `0_3_batch_renamed` in order to save disk space.
 
 ### 5.3 Batch Processing Pixel Classification
 
@@ -339,7 +355,7 @@ In the caactus GUI, find **step 3 – Pixel Classification**, select `batch`, an
 
 2. Open your trained pixel classification project (e.g. `1_pixel_classification.ilp`).
 
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection and 3. Training when running Batch Processing!
+[!CAUTION]: DO NOT CHANGE anything in `1. Input Data`, `2. Feature Selection` and `3. Training` when running Batch Processing!
 
 3. Under `4. Prediction Export`:
    - From the dropdown select **Probabilities** (not Simple Segmentation, Uncertainty, Features, or Labels).
@@ -358,7 +374,7 @@ CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection and 3. Train
                                                                                     
 7. Now click `Process all files`.
 
-8. The output will be saved as _Probabilities.h5 files in the output folder.
+8. The output will be saved as `*_Probabilities.h5` files in the output folder (`6_batch_probabilities`).
 
 ### 5.4 Batch Processing Multicut Segmentation
 
@@ -367,9 +383,9 @@ In the caactus GUI, find **step 4 – Boundary Segmentation**, select `batch`, a
 1. Open ilastik.
 
 2. Open your trained Boundary Segmentation project (e.g. `2_boundary_segmentation.ilp`).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, and 3. Training and Multicut, when running Batch Processing!
+[!CAUTION]: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, and 3. Training and Multicut, when running Batch Processing!
 
-Note: the `*_Multicut Segmentation.h5` output files are generated by ilastik in this step — they do not exist beforehand.
+[!NOTE]: the `*_Multicut Segmentation.h5` output files are generated by ilastik in this step — they do not exist beforehand.
 
 3. Under `4. Data Export`, click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
@@ -386,7 +402,7 @@ Note: the `*_Multicut Segmentation.h5` output files are generated by ilastik in 
 
 8. Go to `5. Batch Processing` and click `Process all files`.
 
-9. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
+9. The output will be saved as `*_Multicut Segmentation.h5` files in the output folder (`7_batch_multicut`).
 
 
 
@@ -402,7 +418,7 @@ In the caactus GUI, find **step 6 – Object Classification**, select `batch`, a
 1. Open ilastik.
 
 2. Open your trained object classification project (`3_object_classification.ilp`).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, 3. Object Classification, when running Batch Processing!
+[!CAUTION]: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, 3. Object Classification, when running Batch Processing!
 
 3. Under `4. Object Information Export`:
    - From the dropdown select **Object Predictions** (default).
@@ -434,29 +450,31 @@ Choose  `Features` to choose the Feature you are interested in exporting
 
 10. Go to `5. Batch Processing` and click `Process all files`.
 
-11. The output will be saved as data_Object Predictions.h5 files and data_table.csv in the output folder.
+11. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the output folder (`8_batch_objectclassification`).
+
 
 
 
 ## 6. Post-Processing and Data Analysis
 
-- Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py` at this stage are written for the analysis and visualization of two independent variables.
+- Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py` at this stage are written for the analysis and visualization of two independent variables. The take the result of the batch-processing steps as input.
+
+1. In the caactus GUI, set **Variable Names**, **Class Order**, **Color Mapping** and **Pixel Size (µm)** in **Global Settings**.
 
 ### 6.1 Merging Data Tables and Table Export
 
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
 - Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
-1. In the caactus GUI, set **Pixel Size (µm)** in Global Settings.
-2. Find **step 7 – CSV Summary** and click **Run**.
-4. The output generated will be `df_clean.csv`.
-5. This spreadsheet now has all feature tables that are the output of 5.6 Object classification united in one spreadsheet.
-5. You can use this spreadsheet now, to continue with analysis in the software of your choice.
+1. Find **7. CSV Summary** and click **Run**.
+2. The output generated will be `df_clean.csv` in `9_data_analysis`
+3. This spreadsheet now has all feature tables that are the output of **5.6 Object classification** united in one spreadsheet.
+4. You can use this spreadsheet now, to continue with analysis in the software of your choice.
 
 
 ### 6.2 Creating Summary Statistics
 
 - This script processes EUCAST data and generates summary statistics and a stacked bar plot of predicted classes cell categories.
-- If working with EUCAST antifungal susceptibility testing, use the `Summary Statistics EUCAST` tab
+- If working with EUCAST antifungal susceptibility testing, use the `9. EUCAST Summary Statistics `
 - For the stacked bar plot, it groups data by the two variables that you enter.
 - It computes the average count and percentage of each predicted class, across replicates (technical and biological), for each combination of the two grouping variables.
 - It visualizes the distribution in stacked bar plots of classes across different conditions.
@@ -465,14 +483,13 @@ The next script will combine all tables from all images into one global table fo
 - The plot will show the percentage distribution of predicted classes for each condition, allowing you to compare how the classes are distributed across different experimental conditions defined by the two grouping variables.
 - The colors of the bars will correspond to the predicted classes, as defined in your color mapping.
 - By default the IBM coloor-blind friendly palette is used, but you can customize the colors by providing the HEX color code.
-1. In the caactus GUI, set **Variable Names**, **Class Order**, and **Color Mapping** in Global Settings.
-2. Find **step 8 – Summary Statistics** and click **Run**.
-3. Output:
+
+1. Find **8. Summary Statistics** and click **Run**.
+2. Output:
     - a) `df_summary_complete.csv` — full table including "not usable" category
     - b) `df_refined_complete.csv` — table without "not usable" category
     - c) `counts.csv` — count data used for PLN modelling
     - d) `barchart.png` — stacked bar chart
-4. CAVE: defaults are provided. Edit **Variable Names** to match your experimental variables. Edit **Class Order** to match your morphotype names. Edit **Color Mapping** to use your preferred colors.
 
 ### 6.3 PLN Modelling 
 
@@ -484,24 +501,24 @@ The next script will combine all tables from all images into one global table fo
 
 - The correlation circle plot will show how the original variables relate to the latent dimensions, helping you interpret the PCA results in terms of the original grouping variables.
 
-- CAVE: the limit of categories for display in the PCA-plot is n=15
+- [!WARNING]: the limit of categories for display in the PCA-plot is n=15
 
 1. In the caactus GUI, make sure **Variable Names** and **Class Order** are set correctly in Global Settings.
 2. Find **step 10 – PLN Modelling** and click **Run**.
 3. Output:
     - a) `correlation_circle.png`
     - b) `pca_plot.png`
-4. CAVE: **Variable Names** and **Class Order** are shared with Summary Statistics — set them once in Global Settings.
+4. [!NOTE]: **Variable Names** and **Class Order** are shared with Summary Statistics — set them once in Global Settings.
 
 
 ## 7. Tutorial
 ### 7.1 Download Sample Data
 1. Go to [zenodo](https://doi.org/10.5281/zenodo.18799803) to download the sample data.
 2. Unpack the `.zip`-file into your project folder.
-3. The path to where you unpacked the sample data will be your main folder.
-4. To showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps. From the dropdown menu in the GUI, select `batch`
+3. The path to where you unpacked the sample data will be your main folder (e.g. `/home/usr/Documents/sampledata_CD6_zenodo`).
+4. To showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps. From the dropdown menu in **Global settings** in the GUI, select `batch`
 
- Please note, we intentionally left some subdirectories empty for the tutorial. 
+ [!NOTE] we intentionally left some subdirectories empty for the tutorial. 
  
  The intend of the the tutorial is that potential users learn how to run the batch mode with pretrained models. The subdirectory `0_1_original_tif_training_images`is empty and will stay empty. The other empty subdirectories will get filled with data once the user follows the below explained steps. 
 
@@ -552,12 +569,12 @@ caactus
 ![mode_batch](caactus/gui/assets/images/tif2h5.png)
 
 ## 7.4 Batch Pixel Classification
-In the caactus GUI, find **step 3 – Pixel Classification**, select `batch`, and click **? Help** for the full instructions. Summary:
+In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the full instructions. Summary:
 
 1. Open ilastik.
 
 2. Open the pre-trained pixel classification project from the sample data (`1_pixel_classification.ilp`).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection, or 3. Training when running Batch Processing!
+[!CAUTION]: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection, or 3. Training when running Batch Processing!
 
 3. Under `4. Prediction Export`:
    - Select **Probabilities** from the dropdown.
@@ -580,12 +597,12 @@ CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Feature Selection, or 3. Train
 
 
 ## 7.5 Batch Processing Multicut Segmentation
-In the caactus GUI, find **step 4 – Boundary Segmentation**, select `batch`, and click **? Help** for the full instructions. Summary:
+In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the full instructions. Summary:
 
 1. In ilastik, open the pre-trained Boundary Segmentation project (`2_boundary_segmentation.ilp`).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, or 3. Training and Multicut when running Batch Processing!
+[!CAUTION]: DO NOT CHANGE anything in 1. Input Data, 2. DT Watershed, or 3. Training and Multicut when running Batch Processing!
 
-Note: the `*_Multicut Segmentation.h5` files are generated here — they do not exist beforehand.
+[!NOTE]: the `*_Multicut Segmentation.h5` files are generated here — they do not exist beforehand.
 
 2. Under `4. Data Export`, click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
@@ -604,24 +621,24 @@ Note: the `*_Multicut Segmentation.h5` files are generated here — they do not 
 
 8. Go to `5. Batch Processing` and click `Process all files`.
 
-9. The output will be saved as _Multicut Segmentation.h5 files in the output folder.
+9. The output will be saved as `*_Multicut Segmentation.h5` files in the output folder (`7_batch_multicut`).
 
 10. Close the `2_boundary_segmentation.ilp`project-file in ilastik.
 
 
 ## 7.6 Batch Background Processing
 1. Switch back to the caactus GUI.
-2. Find **step 5 – Background Processing**. Select `batch` from the dropdown.
+2. Find **5. Background Processing**. 
 3. Click **Run**. The background is now removed and you can continue with object classification in ilastik.
 
 
 ## 7.7 Batch Object Classification
-In the caactus GUI, find **step 6 – Object Classification**, select `batch`, and click **? Help** for the full instructions. Summary:
+In the caactus GUI, find **6. Object Classification**, and click **? Help** for the full instructions. Summary:
 
 1. Switch back to ilastik.
 
 2. Open your trained object classification project (`3_object_classification.ilp`).
-CAVE: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, or 3. Object Classification when running Batch Processing!
+[!CAUTION]: DO NOT CHANGE anything in 1. Input Data, 2. Object Feature Selection, or 3. Object Classification when running Batch Processing!
 
 3. Under `4. Object Information Export`:
    - Select **Object Predictions** from the dropdown.
@@ -652,24 +669,23 @@ Choose  `Features` to choose the Feature you are interested in exporting.
 9. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
 
 10. Go to `5. Batch Processing` and click `Process all files`.                                                                                                                               
-11. The output will be saved as data_Object Predictions.h5 files and data_table.csv in the output folder.
+11.  The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the output folder (`8_batch_objectclassification`).
 
 12. Now you have performed all steps in ilastik. You can close ilastik.
 
 ## 7.8 CSV Summary
 1. Switch back to the caactus GUI.
 2. The default Pixel Size is already set in Global Settings — you can leave it as-is for the sample data.
-3. Find **step 7 – CSV Summary** and click **Run**.
+3. Find **7. CSV Summary** and click **Run**.
 4. Inspect the generated `df_clean.csv`. This spreadsheet combines all feature tables from Object Classification into one file for downstream analysis.
 
 ## 7.9 Summary Statistics
-1. In Global Settings, change **Variable Names** to `['condition1','condition2']`.
-2. Find **step 8 – Summary Statistics** and click **Run**.
+2. Find **8. Summary Statistics** and click **Run**.
 4. Inspect the generated results. The output generated will be 
-    - a) "df_summary_complete.csv" = .csv-table containing also "not usable" category,
-    - b) "df_refined_complete.csv" = .csv-table without "not usable" category", 
-    - c) "counts.csv" dataframe used in PlnModelling
-    - d) bar graph ("barchart.png") (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.) You can play around by putting 'condition2' first and 'condition1' second to see how it changes the plot.
+    - a) `df_summary_complete.csv` = .csv-table containing also **not usable** category,
+    - b) `df_refined_complete.csv` = .csv-table without **not usable** category", 
+    - c) `counts.csv` dataframe used in PlnModelling
+    - d) bar graph (`barchart.png`) (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.) You can play around by putting `'condition2'` first and `'condition1'` second to see how it changes the plot.
 5. You may also change the colors:
  change the default 
 ```bash 
@@ -680,7 +696,7 @@ Choose  `Features` to choose the Feature you are interested in exporting.
 {'resting': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}
 ```
 
-6. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F`). Now re-do step `7.9 Summary Statistics`. Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`
+6. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F` - `Replace all`, save `df_clean.csv`). Now re-do step `7.9 Summary Statistics`. Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`
 ```bash 
 ['resting', 'swollen', 'germling', 'hyphae']
 ```
@@ -693,7 +709,9 @@ and `Color Mapping` fields.
 
 
 7. Let's imagine you only have 3 cell categories in your dataset.
-Again, open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `dormant`with `spores` (use `Ctrl+F`). Similarly, replace all `swollen`with `spores` (use `Ctrl+F`).
+Again, open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `dormant`with `spores` (use `Ctrl+F` - `Replace all`, save `df_clean.csv`).
+
+ Similarly, replace all `swollen`with `spores` (use `Ctrl+F` - `Replace all`, save `df_clean.csv`).
 Now change the `Class Order`field to
 ```bash 
 ['spores', 'germling', 'hyphae']
@@ -706,8 +724,7 @@ and the `Color Mapping`field to
 
 
 ## 7.10 PLN Modelling
-1. **Variable Names** should already be set to `['condition1','condition2']` from step 7.2 — no change needed.
-2. Find **step 10 – PLN Modelling** and click **Run**.
-4. Inspect the generated results in the subdirecory `/sampledata_CD6_zenodo/9_data_analysis/` The output generated will be 
-    - a) "correlation_circle.png". Shows that PCA1, accounting for ~57% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for ~25% of the variance based on condition1.
-    - b) "pca_plot.png". The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2 (the categorical levels will be combined).
+1. Find **10. PLN Modelling** and click **Run**.
+2. Inspect the generated results in the subdirecory `/sampledata_CD6_zenodo/9_data_analysis/` The output generated will be 
+    - a) `correlation_circle.png`. Shows that PCA1, accounting for ~57% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for ~25% of the variance based on condition1.
+    - b) `pca_plot.png`. The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2 (the categorical levels will be combined).

@@ -11,13 +11,18 @@ import sys  # For exit handling
 from caactus.utils import load_config
 
 
-DESCRIPTION = """Process CSV files and generate a cleaned summary CSV.
+DESCRIPTION = """
+## CSV Summary
 
-This script reads all individual data_table.csv files from the  in the specified input directory (e.g. "8_batch_objectclassification" folder).
+Reads all individual `*_table.csv` files from the `8_batch_objectclassification` folder and combines them into a single cleaned table.
 
-It extracts metadata from filenames. 
+### What this step does
+- Extracts metadata (e.g. strain, timepoint) from filenames
+- Converts **Size in pixels** to µm² using the **Pixel Size** set in Global Settings
+- Saves the result to the output folder
 
-It converts the "Size in pixels" column to micrometers squared using the provided pixel size (stored in microm2-column now).
+### Output
+- `df_clean.csv` — unified table with all object predictions and metadata
 """
 
 

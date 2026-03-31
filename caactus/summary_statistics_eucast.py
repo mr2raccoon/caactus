@@ -11,24 +11,26 @@ from caactus.utils import load_config, parse_if_needed
 
 
 DESCRIPTION = """
-This script processes EUCAST data and generates summary statistics and a stacked bar plot of predicted classes cell categories.
+## EUCAST Summary Statistics
 
-For the stacked bar plot, it groups data by the two variables that you enter.
+Generates summary statistics and a **stacked bar plot** for **EUCAST antifungal susceptibility** datasets.
 
-It computes the average count and percentage of each predicted class, across replicates (technical and biological), for each combination of the two grouping variables.
+### How it works
+- Groups data by **concentration** (x-axis) and **timepoint** (facet rows)
+- Computes average count and percentage of each predicted class across technical and biological replicates
 
+### Configuration (set in Global Settings → EUCAST)
+- **Class Order** — morphotype names in display order
+- **Color Mapping** — HEX color per class (default: IBM colorblind-friendly palette)
+- **Conc Order** — concentration levels in display order (x-axis)
+- **Timepoint Order** — timepoints in display order (facet rows)
+- **Pixel Size** — used to convert cell size to µm²
 
-
-It visualizes the distribution in stacked bar plots of classes across different conditions.
-
-The first variable you enter will be displayed on the x-axis (drug concentrtion), and the second variable will be used for faceting (timepoint).
-
-
-This will create separate subplots for each level of that variable.
-
-The plot will show the percentage distribution of predicted classes for each condition, allowing you to compare how the classes are distributed across different experimental conditions defined by the two grouping variables.
-
- The colors of the bars will correspond to the predicted classes, as defined in your color mapping.
+### Output (saved to `9_data_analysis`)
+- `df_summary_complete.csv` — full summary including "not usable" category
+- `df_refined_complete.csv` — summary without "not usable" category
+- `counts.csv` — count table for PLN Modelling
+- `barchart.png` — stacked bar plot
 """
 
 

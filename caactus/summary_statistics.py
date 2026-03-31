@@ -9,25 +9,26 @@ import argparse  # For CLI args
 from caactus.utils import load_config, parse_if_needed
 
 DESCRIPTION = """
-This script processes cleaned data to generate summary statistics and a stacked bar plot of predicted classes.
+## Summary Statistics
 
-For the stacked bar plot, it groups data by the two variables that you enter.
+Generates summary statistics and a **stacked bar plot** from the cleaned cell classification data.
 
-It computes the average count and percentage of each predicted class, across replicates (technical and biological), for each combination of the two grouping variables.
+### How it works
+- Groups data by the two **Variable Names** (set in Global Settings)
+- Computes average count and percentage of each predicted class across technical and biological replicates
+- The **first variable** appears on the x-axis; the **second variable** is used for faceting (subplots)
 
+### Configuration (set in Global Settings)
+- **Variable Names** — two grouping variables, e.g. `['strain', 'timepoint']`
+- **Class Order** — morphotype names in display order
+- **Color Mapping** — HEX color per class (default: IBM colorblind-friendly palette)
 
-It visualizes the distribution in stacked bar plots of classes across different conditions.
-
-The first variable you enter will be displayed on the x-axis (e.g. incubation temperature), and the second variable will be used for faceting (e.g. timepoint).
-
-This will create separate subplots for each level of that variable.
-
-The plot will show the percentage distribution of predicted classes for each condition, allowing you to compare how the classes are distributed across different experimental conditions defined by the two grouping variables.
-
- The colors of the bars will correspond to the predicted classes, as defined in your color mapping.
-
- By default the IBM coloor-blind friendly palette is used, but you can customize the colors by providing the HEX color code.
- """
+### Output (saved to `9_data_analysis`)
+- `df_summary_complete.csv` — full summary including "not usable" category
+- `df_refined_complete.csv` — summary without "not usable" category
+- `counts.csv` — count table for PLN Modelling
+- `barchart.png` — stacked bar plot
+"""
 
 
 def process_cleaned_data(

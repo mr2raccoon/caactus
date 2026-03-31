@@ -12,12 +12,16 @@ import vigra
 
 from caactus.utils import load_config
 
-DESCRIPTION = """Convert all .tif files in input_dir to .h5 format in output_dir.
+DESCRIPTION = """
+## Tif to H5
 
-Select training or batch to specify the input and output directories correctly.
+Converts all `.tif` files in the input folder to `.h5` format.
 
-The `.h5-format` allows for better performance when working with ilastik.
-For more information, see https://www.ilastik.org/documentation/basics/performance_tips.
+The **H5 format** allows for significantly better performance when working with ilastik. Use it for both training and batch images.
+
+Use the **Mode** selector in Global Settings to switch between `training` and `batch`.
+
+For more information, see the ilastik performance tips at https://www.ilastik.org/documentation/basics/performance_tips.
 """
 
 

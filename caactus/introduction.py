@@ -1,30 +1,29 @@
 DESCRIPTION = """
 <images/ascii-art-text.png>
-                                                                                                 
 
-Welcome to the caactus pipeline.
+## Welcome to caactus
 
-caactus (cell analysis and counting tool using ilastik software) is a collection of python scripts to provide a streamlined workflow for ilastik (https://www.ilastik.org/).
+**caactus** (cell analysis and counting tool using ilastik software) is a collection of Python scripts providing a streamlined workflow for ilastik (https://www.ilastik.org/).
 
-It includes data preparation, processing and analysis. 
+It covers data preparation, image processing, and statistical analysis, giving biologists an easy-to-use tool for counting and classifying cells across large microscopy datasets.
 
-It aims to provide biologist with an easy-to-use tool for counting and analyzing cells from a large number of microscopy pictures.
+## How to use this interface
 
-The workflow is organized into multiple steps, each with its own specific purpose and requirements.
+### 1. Set your Main Folder
+Enter the **full path** to your project directory at the top. All sub-folders follow the fixed naming convention described in the README.
 
-To begin, select a step from the tabs on the left. Each tab provides detailed instructions for completing that stage.
+### 2. Configure Global Settings
+Set **Pixel Size**, **Variable Names**, **Class Order**, and **Color Mapping** once. They are shared across all analysis steps. For EUCAST datasets, expand the **EUCAST Settings** section.
 
-Some steps allow you to choose between training mode and batch processing mode.
-Use the dropdown menu within the step to select the desired stage.
+### 3. Choose a Mode
+Use the **Mode** selector (`training` / `batch`) to switch all workflow steps at once.
 
-Three steps need to be performed in ilastik, a user-friendly tool for image analysis. 
-The instructions for these steps will guide you through the necessary actions in ilastik.
+### 4. Follow the Workflow
+Click **? Help** next to any step for detailed instructions. Steps marked **Ilastik** require work in the ilastik application — click **? Help** for step-by-step guidance.
 
+## Folder structure
 
-All folder names referenced in the instructions correspond to the structure of your main project directory.
+All sub-folder names correspond to the fixed structure of your main project directory. Default names can be overridden per-step via the **Advanced paths** section under each step.
 
-Default folder names are provided, but they can be modified either directly in the interface or in the `config.toml` file.
-
-
-
+For full documentation and the sample dataset, see the project README on GitHub.
 """

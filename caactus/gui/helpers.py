@@ -37,7 +37,10 @@ class DPGLogger:
 def load_font():
     font_path = get_asset_path("fonts/Inter-Regular.ttf")
     with dpg.font_registry():
-        font = dpg.add_font(str(font_path), 20)
+        with dpg.font(str(font_path), 20) as font:
+            dpg.add_font_range_hint(dpg.mvFontRangeHint_Default)  # Basic Latin + Latin-1
+            dpg.add_font_range(0x2000, 0x206F)  # General Punctuation: — • … " " etc.
+            dpg.add_font_range(0x26A0, 0x26A0)  # ⚠ warning sign
 
     dpg.bind_font(font)
 

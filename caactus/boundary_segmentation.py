@@ -1,22 +1,30 @@
 DESCRIPTION = """
-1. When first training a boundary-based Segmentation model in ilastik, open ilastik.
+## Training: Boundary Segmentation
 
-2. Create a new project and select "Boundary-based Segmentation with Multicut" as the workflow.
+1. Open **ilastik**.
 
-3. Save it as 2_boundary_segmentation.ilp inside the main project directory.
+2. Create a new project and select **Boundary-based Segmentation with Multicut** as the workflow.
 
-4. Under Raw Data, add the .h5 files from 1_images folder.
+3. Save it as `2_boundary_segmentation.ilp` inside the main project directory.
 
-5. Under Probabilities, add the data_Probabilities.h5 files from 2_probabilites folder.
+4. Under **Raw Data**, add the `.h5` files from the `1_images` folder.
 
-6. in DT Watershed,  use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
+5. Under **Probabilities**, add the `*_Probabilities.h5` files from the `2_probabilities` folder.
+
+6. In **DT Watershed**, use the input channel that corresponds to the boundary class from Pixel Classification (the number of the channel corresponds to the boundary class (0-indexed)).
 
 <images/watershed.png>
 
-7. Annotate the edges by clicking on the edges between cells. Annotate the background by clicking on the background.
+7. Annotate edges between cells and the background region.
 
-8. Export the Multicut Segmentation.
+8. Under **4. Data Export**, click **Choose Export Image Settings** and set the output path to `File`:
+`{dataset_dir}/../3_multicut/{nickname}_{result_type}.h5`
 
 <images/export_multicut.JPG>
 
+9. Click **OK**.
+
+10. Click **Export All**.
+
+11. The output will be saved as `*_Multicut Segmentation.h5` files in the `3_multicut` folder.
 """
