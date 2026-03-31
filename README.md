@@ -328,7 +328,8 @@ For further processing in object classification, the background must be removed 
 
 8. Export the Object_Predictions.
 Under `4. Object Information Export`:
-   - From the dropdown select **Object Predictions** (default).
+   - From the dropdown select **Object Predictions** 
+   
 ![object_pred](caactus/gui/assets/images/object_predicitions.png)
 
 In **Choose Export Image Settings** change settings to
