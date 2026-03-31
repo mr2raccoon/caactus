@@ -36,34 +36,40 @@ For easy copy & paste, commands are provided in `grey code boxes` with one-click
 > We developed the pipeline on ilastik 1.4.0. For optimal user experience, we recommend installing ilastik 1.4.0. Scroll down to "Previous stable versions" on the ilastik download webpage.
 
 # Quick Overview of the workflow
+Below is a short version of the steps performed. For more detail, please consult **Detailed Description of the Workflow**.
+
 1. **Culture** organism of interest in 96-well plate
 2. **Acquire** images of cells via microscopy.
 3. **Create** project directory
-4. **Rename** Files with the caactus-script ```renaming```
-5. **Convert** files to HDF5 Format with the caactus-script  ```tif2h5py```
+4. **Rename** Files with  ```caactus```.
+5. **Convert** files to HDF5 Format with the ```caactus```.
 6. Train a [pixel classification](https://www.ilastik.org/documentation/pixelclassification/pixelclassification) model in ilastik for and later run it batch-mode.
 7. Train a [boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut) model in ilastik for and later run it batch-mode.
-8. **Remove** the background from the images using ```background_processing```
+8. **Remove** the background from the `*_Multicut Segmentation.h5`files with ```caactus```.
 9. Train a [object classification](https://www.ilastik.org/documentation/objects/objects) model in ilastik for  and later run it batch-mode.
-10. **Pool** all csv-tables  from the individual images into one global table with ```csv_summary```
+10. **Pool** all csv-tables  from the individual images into one global table with ```caactus```.
 - output generated: 
     - `df_clean.csv`
-11. **Summarize** the data with  ```summary_statistics```
+11. **Summarize** the data with  caactus.
 - output generated:
     - a) `df_summary_complete.csv` = .csv-table containing also **not usable** category,
     - b) `df_refined_complete.csv` = .csv-table without **not usable** category", 
     - c) `counts.csv` dataframe used in PlnModelling
     - d) stacked bar graph (`barchart.png`)
-12. **Model** the count data with ```pln_modelling```
+12. **Model** the count data with ```caactus```
   - output generated:
     - a) `correlation_circle.png`
     - b) `pca_plot.png`
+
+>[!NOTE]
+> Power users may direclty edit the config.toml and run the scripts from the cmd-line. For onstructions, go to **7.1-7.7**
 
 ## Sample Dataset
 - a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.18799803)
 - to showcase the functionalties, the ilastik steps have been pretrained. Use caactus in batch-modes.
 > [!IMPORTANT]
-> **go to 7.1-7.11 for a detailed tutorial with the sample data set**
+> **go to 8.1-8.10 for a detailed tutorial with the sample data set**
+
 
 
 
@@ -561,8 +567,99 @@ The next script will combine all tables from all images into one global table fo
 > **Variable Names** and **Class Order** are shared with Summary Statistics — set them once in Global Settings.
 
 
-## 7. Tutorial
-### 7.1 Download Sample Data
+## 7Running caactus from the command line
+### 7.1 Setup config.toml-file
+- copy config/config.toml to your working directory and modify it as needed.
+- the caactus scripts are setup for pulling the information needed for running from the file
+  - CAVE: for Windows users make sure to change the backlash fro `/path/to/config.toml` to `\path\to\config.toml`, when copying the path to your working directory
+- open the command line (for Windows: Anaconda Powershell) and save the path to your project file to a variable
+  - whole command UNIX:
+  ```bash
+  p = "\path\to\config.toml" 
+- whole command Windows:
+  ```bash
+  $p = "\path\to\config.toml"
+
+### 7.2 Conversion
+- call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
+ The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
+- select "-c" and enter path to config.toml
+- select "-m" and choose "training"
+- whole command UNIX:
+  ```bash
+  tif2h5py -c "$p" -m training
+- whole command Windows:
+  ```bash
+  tif2h5py.exe -c $p -m training
+
+- For **batch processing** ent "-m batch" for batch mode.
+- whole command UNIX:
+  ```bash
+  tif2h5py -c "$p" -m batch
+- whole command Windows:
+  ```bash
+  tif2h5py.exe -c $p -m batch
+
+### 7.3 Background Processing
+- call the `background-processing` script from the cmd prompt
+- select "-c" and enter path to config.toml
+- enter "-m training" for training mode
+- whole command UNIX:
+  ```bash
+  background_processing -c "$p" -m training
+- whole command Windows:
+  ```bash
+  background_processing.exe -c $p -m training
+
+- For **batch processing** enter "-m batch" for batch mode
+- whole command Unix:
+  ```bash
+  background_processing -c "$p" -m batch
+- whole command Windows:
+  ```bash
+  background_processing.exe -c $p -m batch
+
+### 7.4 Rename Files
+- Call the `rename` script from the cmd prompt to rename all your original `.tif-files` to their new name.
+- whole command Unix:
+  ```bash
+  renaming -c "$p"
+- whole command Windows:
+  ```bash
+  renaming.exe -c $p
+
+### 7.5 CSV-Summary
+- call the `csv_summary.py` script from the cmd prompt
+- whole command Unix:
+   ```bash
+   csv_summary -c "$p"
+- whole command Windows
+   ```bash
+   csv_summary.exe -c $p
+
+### 7.6 Creating Summary Statistics
+
+- call the `summary_statistics.py` script from the cmd prompt
+- whole command Unix:
+   ```bash
+  summary_statistics -c "$p"
+ - whole command Windows:
+   ```bash
+   summary_statistics.exe -c $p
+- if working with EUCAST antifungal susceptibility testing, call `summary_statistics_eucast`
+
+### 7.7 PLN Modelling 
+- call the `pln_modelling.py` script from the cmd prompt`
+- whole command Unix:
+   ```bash
+  pln_modelling -c "$p"
+ - whole command Windows:
+   ```bash
+   pln_modelling.exe -c $p
+
+
+## 8. Tutorial
+### 8.1 Download Sample Data
 1. Go to [zenodo](https://doi.org/10.5281/zenodo.18799803) to download the sample data.
 2. Unpack the `.zip`-file into your project folder.
 3. The path to where you unpacked the sample data will be your main folder (e.g. `/home/usr/Documents/sampledata_CD6_zenodo`).
@@ -583,7 +680,7 @@ caactus
 ```
 6. We recommend working with two screens. This allows to follow the instructions implemented in the caactus GUI while performing the steps in ilastik and quickly switiching back to the caactus steps for fast completion of the pipeline. 
 
-### 7.2 Global Settings
+### 8.2 Global Settings
 
 1. On the top, enter the path to your mainfolder.
 
@@ -604,20 +701,20 @@ caactus
 
 
 
-### 7.3 Pre-Processing - Renaming
+### 8.3 Pre-Processing - Renaming
 1. In your main folder (`sampledata_CD6_zenodo`), inspect the `renaming.csv` spreadsheet to see how it is constructed.
 2. In the GUI, go to `Pre-Processing **1. Renaming** and click **Run**.
 3. If you click on the dropdown menu `Advanced paths`, a menu will open that will allow you to change the input and output folders, as well as the name of the renaming file. 
 
 ![renaming](caactus/gui/assets/images/renaming.png)
 
-### 7.4 Pre-Processing - Tif to h5
+### 8.4 Pre-Processing - Tif to h5
 1. In the GUI, go to `Pre-Processing **2. Tif to h5** and click **Run**.
 3. If you click on the dropdown menu `Advanced paths`, a menu will open that will allow you to change the input and output folders.
 
 ![tif2h5](caactus/gui/assets/images/tif2h5.png)
 
-## 7.4 Batch Pixel Classification
+## 8.4 Batch Pixel Classification
 In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the full instructions. Summary:
 
 1. Open ilastik.
@@ -646,7 +743,7 @@ In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the f
 8. The output will be saved as _Probabilities.h5 files in the output folder.
 
 
-## 7.5 Batch Processing Multicut Segmentation
+## 8.5 Batch Processing Multicut Segmentation
 In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the full instructions. Summary:
 
 1. In ilastik, open the pre-trained Boundary Segmentation project (`2_boundary_segmentation.ilp`).
@@ -678,7 +775,7 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 10. Close the `2_boundary_segmentation.ilp`project-file in ilastik.
 
 
-## 7.6 Batch Background Processing
+## 8.6 Batch Background Processing
 1. Switch back to the caactus GUI.
 2. Find **5. Background Processing**. 
 3. Click **Run**. The background is now removed and you can continue with object classification in ilastik.
@@ -687,7 +784,7 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 
 
 
-## 7.7 Batch Object Classification
+## 8.7 Batch Object Classification
 In the caactus GUI, find **6. Object Classification**, and click **? Help** for the full instructions. Summary:
 
 1. Switch back to ilastik.
@@ -730,7 +827,7 @@ Choose  `Features` to choose the Feature you are interested in exporting.
 
 12. Now you have performed all steps in ilastik. You can close ilastik.
 
-## 7.8 CSV Summary
+## 8.8 CSV Summary
 1. Switch back to the caactus GUI. Scroll down to **Data Analysis**
 
 ![data_analysis](caactus/gui/assets/images/data_analysis.png)
@@ -739,7 +836,7 @@ Choose  `Features` to choose the Feature you are interested in exporting.
 3. Find **7. CSV Summary** and click **Run**.
 4. Inspect the generated `df_clean.csv`. This spreadsheet combines all feature tables from Object Classification into one file for downstream analysis.
 
-## 7.9 Summary Statistics
+## 8.9 Summary Statistics
 1. Find **8. Summary Statistics** and click **Run**.
 2. Inspect the generated results. The output generated will be 
     - a) `df_summary_complete.csv` = .csv-table containing also **not usable** category,
@@ -786,7 +883,7 @@ and the `Color Mapping`field to
 ```
 8. Again, find **8. Summary Statistics** and click **Run**. The names now should be changed.
 
-## 7.10 PLN Modelling
+## 8.10 PLN Modelling
 1. Find **10. PLN Modelling** and click **Run**.
 2. Inspect the generated results in the subdirecory `/sampledata_CD6_zenodo/9_data_analysis/` The output generated will be 
     - a) `correlation_circle.png`. Shows that PCA1, accounting for ~57% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for ~25% of the variance based on condition1.

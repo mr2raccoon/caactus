@@ -5,6 +5,7 @@
 import os
 import sys
 import argparse
+import warnings
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")  # non-interactive backend (no X11 windows)
@@ -168,10 +169,12 @@ def modelling(main_folder, input_path, output_path, variable_names, class_order)
         "xtick.labelsize": 20,
         "ytick.labelsize": 20,
     }):
-        zipln.plot_correlation_circle(
-            column_names=[variable_names[0], variable_names[1]],
-            column_index=[0, 2],
-        )
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", message="FigureCanvasAgg is non-interactive")
+            zipln.plot_correlation_circle(
+                column_names=[variable_names[0], variable_names[1]],
+                column_index=[0, 2],
+            )
 
         plt.savefig(os.path.join(output_dir, "correlation_circle.png"), bbox_inches="tight", dpi=300)
         plt.close(plt.gcf())
