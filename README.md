@@ -62,7 +62,7 @@ Below is a short version of the steps performed. For more detail, please consult
     - b) `pca_plot.png`
 
 >[!NOTE]
-> Power users may direclty edit the config.toml and run the scripts from the cmd-line. For onstructions, go to **7.1-7.7**
+> Power users may direclty edit the config.toml and run the scripts from the cmd-line. For instructions, go to **7.1-7.7**.
 
 ## Sample Dataset
 - a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.18799803)
@@ -165,10 +165,13 @@ The graphic user interface is structured in four parts.
 ![global_settings](caactus/gui/assets/images/global_settings.png)
 
 - At the top, enter the path to your **Main Folder** (use the Browse button or type/ copy&paste the full path).
-- Set shared analysis parameters once in **Global Settings**: Pixel Size, Variable Names, Class Order, Color Mapping. EUCAST-specific settings can be expanded below.
+- Select `Mode`between `training` and `batch`.
+  - `training`refers to all steps during annotation of the ilastik classifiers
+  - `batch`refers to all steps performed on large datasets with ready trained ilastik models used in batch mode and subsequent data analysis. 
+- Set shared analysis parameters once in **Global Settings**: `Pixel Size`, `Variable Names`, `Class Order`, `Color Mapping`. EUCAST-specific settings can be expanded below.
 - When working with a EUCAST dataset, edit EUCAST settings from the dropdown menu.
 
-### 3.3.2 Pre-Processung
+### 3.3.2 Pre-Processing
 ![pre_process](caactus/gui/assets/images/pre_processing.png)
 - The workflow is shown as a numbered list of steps. When in training or batch modes, select the respective mode from the dropdown **Global Settings**.
 - Click **Run** to execute a step. 
@@ -389,7 +392,8 @@ In `Configure Feature Table Export General` change seetings to
 
 #### 5.2 Conversion
 1. In the caactus GUI, find **2. Tif to H5**. Select `batch` from the dropdown menu.
-- The script converts `.tif` files to `.h5` format for better [performance in ilastik](https://www.ilastik.org/documentation/basics/performance_tips).
+
+The script converts `.tif` files to `.h5` format for better [performance in ilastik](https://www.ilastik.org/documentation/basics/performance_tips).
 2. Click **Run**.
 
 > [!TIP]
@@ -511,18 +515,21 @@ Choose  `Features` to choose the Feature you are interested in exporting
 
 ## 6. Post-Processing and Data Analysis
 
-- Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py` at this stage are written for the analysis and visualization of two independent variables. The take the result of the batch-processing steps as input.
+> [!NOTE]  
+> Please be aware, the last two scripts, `summary_statisitcs.py` and `pln_modelling.py` at this stage are written for the analysis and visualization of two independent variables. The take the result of the batch-processing steps as input.
 
 1. In the caactus GUI, set **Variable Names**, **Class Order**, **Color Mapping** and **Pixel Size (µm)** in **Global Settings**.
 
 ### 6.1 Merging Data Tables and Table Export
 
 The next script will combine all tables from all images into one global table for further analysis. Additionally, the information stored in the file name will be added as columns to the dataset. 
-- Technically from this point on, you can continue to use whatever software / workflow your that is easiest for use for subsequent data analysis. 
+
+
 1. Find **7. CSV Summary** and click **Run**.
 2. The output generated will be `df_clean.csv` in `9_data_analysis`
 3. This spreadsheet now has all feature tables that are the output of **5.6 Object classification** united in one spreadsheet.
-4. You can use this spreadsheet now, to continue with analysis in the software of your choice.
+> [!TIP]  
+>Technically from this point on, you can continue to use whatever software / workflow that is easiest for you for subsequent data analysis (e.g. GraphPadPrism, EXCEL etc.)
 
 
 ### 6.2 Creating Summary Statistics
@@ -583,8 +590,8 @@ The next script will combine all tables from all images into one global table fo
 ### 7.2 Conversion
 - call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
  The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
-- select "-c" and enter path to config.toml
-- select "-m" and choose "training"
+- enter "-c" and enter path to config.toml
+- enter "-m" and choose "training"
 - whole command UNIX:
   ```bash
   tif2h5py -c "$p" -m training
@@ -592,7 +599,7 @@ The next script will combine all tables from all images into one global table fo
   ```bash
   tif2h5py.exe -c $p -m training
 
-- For **batch processing** ent "-m batch" for batch mode.
+- For **batch processing** enter "-m batch" for batch mode.
 - whole command UNIX:
   ```bash
   tif2h5py -c "$p" -m batch
@@ -602,7 +609,7 @@ The next script will combine all tables from all images into one global table fo
 
 ### 7.3 Background Processing
 - call the `background-processing` script from the cmd prompt
-- select "-c" and enter path to config.toml
+- enter "-c" and enter path to config.toml
 - enter "-m training" for training mode
 - whole command UNIX:
   ```bash
@@ -643,10 +650,16 @@ The next script will combine all tables from all images into one global table fo
 - whole command Unix:
    ```bash
   summary_statistics -c "$p"
- - whole command Windows:
+- whole command Windows:
    ```bash
    summary_statistics.exe -c $p
-- if working with EUCAST antifungal susceptibility testing, call `summary_statistics_eucast`
+- if working with EUCAST antifungal susceptibility testing, call 
+- whole command Unix:
+  ```bash
+  summary_statistics_eucast -c "$p" 
+- whole command Windows:
+  ```bash 
+  summary_statistics_eucast -c $p
 
 ### 7.7 PLN Modelling 
 - call the `pln_modelling.py` script from the cmd prompt`

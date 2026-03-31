@@ -454,8 +454,8 @@ def _build_step_row(step: CaactusStep, number: int):
                 callback=create_run_callback(step),
             )
         else:
-            # Ilastik step — indicate manual action required, no Run button.
-            dpg.add_button(label="Ilastik", width=80, enabled=False)
+            # ilastik step — indicate manual action required, no Run button.
+            dpg.add_button(label="ilastik", width=80, enabled=False)
 
         dpg.add_button(
             label="? Help",
