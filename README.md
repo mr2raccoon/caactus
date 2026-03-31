@@ -587,11 +587,11 @@ The next script will combine all tables from all images into one global table fo
   ```bash
   $p = "\path\to\config.toml"
 
+- enter "-c" and enter path to config.toml
+- enter "-m" and choose "training" or "batch" to switch between modes
+
 ### 7.2 Conversion
 - call the `tif2h5py` script from the cmd prompt to transform all `.tif-files` to `.h5-format`. 
- The `.h5-format` allows for better [performance when working with ilastik](https://www.ilastik.org/documentation/basics/performance_tips). 
-- enter "-c" and enter path to config.toml
-- enter "-m" and choose "training"
 - whole command UNIX:
   ```bash
   tif2h5py -c "$p" -m training
@@ -610,8 +610,6 @@ The next script will combine all tables from all images into one global table fo
 
 ### 7.3 Background Processing
 - call the `background-processing` script from the cmd prompt
-- enter "-c" and enter path to config.toml
-- enter "-m training" for training mode
   - whole command UNIX:
   ```bash
   background_processing -c "$p" -m training
