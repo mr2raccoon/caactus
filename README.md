@@ -154,7 +154,7 @@ caactus
 ## 3.3 The Graphic User Interface (GUI)
 The graphic user interface is structured in four parts.
 ### 3.3.1 Global Settings
-![global_settings](caactus/gui/assets/images/globals_settings.png)
+![global_settings](caactus/gui/assets/images/global_settings.png)
 
 - At the top, enter the path to your **Main Folder** (use the Browse button or type/ copy&paste the full path).
 - Set shared analysis parameters once in **Global Settings**: Pixel Size, Variable Names, Class Order, Color Mapping. EUCAST-specific settings can be expanded below.
@@ -316,7 +316,11 @@ For further processing in object classification, the background must be removed 
  Annotate the background by clicking on the background.
 
 8. Export the Object_Predictions.
-In `Choose Export Imager Settings` change settings to
+Under `4. Object Information Export`:
+   - From the dropdown select **Object Predictions** (default).
+![object_pred](caactus/gui/assets/images/object_predicitions.png)
+
+In **Choose Export Image Settings** change settings to
 - `Convert to Data Type: integer 8-bit`
 - `Renormalize from 0.00 1.00 to 0 255`
 - Format: `compressed hdf5`
@@ -463,6 +467,7 @@ In the caactus GUI, find **6. Object Classification**, click **? Help** for the 
 
 3. Under `4. Object Information Export`:
    - From the dropdown select **Object Predictions** (default).
+   - ![object_pred](caactus/gui/assets/images/object_predicitions.png)
    - Click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
@@ -691,6 +696,7 @@ In the caactus GUI, find **6. Object Classification**, and click **? Help** for 
 
 3. Under `4. Object Information Export`:
    - Select **Object Predictions** from the dropdown.
+   - ![object_pred](caactus/gui/assets/images/object_predicitions.png)
    - Click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
@@ -776,7 +782,7 @@ and the `Color Mapping`field to
 ```bash 
 {'spores': 'yellow', 'germling': 'blue', 'hyphae': 'magenta'}
 ```
-8. 4. Again, find **8. Summary Statistics** and click **Run**. The names now should be changed.
+8. Again, find **8. Summary Statistics** and click **Run**. The names now should be changed.
 
 ## 7.10 PLN Modelling
 1. Find **10. PLN Modelling** and click **Run**.
