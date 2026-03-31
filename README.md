@@ -153,7 +153,9 @@ caactus
 ```
 ## 3.3 The Graphic User Interface (GUI)
 The graphic user interface is structured in four parts.
+
 ### 3.3.1 Global Settings
+
 ![global_settings](caactus/gui/assets/images/global_settings.png)
 
 - At the top, enter the path to your **Main Folder** (use the Browse button or type/ copy&paste the full path).
@@ -467,7 +469,7 @@ In the caactus GUI, find **6. Object Classification**, click **? Help** for the 
 
 3. Under `4. Object Information Export`:
    - From the dropdown select **Object Predictions** (default).
-   - ![object_pred](caactus/gui/assets/images/object_predicitions.png)
+   ![object_pred](caactus/gui/assets/images/object_predicitions.png)
    - Click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
@@ -696,7 +698,7 @@ In the caactus GUI, find **6. Object Classification**, and click **? Help** for 
 
 3. Under `4. Object Information Export`:
    - Select **Object Predictions** from the dropdown.
-   - ![object_pred](caactus/gui/assets/images/object_predicitions.png)
+  ![object_pred](caactus/gui/assets/images/object_predicitions.png)
    - Click **Choose Export Image Settings** and set the output path at `File`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
