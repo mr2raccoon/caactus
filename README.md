@@ -196,6 +196,7 @@ In case absolute file path is selected, right click on the location and select `
 1 = background, 
 2 = boundary 
 (This follows python's 0-indexing logic where counting is started at 0).
+
 ![pixel_classes](caactus/gui/assets/images/pixel_classification_classes.JPG)
 
 
@@ -323,14 +324,16 @@ In `Configure Feature Table Export General` change seetings to
 - Once you have successfully trained all three ilastik models, you are ready to process large image datasets with the caactus pipeline.
 1. store the images you want to process in the `0_2_original_tif_batch_images` directory
 2. Perform steps 4.1 to 4.5 in batch mode, as explained in detail below (5.1 to 5.5).
-3. Select **Mode** `batch` in the dropdown menu in **Global settings in the caactus GUI.
+3. Select **Mode** `batch` in the dropdown menu in **Global settings** in the caactus GUI.
 - For more information, follow the [documentation for batch processing](https://www.ilastik.org/documentation/basics/batch)
   
 ### 5.1 Rename Files
 - Rename the `.tif-files` so that they contain information about your cells and experimental conditions
 1. Create a csv-file that contains the information you need in columns. Each row corresponds to one image. Follow the same order as your images files are stored in the respective directory (alphabetically).
 
-- The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
+- The script will rename your files in the following format ```columnA-value1_columnB-value2_columnC_etc.tif ``` eg. as seen in the example below picture 1 (well A1 from our plate) will be named
+
+ ```strain-ATCC11559_date-20241707_timepoint-6h_biorep-A_techrep-1.tif ```
 
 > [!CAUTION]
 > Do not use underscores (`_`) or dashes (`-`) in column names or values — these characters are used as delimiters in the new file names.
@@ -339,15 +342,14 @@ In `Configure Feature Table Export General` change seetings to
 > The only hardcoded column names required are **biorep** and **techrep**. They are needed in downstream analysis for calculating averages.
 
 
-2. In the caactus GUI, find **step 1 – Renaming** and click **Run**.
+2. In the caactus GUI under **Pre-Processing**, find **1. Renaming** and click **Run**.
 ![96_well](caactus/gui/assets/images/96_well_setup.png)
 
 > [!TIP]
 > After renaming, we recommend deleting the contents of `0_2_original_tif_batch_images` to save disk space.
-"""
 
 #### 5.2 Conversion
-1. In the caactus GUI, find **step 2 – Tif to H5**. Select `batch` from the dropdown menu.
+1. In the caactus GUI, find **2. Tif to H5**. Select `batch` from the dropdown menu.
 - The script converts `.tif` files to `.h5` format for better [performance in ilastik](https://www.ilastik.org/documentation/basics/performance_tips).
 2. Click **Run**.
 
@@ -356,7 +358,7 @@ In `Configure Feature Table Export General` change seetings to
 
 ### 5.3 Batch Processing Pixel Classification
 
-In the caactus GUI, find **step 3 – Pixel Classification**, select `batch`, and click **? Help** for the full ilastik instructions. Summary:
+In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the full ilastik instructions. Summary:
 
 1. Open ilastik.
 
@@ -386,7 +388,7 @@ In the caactus GUI, find **step 3 – Pixel Classification**, select `batch`, an
 
 ### 5.4 Batch Processing Multicut Segmentation
 
-In the caactus GUI, find **step 4 – Boundary Segmentation**, select `batch`, and click **? Help** for the full ilastik instructions. Summary:
+In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the full ilastik instructions. Summary:
 
 1. Open ilastik.
 
@@ -418,12 +420,13 @@ In the caactus GUI, find **step 4 – Boundary Segmentation**, select `batch`, a
 
 
 ### 5.5 Background Processing
-In the caactus GUI, find **step 5 – Background Processing**. Select `batch` from the dropdown and click **Run**. This removes the background from all `*_Multicut Segmentation.h5` files in `7_batch_multicut/` by setting the largest region value to 0 (transparent in ilastik).
+1. In the caactus GUI, find **5. Background Processing**, click **? Help** for the description. 
+2. Click **Run**. This removes the background from all `*_Multicut Segmentation.h5` files in `7_batch_multicut/` by setting the largest region value to 0 (transparent in ilastik).
 
 
 ### 5.6 Batch processing Object classification
 
-In the caactus GUI, find **step 6 – Object Classification**, select `batch`, and click **? Help** for the full ilastik instructions. Summary:
+In the caactus GUI, find **6. Object Classification**, click **? Help** for the full ilastik instructions. Summary:
 
 1. Open ilastik.
 
