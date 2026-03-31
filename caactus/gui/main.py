@@ -323,6 +323,16 @@ def _show_introduction():
 def _build_global_settings():
     with dpg.group(horizontal=True):
         dpg.add_text("Global Settings", color=[200, 200, 200])
+        dpg.add_spacer(width=20)
+        dpg.add_text("Mode:", color=[200, 200, 200])
+        dpg.add_combo(
+            items=["training", "batch"],
+            default_value="training",
+            tag="global__stage",
+            width=120,
+            callback=on_global_stage_change,
+        )
+        dpg.add_spacer(width=20)
         dpg.add_button(
             label="? Introduction to caactus",
             callback=lambda: _show_introduction(),
@@ -458,17 +468,6 @@ def _build_step_row(step: CaactusStep, number: int):
 
 
 def _build_workflow():
-    # Global training / batch toggle
-    with dpg.group(horizontal=True):
-        dpg.add_text("Mode:")
-        dpg.add_combo(
-            items=["training", "batch"],
-            default_value="training",
-            tag="global__stage",
-            width=120,
-            callback=on_global_stage_change,
-        )
-    dpg.add_separator()
     dpg.add_spacer(height=4)
 
     seen_groups: list[str] = []
