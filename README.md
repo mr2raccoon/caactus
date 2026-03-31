@@ -151,13 +151,39 @@ conda activate caactus-env
 ```bash
 caactus
 ```
+## 3.3 The Graphic User Interface (GUI)
+The graphic user interface is structured in four parts.
+### 3.3.1 Global Settings
+![global_settings](caactus/gui/assets/images/globals_settings.png)
+
 - At the top, enter the path to your **Main Folder** (use the Browse button or type/ copy&paste the full path).
 - Set shared analysis parameters once in **Global Settings**: Pixel Size, Variable Names, Class Order, Color Mapping. EUCAST-specific settings can be expanded below.
+- When working with a EUCAST dataset, edit EUCAST settings from the dropdown menu.
+
+### 3.3.2 Pre-Processung
+![pre_process](caactus/gui/assets/images/pre_processing.png)
 - The workflow is shown as a numbered list of steps. When in training or batch modes, select the respective mode from the dropdown **Global Settings**.
 - Click **Run** to execute a step. 
-- Each step includes description in **? Help** pop-up. For ilastik steps, detailed step-by-step instructions are included.
+- Each step includes description in **? Help** pop-up.
 - Processing messages appear in the log panel at the bottom.
 - The output can be accessed in the respective subdirectory of your main folder.
+
+### 3.3.3 ilastik
+![ilastiks_steps](caactus/gui/assets/images/ilastik_background.png)
+-  For ilastik steps, detailed step-by-step instructions are included.
+- When in training or batch modes, select the respective mode from the dropdown **Global Settings**.
+- Click **Run** to execute a **Backgrground processing**, Processing messages appear in the log panel at the bottom.
+- All other steps have to be performed in ilastik. 
+- Each step includes description in **? Help** pop-up.
+
+
+### 3.3.4 Data analysis
+![data_analysis](caactus/gui/assets/images/data_analysis.png)
+- Data analysis steps are performed with the results of batch-processing.
+- Click **Run** to execute a step and **? Help** for pop-up window instructions.
+- Use 9. insead of 8. When working with a EUCAST dataset. 
+
+
 
 ## 4. Training
 
@@ -576,13 +602,13 @@ caactus
 2. In the GUI, go to `Pre-Processing **1. Renaming** and click **Run**.
 3. If you click on the dropdown menu `Advanced paths`, a menu will open that will allow you to change the input and output folders, as well as the name of the renaming file. 
 
-![mode_batch](caactus/gui/assets/images/renaming.png)
+![renaming](caactus/gui/assets/images/renaming.png)
 
 ### 7.4 Pre-Processing - Tif to h5
 1. In the GUI, go to `Pre-Processing **2. Tif to h5** and click **Run**.
 3. If you click on the dropdown menu `Advanced paths`, a menu will open that will allow you to change the input and output folders.
 
-![mode_batch](caactus/gui/assets/images/tif2h5.png)
+![tif2h5](caactus/gui/assets/images/tif2h5.png)
 
 ## 7.4 Batch Pixel Classification
 In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the full instructions. Summary:
@@ -650,6 +676,9 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 2. Find **5. Background Processing**. 
 3. Click **Run**. The background is now removed and you can continue with object classification in ilastik.
 
+![batch_background](caactus/gui/assets/images/ilastik_background.png)
+
+
 
 ## 7.7 Batch Object Classification
 In the caactus GUI, find **6. Object Classification**, and click **? Help** for the full instructions. Summary:
@@ -694,20 +723,23 @@ Choose  `Features` to choose the Feature you are interested in exporting.
 12. Now you have performed all steps in ilastik. You can close ilastik.
 
 ## 7.8 CSV Summary
-1. Switch back to the caactus GUI.
+1. Switch back to the caactus GUI. Scroll down to **Data Analysis**
+
+![data_analysis](caactus/gui/assets/images/data_analysis.png)
+
 2. The default Pixel Size is already set in Global Settings — you can leave it as-is for the sample data.
 3. Find **7. CSV Summary** and click **Run**.
 4. Inspect the generated `df_clean.csv`. This spreadsheet combines all feature tables from Object Classification into one file for downstream analysis.
 
 ## 7.9 Summary Statistics
-2. Find **8. Summary Statistics** and click **Run**.
-4. Inspect the generated results. The output generated will be 
+1. Find **8. Summary Statistics** and click **Run**.
+2. Inspect the generated results. The output generated will be 
     - a) `df_summary_complete.csv` = .csv-table containing also **not usable** category,
     - b) `df_refined_complete.csv` = .csv-table without **not usable** category", 
     - c) `counts.csv` dataframe used in PlnModelling
     - d) bar graph (`barchart.png`) (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.) You can play around by putting `'condition2'` first and `'condition1'` second to see how it changes the plot.
-5. You may also change the colors:
- change the default 
+3. You may also change the colors:
+ change the default in **Global Settings**
 ```bash 
 {'resting': '#FE6100', 'swollen': '#648FFF', 'germling': '#785EF0', 'hyphae': '#DC267F'}
 ```
@@ -715,8 +747,11 @@ Choose  `Features` to choose the Feature you are interested in exporting.
 ```bash 
 {'resting': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}
 ```
+4. Again, find **8. Summary Statistics** and click **Run**. The colors now should be changed.
 
-6. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F` - `Replace all`, save `df_clean.csv`). Now re-do step `7.9 Summary Statistics`. Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`
+5. Similarly, you my change the morphotype names. Open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `resting`with `dormant` (use `Ctrl+F` - `Replace all`, save `df_clean.csv`). Now re-do step `7.9 Summary Statistics`. 
+
+Before you click `Run`, make sure you replace `resting` with `dormant`in both `Class order`
 ```bash 
 ['resting', 'swollen', 'germling', 'hyphae']
 ```
@@ -726,7 +761,7 @@ and `Color Mapping` fields.
 ```bash 
 {'dormant': 'yellow', 'swollen': 'cyan', 'germling': 'blue', 'hyphae': 'magenta'}
 ```
-
+6. Again, find **8. Summary Statistics** and click **Run**. The names now should be changed.
 
 7. Let's imagine you only have 3 cell categories in your dataset.
 Again, open `df_clean.csv` in a speadsheet software (e.g. Excel). Replace all `dormant`with `spores` (use `Ctrl+F` - `Replace all`, save `df_clean.csv`).
@@ -741,7 +776,7 @@ and the `Color Mapping`field to
 ```bash 
 {'spores': 'yellow', 'germling': 'blue', 'hyphae': 'magenta'}
 ```
-
+8. 4. Again, find **8. Summary Statistics** and click **Run**. The names now should be changed.
 
 ## 7.10 PLN Modelling
 1. Find **10. PLN Modelling** and click **Run**.
