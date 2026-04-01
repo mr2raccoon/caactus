@@ -78,6 +78,7 @@ Below is a short version of the steps performed. For more detail, please consult
 - Culture your cells in a flat bottom plate of your choice and according to the needs of the organims being researched.
 ## 2. Image acquisition
 - In your respective microscopy software environment, export the images of interest to `.tif-format`.
+- For the workflow and file conversion steps, caactus currently supports grayscale (1-channel) and RGB (3-channel) images in `.tif-format`.
 - From the image metadata, copy the pixel size. 
 
 ## 3. Data Preparation
