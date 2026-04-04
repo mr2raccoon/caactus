@@ -21,8 +21,10 @@ DESCRIPTION = """
 
 7. Annotate each class by drawing on the images.
 
-8. Under **4. Prediction Export**, click **Choose Export Image Settings** and set the output path to `File`:
-`{dataset_dir}/../2_probabilities/{nickname}_{result_type}.h5`
+8. Under **4. Prediction Export**, click **Choose Export Image Settings** and configure:
+- `Convert to Data Type: integer 8-bit`
+- `Renormalize from 0.00 1.00 to 0 255`
+- `File`: `{dataset_dir}/../2_probabilities/{nickname}_{result_type}.h5`
 
 <images/export_probabilities.JPG>
 

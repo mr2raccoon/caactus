@@ -17,8 +17,11 @@ DESCRIPTION = """
 
 7. Annotate edges between cells and the background region.
 
-8. Under **4. Data Export**, click **Choose Export Image Settings** and set the output path to `File`:
-`{dataset_dir}/../3_multicut/{nickname}_{result_type}.h5`
+8. Under **4. Data Export**, click **Choose Export Image Settings** and configure:
+- `Convert to Data Type: integer 8-bit`
+- `Renormalize from 0.00 1.00 to 0 255`
+- Format: `compressed hdf5`
+- `File`: `{dataset_dir}/../3_multicut/{nickname}_{result_type}.h5`
 
 <images/export_multicut.JPG>
 

@@ -21,7 +21,7 @@ Generates summary statistics and a **stacked bar plot** from the cleaned cell cl
 ### Configuration (set in Global Settings)
 - **Variable Names** — two grouping variables, e.g. `['strain', 'timepoint']`
 - **Class Order** — morphotype names in display order
-- **Color Mapping** — HEX color per class (default: IBM colorblind-friendly palette)
+- **Color Mapping** — HEX color per class (default: IBM color-blind-friendly palette)
 
 ### Output (saved to `9_data_analysis`)
 - `df_summary_complete.csv` — full summary including "not usable" category

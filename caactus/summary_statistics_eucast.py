@@ -21,7 +21,7 @@ Generates summary statistics and a **stacked bar plot** for **EUCAST antifungal 
 
 ### Configuration (set in Global Settings → EUCAST)
 - **Class Order** — morphotype names in display order
-- **Color Mapping** — HEX color per class (default: IBM colorblind-friendly palette)
+- **Color Mapping** — HEX color per class (default: IBM color-blind-friendly palette)
 - **Conc Order** — concentration levels in display order (x-axis)
 - **Timepoint Order** — timepoints in display order (facet rows)
 - **Pixel Size** — used to convert cell size to µm²

@@ -11,17 +11,20 @@ DESCRIPTION = """
 
 5. Under **Segmentation Image**, add the `*_Multicut Segmentation.h5` files from the `3_multicut` folder.
 
-6. Define your cell classes plus a **"not-usable"** category (for debris and cells cut off at image borders).
+6. Define your cell classes plus a **not usable** category (for debris and cells cut off at image borders).
 Default class names: `resting`, `swollen`, `germling`, `hyphae`, `notusable` (and `mycelium` for EUCAST workflow). 
 You are welcome to change the names. 
 Make sure to also change the names in the caactus GUI when performing analysis steps below.
 
-<images/watershed.png>
+<images/object_label_classes.png>
 
 7. Annotate objects by clicking on them in each class.
 
-8. Under **4. Object Information Export**, click **Choose Export Image Settings** and set the output path to `File`:
-`{dataset_dir}/../4_objectclassification/{nickname}_{result_type}.h5`
+8. Under **4. Object Information Export**, click **Choose Export Image Settings** and configure:
+- `Convert to Data Type: integer 8-bit`
+- `Renormalize from 0.00 1.00 to 0 255`
+- Format: `compressed hdf5`
+- `File`: `{dataset_dir}/../4_objectclassification/{nickname}_{result_type}.h5`
 
 <images/export_objectclassification.JPG>
 
