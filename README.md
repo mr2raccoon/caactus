@@ -251,14 +251,13 @@ In prediction export change the settings to
   ```bash
   {dataset_dir}/../2_probabilities/{nickname}_{result_type}.h5
   ```
+- Now click `OK`.
 
 ![export_prob](caactus/gui/assets/images/export_probabilities.JPG)
 
-9. Click `OK`.
+9. Click `Export All`.
 
-10. Click `Export All`.
-
-11. The output will be saved as `*_Probabilities.h5` files in the `2_probabilities` folder.
+10. The output will be saved as `*_Probabilities.h5` files in the `2_probabilities` folder.
 
 
 - For more information, consult the [documentation for pixel classification with ilastik](https://www.ilastik.org/documentation/pixelclassification/pixelclassification). 
@@ -291,14 +290,13 @@ In prediction export change the settings to
   ```bash
   {dataset_dir}/../3_multicut/{nickname}_{result_type}.h5
   ```
+- Now click `OK`.
 
 ![export_multicut](caactus/gui/assets/images/export_multicut.JPG)
 
-9. Click `OK`.
+9. Click `Export All`.
 
-10. Click `Export All`.
-
-11. The output will be saved as `*_Multicut Segmentation.h5` files in the `3_multicut` folder.
+10. The output will be saved as `*_Multicut Segmentation.h5` files in the `3_multicut` folder.
 
 - For more information follow the [documentation for boundary-based segmentation with Multicut](https://www.ilastik.org/documentation/multicut/multicut).  
 
@@ -346,24 +344,22 @@ In **Choose Export Image Settings** change settings to
   ```bash
   {dataset_dir}/../4_objectclassification/{nickname}_{result_type}.h5
   ```
-
+- Now click `OK`.
 ![export_multicut](caactus/gui/assets/images/export_objectclassification.JPG)
 
 
 9. Export the Object data_table.csv-files
-In `Configure Feature Table Export General` change settings to
+In `Configure Feature Table Export`, subtab `General`, change settings to
 - format `.csv` and output directory File:
   ```bash
   {dataset_dir}/../4_objectclassification/{nickname}.csv
   ```
-- select your features of interest for exporting
+- In subtab `Features`, select your features of interest for exporting and click `OK`
 ![export_prob](caactus/gui/assets/images/object_tableexport.JPG)
 
-10. Click `OK`.
+10. Click `Export All`.
 
-11. Click `Export All`.
-
-12. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the `4_objectclassification` folder.
+11. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the `4_objectclassification` folder.
 
 
 - For more information follow the [documentation for object classification](https://www.ilastik.org/documentation/objects/objects).
@@ -422,22 +418,20 @@ In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the f
 
      ![pixel_prob](caactus/gui/assets/images/pixel_prob.png)
 
-   - Click **Choose Export Image Settings** and set the output file path at `File`:
+   - Click **Choose Export Image Settings**, set the output file path at `File` and then click `OK`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
   ```
 
 ![batch_pixel](caactus/gui/assets/images/batch_pixel.png)
 
-4. Click `OK`
+4. Go to `5. Batch processing` tab
 
-5. Go to `5. Batch processing` tab
-
-6. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
+5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
                                                                                     
-7. Now click `Process all files`.
+6. Now click `Process all files`.
 
-8. The output will be saved as `*_Probabilities.h5` files in the output folder (`6_batch_probabilities`).
+7. The output will be saved as `*_Probabilities.h5` files in the output folder (`6_batch_probabilities`).
 
 ### 5.4 Batch Processing Multicut Segmentation
 
@@ -456,22 +450,21 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 
 ![batch_multicut](caactus/gui/assets/images/pixel_prob.png)
 
-- Click **Choose Export Image Settings** and set the output path at `File`:
+- Click **Choose Export Image Settings**,  set the output path at `File` and then click `OK`:
   ```bash
   {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
   ```
-4. Click `OK`
 
-5. Go to `5. Batch processing`.
+4. Go to `5. Batch processing`.
 
-6. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                                                 
-7. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
+5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                                                 
+6. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
 
 ![batch_multicut](caactus/gui/assets/images/batch_multicut.png)
 
-8. Go to `5. Batch Processing` and click `Process all files`.
+7. Go to `5. Batch Processing` and click `Process all files`.
 
-9. The output will be saved as `*_Multicut Segmentation.h5` files in the output folder (`7_batch_multicut`).
+8. The output will be saved as `*_Multicut Segmentation.h5` files in the output folder (`7_batch_multicut`).
 
 
 
@@ -493,36 +486,36 @@ In the caactus GUI, find **6. Object Classification**, click **? Help** for the 
 
 3. Under `4. Object Information Export`:
    - From the dropdown select **Object Predictions** (default).
+
    ![object_pred](caactus/gui/assets/images/object_predicitions.png)
-   - Click **Choose Export Image Settings** and set the output path at `File`:
+
+   - Click **Choose Export Image Settings**, set the output path at `File` and then click `OK`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
   ```
 ![object_image](caactus/gui/assets/images/batch_object_image.png)
 
-4. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
+4. Under `4. Object Information Export`, choose `Configure Feature Table Export`, with the following settings and then click `OK`:
 ![feature_table](caactus/gui/assets/images/feature_table_export.png)
                                                                         
-5. In `Configure Feature Table Export General` choose format `.csv` and change output directory to:
+5. In `Configure Feature Table Export`, subtab `General`, choose format `.csv` and change output directory to, then click `OK`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
   ```
 
-Choose  `Features` to choose the Feature you are interested in exporting
+In subtab `Features`, choose the features you are interested in exporting. Then click `OK`.
 
 ![feature_features](caactus/gui/assets/images/features_of_featuretable.png)
 
-6. Click `OK`
+6. Go to 5. `Batch Processing` tab
 
-7. Go to 5. `Batch Processing` tab
+7. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
 
-8. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
+8. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
 
-9. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
+9. Go to `5. Batch Processing` and click `Process all files`.
 
-10. Go to `5. Batch Processing` and click `Process all files`.
-
-11. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the output folder (`8_batch_objectclassification`).
+10. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the output folder (`8_batch_objectclassification`).
 
 
 
@@ -764,7 +757,7 @@ In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the f
 
 1. Open ilastik.
 
-2. Open the pre-trained pixel classification project from the sample data (`1_pixel_classification.ilp`).
+2. Open the pre-trained pixel classification project (`1_pixel_classification.ilp`) from the sample data folder `sampledata_CD6_zenodo`.
 > [!CAUTION]
 > DO NOT CHANGE anything in `1. Input Data`, `2. Feature Selection`, or `3. Training` when running Batch Processing!
 
@@ -773,28 +766,26 @@ In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the f
 
      ![pixel_prob](caactus/gui/assets/images/pixel_prob.png)
 
-   - Click **Choose Export Image Settings** and set the output path at `File`:
+   - Click **Choose Export Image Settings**, set the output path at `File` and then click `OK`:
   ```bash
   {dataset_dir}/../6_batch_probabilities/{nickname}_{result_type}.h5
   ```
 
 ![batch_pixel](caactus/gui/assets/images/batch_pixel.png)
 
-4. Click `OK`
+4. Go to `5. Batch processing` tab
 
-5. Go to `5. Batch processing` tab
-
-6. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
+5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
                                                                                     
-7. Now click `Process all files`.
+6. Now click `Process all files`.
 
-8. The output will be saved as _Probabilities.h5 files in the output folder.
+7. The output will be saved as _Probabilities.h5 files in the output folder.
 
 
 ### 8.6 Batch Processing Multicut Segmentation
 In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the full instructions. Summary:
 
-1. In ilastik, open the pre-trained Boundary Segmentation project (`2_boundary_segmentation.ilp`).
+1. In ilastik, open the pre-trained Boundary Segmentation project (`2_boundary_segmentation.ilp`) from the sample data folder `sampledata_CD6_zenodo`.
 > [!CAUTION]
 > DO NOT CHANGE anything in `1. Input Data`, `2. DT Watershed`, or `3. Training and Multicut` when running Batch Processing!
 
@@ -803,29 +794,27 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 
 2. Under `4. Data Export`,
 
-![batch_multicut](caactus/gui/assets/images/pixel_prob.png)
+![batch_multicut](caactus/gui/assets/images/multicut_export.png)
 
 
-- click **Choose Export Image Settings** and set the output path at `File`:
+- click **Choose Export Image Settings**, set the output path at `File` and then click `OK`:
   ```bash
   {dataset_dir}/../7_batch_multicut/{nickname}_{result_type}.h5
   ```
 
-4. Click `OK`
+3. Go to `5. Batch processing`.
 
-5. Go to `5. Batch processing`.
+4. Under `Raw data`, add the .h5 files from `5_batch_images` folder.
 
-6. Under `Raw data`, add the .h5 files from `5_batch_images` folder.
-
-7. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
+5. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
 
 ![batch_multicut](caactus/gui/assets/images/batch_multicut.png)
 
-8. Go to `5. Batch Processing` and click `Process all files`.
+6. Go to `5. Batch Processing` and click `Process all files`.
 
-9. The output will be saved as `*_Multicut Segmentation.h5` files in the output folder (`7_batch_multicut`).
+7. The output will be saved as `*_Multicut Segmentation.h5` files in the output folder (`7_batch_multicut`).
 
-10. Close the `2_boundary_segmentation.ilp` project-file in ilastik.
+8. Close the `2_boundary_segmentation.ilp` project-file in ilastik.
 
 
 ### 8.7 Batch Background Processing
@@ -842,7 +831,7 @@ In the caactus GUI, find **6. Object Classification**, and click **? Help** for 
 
 1. Switch back to ilastik.
 
-2. Open your trained object classification project (`3_object_classification.ilp`).
+2. Open your trained object classification project (`3_object_classification.ilp`) from the sample data folder `sampledata_CD6_zenodo`.
 > [!CAUTION]
 > DO NOT CHANGE anything in `1. Input Data`, `2. Object Feature Selection`, or `3. Object Classification` when running Batch Processing!
 
@@ -851,36 +840,34 @@ In the caactus GUI, find **6. Object Classification**, and click **? Help** for 
 
   ![object_pred](caactus/gui/assets/images/object_predicitions.png)
 
-   - Click **Choose Export Image Settings** and set the output path at `File`:
+   - Click **Choose Export Image Settings**, set the output path at `File` and then click `OK`:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}_{result_type}.h5
   ```
 ![object_image](caactus/gui/assets/images/batch_object_image.png)
 
-4. Under "4. Object Information Export", choose "Configure Feature Table Export" with the following settings:
+4. Under `4. Object Information Export`, choose `Configure Feature Table Export` with the following settings and then click `OK`:
 ![feature_table](caactus/gui/assets/images/feature_table_export.png)
                                                                         
-5. In `Configure Feature Table Export General` choose format `.csv` and change output directory to:
+5. In `Configure Feature Table Export`, subtab `General`,  choose format `.csv` and change output directory to:
   ```bash
   {dataset_dir}/../8_batch_objectclassification/{nickname}.csv
   ```
 
-Choose  `Features` to choose the Feature you are interested in exporting.
+In subtab `Features`, choose the features you are interested in exporting. Then click `OK`.
 
 ![feature_features](caactus/gui/assets/images/features_of_featuretable.png)
 
-6. Click `OK`
+6. Go to 5. `Batch Processing` tab
 
-7. Go to 5. `Batch Processing` tab
+7. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
 
-8. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
+8. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
 
-9. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
+9. Go to `5. Batch Processing` and click `Process all files`.                                                                                                                               
+10.  The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the output folder (`8_batch_objectclassification`).
 
-10. Go to `5. Batch Processing` and click `Process all files`.                                                                                                                               
-11.  The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the output folder (`8_batch_objectclassification`).
-
-12. Now you have performed all steps in ilastik. You can close ilastik.
+11. Now you have performed all steps in ilastik. You can close ilastik.
 
 ### 8.9 CSV Summary
 1. Switch back to the caactus GUI. Scroll down to **Data Analysis**

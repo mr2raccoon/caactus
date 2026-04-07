@@ -20,7 +20,7 @@ Make sure to also change the names in the caactus GUI when performing analysis s
 
 7. Annotate objects by clicking on them in each class.
 
-8. Under **4. Object Information Export**, click **Choose Export Image Settings** and configure:
+8. Under **4. Object Information Export**, click **Choose Export Image Settings**, configure the settings below and then click `OK`:
 - `Convert to Data Type: integer 8-bit`
 - `Renormalize from 0.00 1.00 to 0 255`
 - Format: `compressed hdf5`
@@ -28,14 +28,12 @@ Make sure to also change the names in the caactus GUI when performing analysis s
 
 <images/export_objectclassification.JPG>
 
-9. Click **Configure Feature Table Export**, set format to `.csv` and output path to:
+9. Click **Configure Feature Table Export**, set format to `.csv` and output path to, then click `OK`:
 `{dataset_dir}/../4_objectclassification/{nickname}.csv`
 
 <images/object_tableexport.JPG>
 
-10. Click **OK**.
+10. Click **Export All**.
 
-11. Click **Export All**.
-
-12. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the `4_objectclassification` folder.
+11. The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the `4_objectclassification` folder.
 """

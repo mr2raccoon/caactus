@@ -21,16 +21,14 @@ DESCRIPTION = """
 
 7. Annotate each class by drawing on the images.
 
-8. Under **4. Prediction Export**, click **Choose Export Image Settings** and configure:
+8. Under **4. Prediction Export**, click **Choose Export Image Settings**, configure the settings below and then click `OK`:
 - `Convert to Data Type: integer 8-bit`
 - `Renormalize from 0.00 1.00 to 0 255`
 - `File`: `{dataset_dir}/../2_probabilities/{nickname}_{result_type}.h5`
 
 <images/export_probabilities.JPG>
 
-9. Click **OK**.
+9. Click **Export All**.
 
-10. Click **Export All**. 
-
-11. The output will be saved as `*_Probabilities.h5` files in the `2_probabilities` folder.
+10. The output will be saved as `*_Probabilities.h5` files in the `2_probabilities` folder.
 """
