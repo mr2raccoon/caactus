@@ -54,8 +54,8 @@ Below is a short version of the steps performed. For more detail, please consult
 - output generated:
     - a) `df_summary_complete.csv` = .csv-table containing also **not usable** category,
     - b) `df_refined_complete.csv` = .csv-table without **not usable** category", 
-    - c) `counts.csv` dataframe used in PlnModelling
-    - d) stacked bar graph (`barchart.png`)
+    - c) `counts_df.csv` dataframe used in PlnModelling
+    - d) `barchart.png` — stacked bar chart
 12. **Model** the count data with ```caactus```
   - output generated:
     - a) `correlation_circle.png`
@@ -68,7 +68,7 @@ Below is a short version of the steps performed. For more detail, please consult
 - a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.18799803)
 - to showcase the functionalities, the ilastik steps have been pretrained. Use caactus in batch-modes.
 > [!IMPORTANT]
-> **go to 8.1-8.10 for a detailed tutorial with the sample data set**
+> **[go to 8.1-8.10 for a detailed tutorial with the sample data set](#8-tutorial)**
 
 
 
@@ -270,9 +270,9 @@ In prediction export change the settings to
 
 3. Save it as `2_boundary_segmentation.ilp` inside the main project directory.
 
-4. Under Raw Data, add the .h5 files from `1_images folder`.
+4. Under Raw Data, add the `.h5` files from `1_images folder`.
 
-5. Under Probabilities, add the data_Probabilities.h5 files from `2_probabilities` folder.
+5. Under Probabilities, add the `data_Probabilities.h5` files from `2_probabilities` folder.
 
 6. in DT Watershed,  use the input channel the corresponds to the order you used under project setup (in this case input channel = 2).
 
@@ -427,7 +427,7 @@ In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the f
 
 4. Go to `5. Batch processing` tab
 
-5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
+5. Under `Raw data`, add the `.h5` files from `5_batch_images` folder.                                                                  
                                                                                     
 6. Now click `Process all files`.
 
@@ -457,8 +457,8 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 
 4. Go to `5. Batch processing`.
 
-5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                                                 
-6. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
+5. Under `Raw data`, add the `.h5` files from `5_batch_images` folder.                                                                                                 
+6. Under `Probabilities`, add the `data_Probabilities.h5` files from `6_batch_probabilities` folder.
 
 ![batch_multicut](caactus/gui/assets/images/batch_multicut.png)
 
@@ -509,9 +509,9 @@ In subtab `Features`, choose the features you are interested in exporting. Then 
 
 6. Go to 5. `Batch Processing` tab
 
-7. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
+7. Under  `Raw data`, add the `.h5` files from `5_batch_images` folder.
 
-8. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
+8. Under `Segmentation Image`, add the `data_Multicut Segmentation.h5` files from `7_batch_multicut` folder.
 
 9. Go to `5. Batch Processing` and click `Process all files`.
 
@@ -556,7 +556,7 @@ The next script will combine all tables from all images into one global table fo
 2. Output:
     - a) `df_summary_complete.csv` — full table including "not usable" category
     - b) `df_refined_complete.csv` — table without "not usable" category
-    - c) `counts.csv` — count data used for PLN modelling
+    - c) `counts_df.csv` — count data used for PLN modelling
     - d) `barchart.png` — stacked bar chart
 
 ### 6.3 PLN Modelling 
@@ -720,7 +720,7 @@ caactus
 
 ### 8.2 Global Settings
 
-1. On the top, enter the path to your main folder.
+1. On the top of the GUI, enter the path to your main folder.
 
 ![main_folder](caactus/gui/assets/images/set_mainfolderpath.png)
 
@@ -747,7 +747,7 @@ caactus
 ![renaming](caactus/gui/assets/images/renaming.png)
 
 ### 8.4 Pre-Processing - Tif to h5
-1. In the GUI, go to `Pre-Processing` **2. Tif to h5** and click **Run**.
+1. In the caactus GUI, go to `Pre-Processing` **2. Tif to h5** and click **Run**.
 3. If you click on the dropdown menu `Advanced paths`, a menu will open that will allow you to change the input and output folders.
 
 ![tif2h5](caactus/gui/assets/images/tif2h5.png)
@@ -775,11 +775,11 @@ In the caactus GUI, find **3. Pixel Classification**, click **? Help** for the f
 
 4. Go to `5. Batch processing` tab
 
-5. Under `Raw data`, add the .h5 files from `5_batch_images` folder.                                                                  
+5. Under `Raw data`, add the `.h5` files from `5_batch_images` folder.                                                                  
                                                                                     
 6. Now click `Process all files`.
 
-7. The output will be saved as _Probabilities.h5 files in the output folder.
+7. The output will be saved as `_Probabilities.h5` files in the output folder.
 
 
 ### 8.6 Batch Processing Multicut Segmentation
@@ -804,9 +804,9 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 
 3. Go to `5. Batch processing`.
 
-4. Under `Raw data`, add the .h5 files from `5_batch_images` folder.
+4. Under `Raw data`, add the `.h5` files from `5_batch_images` folder.
 
-5. Under `Probabilities`, add the data_Probabilities.h5 files from `6_batch_probabilities` folder.
+5. Under `Probabilities`, add the `data_Probabilities.h5` files from `6_batch_probabilities` folder.
 
 ![batch_multicut](caactus/gui/assets/images/batch_multicut.png)
 
@@ -819,7 +819,7 @@ In the caactus GUI, find **4. Boundary Segmentation**, click **? Help** for the 
 
 ### 8.7 Batch Background Processing
 1. Switch back to the caactus GUI.
-2. Find **5. Background Processing**. 
+2. In the GUI, find **5. Background Processing**. 
 3. Click **Run**. The background is now removed and you can continue with object classification in ilastik.
 
 ![batch_background](caactus/gui/assets/images/ilastik_background.png)
@@ -860,9 +860,9 @@ In subtab `Features`, choose the features you are interested in exporting. Then 
 
 6. Go to 5. `Batch Processing` tab
 
-7. Under  `Raw data`, add the .h5 files from `5_batch_images` folder.
+7. Under  `Raw data`, add the `.h5` files from `5_batch_images` folder.
 
-8. Under `Segmentation Image`, add the data_Multicut Segmentation.h5 files from `7_batch_multicut` folder.
+8. Under `Segmentation Image`, add the `data_Multicut Segmentation.h5` files from `7_batch_multicut` folder.
 
 9. Go to `5. Batch Processing` and click `Process all files`.                                                                                                                               
 10.  The output will be saved as `*_Object Predictions.h5` files and `*_table.csv` in the output folder (`8_batch_objectclassification`).
@@ -875,16 +875,16 @@ In subtab `Features`, choose the features you are interested in exporting. Then 
 ![data_analysis](caactus/gui/assets/images/data_analysis.png)
 
 2. The default Pixel Size is already set in Global Settings — you can leave it as-is for the sample data.
-3. Find **7. CSV Summary** and click **Run**.
+3. In the GUI, find **7. CSV Summary** and click **Run**.
 4. Inspect the generated `df_clean.csv`. This spreadsheet combines all feature tables from Object Classification into one file for downstream analysis.
 
 ### 8.10 Summary Statistics
-1. Find **8. Summary Statistics** and click **Run**.
+1. In the GUI, find **8. Summary Statistics** and click **Run**.
 2. Inspect the generated results. The output generated will be 
     - a) `df_summary_complete.csv` = .csv-table containing also **not usable** category,
     - b) `df_refined_complete.csv` = .csv-table without **not usable** category", 
-    - c) `counts.csv` dataframe used in PlnModelling
-    - d) bar graph (`barchart.png`) (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.) You can play around by putting `'condition2'` first and `'condition1'` second to see how it changes the plot.
+    - c) `counts_df.csv` dataframe with count data used in PlnModelling
+    - d) `barchart.png` (faceted by condition1 on x-axis, percent of morphotypes "Predicted Class" on the y-axis and condition2 as the facetting variable in rows.) You can play around by putting `'condition2'` first and `'condition1'` second to see how it changes the plot.
 3. You may also change the colors:
  change the default in **Global Settings**
 ```bash 
@@ -926,7 +926,7 @@ and the `Color Mapping`field to
 8. Again, find **8. Summary Statistics** and click **Run**. The names now should be changed.
 
 ### 8.11 PLN Modelling
-1. Find **10. PLN Modelling** and click **Run**.
+1. In the GUI, find **10. PLN Modelling** and click **Run**.
 2. Inspect the generated results in the subdirectory `/sampledata_CD6_zenodo/9_data_analysis/` The output generated will be 
     - a) `correlation_circle.png`. Shows that PCA1, accounting for ~57% of the variance, primarily separated samples by condition2, whereas  PCA2 accounted for ~25% of the variance based on condition1.
     - b) `pca_plot.png`. The PCA plot shows how the images are grouped together in 2D-space based on combined category of condition1 and condition2 (the categorical levels will be combined).

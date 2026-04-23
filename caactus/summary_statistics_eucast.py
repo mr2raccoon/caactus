@@ -29,7 +29,7 @@ Generates summary statistics and a **stacked bar plot** for **EUCAST antifungal 
 ### Output (saved to `9_data_analysis`)
 - `df_summary_complete.csv` — full summary including "not usable" category
 - `df_refined_complete.csv` — summary without "not usable" category
-- `counts.csv` — count table for PLN Modelling
+- `counts_df.csv` — count table for PLN Modelling
 - `barchart.png` — stacked bar plot
 """
 
