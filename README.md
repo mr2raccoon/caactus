@@ -65,7 +65,7 @@ Below is a short version of the steps performed. For more detail, please consult
 > Power users may directly edit the config.toml and run the scripts from the cmd-line. For instructions, go to **7.1-7.7**.
 
 ## Sample Dataset
-- a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.18799803)
+- a sample dataset to quickly test the workflow can be accessed via  [zenodo](https://doi.org/10.5281/zenodo.19728045)
 - to showcase the functionalities, the ilastik steps have been pretrained. Use caactus in batch-modes.
 > [!IMPORTANT]
 > **[go to 8.1-8.10 for a detailed tutorial with the sample data set](#8-tutorial)**
@@ -698,7 +698,7 @@ The next script will combine all tables from all images into one global table fo
 
 ## 8. Tutorial
 ### 8.1 Download Sample Data
-1. Go to [zenodo](https://doi.org/10.5281/zenodo.18799803) to download the sample data.
+1. Go to [zenodo](https://doi.org/10.5281/zenodo.19728045) to download the sample data.
 2. Unpack the `.zip`-file into your project folder.
 3. The path to where you unpacked the sample data will be your main folder (e.g. `/home/usr/Documents/sampledata_CD6_zenodo`).
 4. To showcase the functionalities, the ilastik steps have been pretrained. Use caactus in batch-mode for the following steps. From the dropdown menu in **Global settings** in the GUI, select `batch`
